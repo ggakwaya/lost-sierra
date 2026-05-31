@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trip Plan — Lost Sierra &amp; Tahoe · June 9–15, 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Spline+Sans:wght@300..600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #e9e1cf;
+            --surface: #f8f3e6;
+            --surface-2: #f1ead9;
+            --ink: #211f18;
+            --ink-soft: #5b574c;
+            --pine: #26412f;
+            --pine-deep: #182a1f;
+            --clay: #bc5527;
+            --clay-deep: #9a4420;
+            --amber: #e0a55f;
+            --slate: #3d5965;
+            --line: rgba(33, 31, 24, .16);
+            --line-soft: rgba(33, 31, 24, .09);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Spline Sans', sans-serif;
+            font-weight: 400;
+            line-height: 1.55;
+            font-size: 15.5px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .wrap {
+            max-width: 940px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -.01em;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--pine-deep);
+            color: #f3ecda;
+            padding: 40px 0 34px;
+        }
+
+        header .eyebrow {
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--amber);
+        }
+
+        header h1 {
+            font-size: clamp(1.9rem, 4.6vw, 2.7rem);
+            color: #f6efdc;
+            margin: 8px 0 4px;
+        }
+
+        header .sub {
+            color: #cfc8b2;
+            font-weight: 300;
+            font-size: 15px;
+        }
+
+        .keyfacts {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid rgba(243, 236, 218, .18);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .keyfacts div {
+            padding: 13px 14px;
+            border-left: 1px solid rgba(243, 236, 218, .14);
+        }
+
+        .keyfacts div:first-child {
+            border-left: none;
+        }
+
+        .keyfacts .k {
+            font-size: 10px;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+            color: var(--amber);
+            font-weight: 600;
+        }
+
+        .keyfacts .v {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #f6efdc;
+            margin-top: 3px;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 38px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .sh {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .sh .num {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: #fff;
+            background: var(--clay);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            font-size: 13px;
+        }
+
+        .sh h2 {
+            font-size: 1.4rem;
+            color: var(--pine);
+        }
+
+        .sh .note {
+            margin-left: auto;
+            font-size: 12.5px;
+            color: var(--ink-soft);
+            font-style: italic;
+        }
+
+        /* CALENDAR TABLE */
+        .calwrap {
+            overflow-x: auto;
+        }
+
+        table.cal {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+        }
+
+        table.cal thead th {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 12.5px;
+            background: var(--pine);
+            color: #f3ecda;
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        table.cal thead th:first-child {
+            background: var(--pine-deep);
+        }
+
+        table.cal td {
+            padding: 11px 12px;
+            border-bottom: 1px solid var(--line-soft);
+            vertical-align: top;
+            color: var(--ink-soft);
+        }
+
+        table.cal tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        table.cal .jr b {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--ink);
+            display: block;
+            font-size: 14.5px;
+        }
+
+        table.cal .jr span {
+            font-size: 10.5px;
+            color: var(--clay-deep);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+        }
+
+        table.cal .ride b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        table.cal .none {
+            font-style: italic;
+        }
+
+        table.cal tr.coda td {
+            background: var(--surface-2);
+        }
+
+        table.cal tr.coda .jr b {
+            color: var(--ink-soft);
+        }
+
+        /* CARD GRIDS */
+        .grid3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .grid2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-top: 3px solid var(--pine);
+            border-radius: 5px;
+            padding: 18px 20px;
+        }
+
+        .card.clay {
+            border-top-color: var(--clay);
+        }
+
+        .card.slate {
+            border-top-color: var(--slate);
+        }
+
+        .card .ct {
+            font-size: 10.5px;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--clay-deep);
+        }
+
+        .card h3 {
+            font-size: 1.12rem;
+            color: var(--pine);
+            margin: 3px 0 2px;
+        }
+
+        .card .meta {
+            font-size: 12.5px;
+            color: var(--ink-soft);
+            margin-bottom: 9px;
+        }
+
+        .card p {
+            font-size: 13.5px;
+            color: var(--ink-soft);
+            margin-bottom: 5px;
+        }
+
+        .card p b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .card .contact {
+            font-size: 12.5px;
+            color: var(--ink-soft);
+            border-top: 1px solid var(--line-soft);
+            margin-top: 9px;
+            padding-top: 9px;
+        }
+
+        .card .contact b {
+            color: var(--ink);
+        }
+
+        /* FLIGHT SEGMENTS */
+        .segs {
+            margin: 8px 0 2px;
+        }
+
+        .seg {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 13px;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .seg:last-child {
+            border-bottom: none;
+        }
+
+        .seg .sa {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .seg .st {
+            color: var(--ink-soft);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        /* DRIVE LEGS */
+        .legs {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 5px;
+        }
+
+        .leg {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--line-soft);
+            font-size: 14px;
+        }
+
+        .leg:last-child {
+            border-bottom: none;
+        }
+
+        .leg .lr {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--ink);
+            flex: 1;
+        }
+
+        .leg .lt {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--pine);
+            white-space: nowrap;
+        }
+
+        .leg .ld {
+            font-size: 11.5px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--clay-deep);
+            font-weight: 600;
+            white-space: nowrap;
+            width: 36px;
+        }
+
+        /* STATUS LIST */
+        .grouplabel {
+            font-size: 11px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--clay-deep);
+            margin-bottom: 4px;
+        }
+
+        .grouplabel.second {
+            margin-top: 24px;
+        }
+
+        .statuslist {
+            list-style: none;
+        }
+
+        .statuslist li {
+            position: relative;
+            padding: 9px 0 9px 32px;
+            border-bottom: 1px solid var(--line-soft);
+            font-size: 13.8px;
+            color: var(--ink-soft);
+        }
+
+        .statuslist li:last-child {
+            border-bottom: none;
+        }
+
+        .statuslist li::before {
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 19px;
+            height: 19px;
+            border-radius: 4px;
+            text-align: center;
+            line-height: 18px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .statuslist li.done::before {
+            content: "\2713";
+            background: var(--pine);
+            color: #f3ecda;
+        }
+
+        .statuslist li.todo::before {
+            content: "";
+            border: 1.5px solid var(--ink-soft);
+        }
+
+        .statuslist li b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .statuslist li .sub {
+            display: block;
+            font-size: 12.3px;
+            color: var(--ink-soft);
+        }
+
+        .callout {
+            background: var(--surface-2);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--slate);
+            border-radius: 4px;
+            padding: 13px 18px;
+            font-size: 13px;
+            color: var(--ink-soft);
+            margin-top: 16px;
+        }
+
+        .callout b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        /* TRACKS */
+        .tracks {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 5px;
+        }
+
+        .trk {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 18px;
+            border-bottom: 1px solid var(--line-soft);
+            flex-wrap: wrap;
+        }
+
+        .trk:last-child {
+            border-bottom: none;
+        }
+
+        .trk .td {
+            font-size: 11.5px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--clay-deep);
+            font-weight: 600;
+            width: 34px;
+            flex: 0 0 auto;
+        }
+
+        .trk .tn {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 14.5px;
+            flex: 1;
+            min-width: 170px;
+        }
+
+        .trk .tn .tx {
+            display: block;
+            font-family: 'Spline Sans', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            color: var(--ink-soft);
+            margin-top: 1px;
+        }
+
+        .trk .links {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .trk a {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--clay-deep);
+            text-decoration: none;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 4px 9px;
+            white-space: nowrap;
+        }
+
+        .trk a:hover {
+            background: var(--surface-2);
+            border-color: var(--clay-deep);
+        }
+
+        /* TERRAIN */
+        .terr {
+            border-left: 3px solid var(--clay);
+            padding: 1px 0 1px 20px;
+            margin-bottom: 24px;
+        }
+
+        .terr:last-child {
+            margin-bottom: 0;
+        }
+
+        .terr .tlabel {
+            font-size: 10.5px;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--clay-deep);
+        }
+
+        .terr h3 {
+            font-size: 1.2rem;
+            color: var(--pine);
+            margin: 3px 0 8px;
+        }
+
+        .terr p {
+            font-size: 14px;
+            color: var(--ink-soft);
+            margin-bottom: 9px;
+        }
+
+        .terr p:last-child {
+            margin-bottom: 0;
+        }
+
+        .terr p b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        /* GLOSSARY */
+        .lex {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+        }
+
+        .lex td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--line-soft);
+            vertical-align: top;
+        }
+
+        .lex tr:last-child td {
+            border-bottom: none;
+        }
+
+        .lex .lt {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--pine);
+            width: 26%;
+            font-size: 13.5px;
+        }
+
+        .lex .ld {
+            color: var(--ink-soft);
+        }
+
+        /* ROADMAP */
+        .roadmap {
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 22px;
+            bottom: 22px;
+            width: 2px;
+            background: var(--line);
+        }
+
+        .rstop {
+            position: relative;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .rstop:last-child {
+            border-bottom: none;
+        }
+
+        .rstop::before {
+            content: attr(data-n);
+            position: absolute;
+            left: -27px;
+            top: 18px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--pine);
+            color: #f3ecda;
+            font-size: 10px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 18px;
+        }
+
+        .rstop .rsday {
+            font-size: 10.5px;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--clay-deep);
+            margin-bottom: 2px;
+        }
+
+        .rstop .rsn {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--pine);
+            font-size: 1.06rem;
+        }
+
+        .rstop .rsaddr {
+            font-size: 13px;
+            color: var(--ink-soft);
+            margin-top: 2px;
+        }
+
+        .rstop .rsnote {
+            font-size: 13px;
+            color: var(--ink-soft);
+            margin-top: 5px;
+        }
+
+        .rstop .rsnote b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .rstop .rssub {
+            font-size: 12.5px;
+            color: var(--ink-soft);
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: var(--surface-2);
+            border-radius: 4px;
+            border-left: 2px solid var(--clay);
+        }
+
+        .rdrive {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 12.5px;
+            color: var(--ink-soft);
+        }
+
+        .rdrive::before {
+            content: '↓';
+            color: var(--clay);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .rdrive b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .rdrive .gm,
+        .rssub .gm {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--clay-deep);
+            text-decoration: none;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 2px 8px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .rdrive .gm {
+            margin-left: auto;
+        }
+
+        .rdrive .gm:hover,
+        .rssub .gm:hover {
+            background: var(--surface-2);
+        }
+
+        /* STATS */
+        .statbig {
+            background: var(--pine-deep);
+            color: #f3ecda;
+            border-radius: 6px;
+            padding: 22px 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .statbig .sbnum {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: clamp(2.2rem, 7vw, 3.4rem);
+            color: #f6efdc;
+            line-height: 1;
+        }
+
+        .statbig .sbunit {
+            font-size: .95rem;
+            color: var(--amber);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .statbig .sbcompare {
+            font-size: 13px;
+            color: #cfc8b2;
+            margin-top: 11px;
+            line-height: 1.55;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .statbig .sbcompare b {
+            color: #f6efdc;
+            font-weight: 600;
+        }
+
+        .bars {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            padding: 4px 16px;
+        }
+
+        .bar {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .bar:last-child {
+            border-bottom: none;
+        }
+
+        .bar .brtop {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 7px;
+            flex-wrap: wrap;
+        }
+
+        .bar .brname {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--pine);
+            font-size: 14.5px;
+        }
+
+        .bar .brname span {
+            font-size: 10.5px;
+            color: #fff;
+            background: var(--clay);
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin-right: 5px;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+
+        .bar .brstats {
+            font-size: 12px;
+            color: var(--ink-soft);
+            white-space: nowrap;
+            text-align: right;
+        }
+
+        .bar .brstats b {
+            color: var(--clay-deep);
+            font-weight: 700;
+        }
+
+        .bar .brstats .imp {
+            display: block;
+            font-size: 10.5px;
+            opacity: .6;
+            font-weight: 400;
+        }
+
+        .bar .brtrack {
+            height: 13px;
+            background: var(--surface-2);
+            border-radius: 7px;
+            overflow: hidden;
+        }
+
+        .bar .brfill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--clay), var(--amber));
+            border-radius: 7px;
+        }
+
+        .statnote {
+            font-size: 12px;
+            color: var(--ink-soft);
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        footer {
+            padding: 26px 0 38px;
+            text-align: center;
+            color: var(--ink-soft);
+            font-size: 11.5px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:720px) {
+            .wrap {
+                padding: 0 18px;
+            }
+
+            .keyfacts {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .keyfacts div {
+                border-left: 1px solid rgba(243, 236, 218, .14);
+                border-top: 1px solid rgba(243, 236, 218, .14);
+            }
+
+            .keyfacts div:nth-child(odd) {
+                border-left: none;
+            }
+
+            .keyfacts div:nth-child(-n+2) {
+                border-top: none;
+            }
+
+            .grid3,
+            .grid2 {
+                grid-template-columns: 1fr;
+            }
+
+            table.cal thead {
+                display: none;
+            }
+
+            table.cal tr {
+                display: block;
+                border-bottom: 1px solid var(--line);
+            }
+
+            table.cal tbody tr:last-child {
+                border-bottom: none;
+            }
+
+            table.cal td {
+                display: block;
+                border: none;
+                padding: 3px 14px;
+            }
+
+            table.cal td:first-child {
+                padding-top: 12px;
+            }
+
+            table.cal td:last-child {
+                padding-bottom: 12px;
+            }
+
+            table.cal td::before {
+                content: attr(data-l);
+                display: block;
+                font-size: 10px;
+                letter-spacing: .1em;
+                text-transform: uppercase;
+                font-weight: 600;
+                color: var(--clay-deep);
+            }
+
+            table.cal td.jr::before {
+                display: none;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                font-size: 10.5pt;
+            }
+
+            header,
+            table.cal thead th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            section {
+                padding: 20px 0;
+            }
+
+            .card,
+            .leg,
+            .statuslist li,
+            table.cal tr,
+            .trk,
+            .terr,
+            .bar,
+            .statbig {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="wrap">
+            <div class="eyebrow">Trip plan · near-final version</div>
+            <h1>Lost Sierra &amp; Tahoe — mountain bike road trip</h1>
+            <div class="sub">Dates, schedule, travel legs and booking status.</div>
+            <div class="keyfacts">
+                <div>
+                    <div class="k">Dates</div>
+                    <div class="v">June 9–15, 2026</div>
+                </div>
+                <div>
+                    <div class="k">Return to Québec</div>
+                    <div class="v">June 16</div>
+                </div>
+                <div>
+                    <div class="k">Duration</div>
+                    <div class="v">7 days · 6 nights</div>
+                </div>
+                <div>
+                    <div class="k">Flights</div>
+                    <div class="v">Québec ⇄ Reno</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1 — CALENDAR -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">1</div>
+                <h2>Calendar</h2>
+                <div class="note">6 rides · 3 bases</div>
+            </div>
+            <div class="calwrap">
+                <table class="cal">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Travel</th>
+                            <th>Ride</th>
+                            <th>Accommodation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="jr"><b>D1</b><span>Tue Jun 9</span></td>
+                            <td data-l="Travel">Flight Québec → Reno (arrives 7:44 pm) · drive to Downieville (~2 h,
+                                evening)</td>
+                            <td class="ride" data-l="Ride"><span class="none">— arrival &amp; check-in</span></td>
+                            <td data-l="Accommodation">Downieville</td>
+                        </tr>
+                        <tr>
+                            <td class="jr"><b>D2</b><span>Wed Jun 10</span></td>
+                            <td data-l="Travel">—</td>
+                            <td class="ride" data-l="Ride"><b>Downieville Downhill</b><br>shuttle with Downieville
+                                Outfitters
+                            </td>
+                            <td data-l="Accommodation">Downieville</td>
+                        </tr>
+                        <tr>
+                            <td class="jr"><b>D3</b><span>Thu Jun 11</span></td>
+                            <td data-l="Travel">—</td>
+                            <td class="ride" data-l="Ride"><b>Gold Valley Rim Epic</b><br>shuttle with Downieville
+                                Outfitters</td>
+                            <td data-l="Accommodation">Downieville</td>
+                        </tr>
+                        <tr>
+                            <td class="jr"><b>D4</b><span>Fri Jun 12</span></td>
+                            <td data-l="Travel">Drive Downieville → Quincy (~1 h 30)</td>
+                            <td class="ride" data-l="Ride"><b>Mt. Hough</b> — shuttle<br>Yuba Expeditions · 1-2 laps
+                            </td>
+                            <td data-l="Accommodation">Quincy</td>
+                        </tr>
+                        <tr>
+                            <td class="jr"><b>D5</b><span>Sat Jun 13</span></td>
+                            <td data-l="Travel">—</td>
+                            <td class="ride" data-l="Ride"><b>Mt. Hough</b> — backcountry out-and-back<br>self-shuttle,
+                                parking at trailhead</td>
+                            <td data-l="Accommodation">Quincy</td>
+                        </tr>
+                        <tr>
+                            <td class="jr"><b>D6</b><span>Sun Jun 14</span></td>
+                            <td data-l="Travel">Drive Quincy → Tunnel Creek (~2 h 45, morning), then Carson City
+                                after the ride</td>
+                            <td class="ride" data-l="Ride"><b>Tahoe Rim &amp; Flume Trail</b> — Flume Trail Tahoe
+                                shuttle<br>Tahoe Meadows → Tunnel Creek (10 am)</td>
+                            <td data-l="Accommodation">Carson City</td>
+                        </tr>
+                        <tr>
+                            <td class="jr"><b>D7</b><span>Mon Jun 15</span></td>
+                            <td data-l="Travel">Drive Carson City → Reno (~50 min, afternoon) · flight 6:40 pm</td>
+                            <td class="ride" data-l="Ride"><b>Ash to Kings Trail</b> — morning<br>Carson City trail
+                                network</td>
+                            <td data-l="Accommodation">— (overnight flight)</td>
+                        </tr>
+                        <tr class="coda">
+                            <td class="jr"><b>Return</b><span>Tue Jun 16</span></td>
+                            <td data-l="Travel">Arrival in Québec (9:31 am)</td>
+                            <td class="ride none" data-l="Ride">—</td>
+                            <td data-l="Accommodation">—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="grouplabel second">Trailforks Routes</div>
+            <div class="tracks">
+                <div class="trk">
+                    <span class="td">D2</span>
+                    <span class="tn">Downieville Downhill<span class="tx">The classic line — Sunrise, Butcher, 3rd
+                            &amp; 1st Divide</span></span>
+                    <span class="links"><a href="https://www.trailforks.com/route/downieville-downhill/" target="_blank"
+                            rel="noopener">Trailforks ↗</a></span>
+                </div>
+                <div class="trk">
+                    <span class="td">D3</span>
+                    <span class="tn">Gold Valley Rim Epic<span class="tx">Gold Valley Rim → Pauley Creek → Butcher →
+                            3rd → 1st</span></span>
+                    <span class="links"><a
+                            href="https://www.trailforks.com/route/yuba-expeditions-gold-valley-rim-pauley-creek-butcher-third-first/"
+                            target="_blank" rel="noopener">Trailforks ↗</a></span>
+                </div>
+                <div class="trk">
+                    <span class="td">D4</span>
+                    <span class="tn">Mt. Hough — shuttle<span class="tx">Two shuttle descents: Mt. Hough trail and
+                            Tollgate</span></span>
+                    <span class="links"><a
+                            href="https://www.trailforks.com/route/yuba-expeditions-mt-hough-downhill-shuttle-lap/"
+                            target="_blank" rel="noopener">Mt. Hough ↗</a><a
+                            href="https://www.trailforks.com/route/yuba-expeditions-tollgate-shuttle-lap/"
+                            target="_blank" rel="noopener">Tollgate ↗</a></span>
+                </div>
+                <div class="trk">
+                    <span class="td">D5</span>
+                    <span class="tn">Mt. Hough — out-and-back<span class="tx">Backcountry ride, parking at
+                            trailhead</span></span>
+                    <span class="links"><a href="https://www.trailforks.com/ridelog/planner/view/690770" target="_blank"
+                            rel="noopener">Trailforks ↗</a></span>
+                </div>
+                <div class="trk">
+                    <span class="td">D6</span>
+                    <span class="tn">Tahoe Rim &amp; Flume Trail — Flume Trail Tahoe shuttle<span class="tx">Tahoe
+                            Meadows → Tunnel Creek · 20.8 mi · ↑3,294 ft / ↓5,574 ft · max 8,825 ft</span></span>
+                    <span class="links"><a href="https://www.trailforks.com/ridelog/planner/view/695834/"
+                            target="_blank" rel="noopener">Trailforks ↗</a></span>
+                </div>
+                <div class="trk">
+                    <span class="td">D7</span>
+                    <span class="tn">Ash to Kings Trail<span class="tx">Carson City's signature trail — ~13 mi (21
+                            km), 10 min from downtown</span></span>
+                    <span class="links"><a href="https://www.trailforks.com/route/kings-to-ash-canyon/" target="_blank"
+                            rel="noopener">Trailforks ↗</a></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2 — FLIGHTS -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">2</div>
+                <h2>Flights</h2>
+                <div class="note">booked · Air Canada, ref. ACFVVP</div>
+            </div>
+            <div class="grid2">
+                <div class="card clay">
+                    <div class="ct">Outbound — Tuesday June 9</div>
+                    <h3>Québec → Reno</h3>
+                    <div class="segs">
+                        <div class="seg"><span class="sa">YQB → YUL</span><span class="st">5:35 am – 6:27 am</span>
+                        </div>
+                        <div class="seg"><span class="sa">YUL → SFO</span><span class="st">8:10 am – 11:25 am</span>
+                        </div>
+                        <div class="seg"><span class="sa">SFO → RNO</span><span class="st">6:30 pm – 7:44 pm</span>
+                        </div>
+                    </div>
+                    <div class="contact">~7 h layover in San Francisco.</div>
+                </div>
+                <div class="card slate">
+                    <div class="ct">Return — Monday June 15</div>
+                    <h3>Reno → Québec</h3>
+                    <div class="segs">
+                        <div class="seg"><span class="sa">RNO → LAX</span><span class="st">6:40 pm – 8:35 pm</span>
+                        </div>
+                        <div class="seg"><span class="sa">LAX → YUL</span><span class="st">10:30 pm – 6:51 am (+1)</span>
+                        </div>
+                        <div class="seg"><span class="sa">YUL → YQB</span><span class="st">8:35 am – 9:31 am</span>
+                        </div>
+                    </div>
+                    <div class="contact">Arriving in Québec on June 16.</div>
+                </div>
+            </div>
+            <div class="callout">
+                <b>Watch out:</b> the Reno arrival is at 7:44 pm — the drive to Downieville (~2 h) will happen after
+                dark, so confirm late check-in (~11 pm) with Riverside. The 6:40 pm return departure leaves the
+                morning of the 15th free for a ride. Bikes as special baggage on an Air Canada + United itinerary:
+                confirm the policy and fees for the entire routing.
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 — ACCOMMODATIONS -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">3</div>
+                <h2>Accommodations</h2>
+                <div class="note">3 bases · booked</div>
+            </div>
+            <div class="grid3">
+                <div class="card">
+                    <div class="ct">Jun 9-10-11 · 3 nights</div>
+                    <h3>Downieville</h3>
+                    <div class="meta">Riverside Mountain Lodge</div>
+                    <p>206 Commercial Street. Family room with two beds. Secure covered bike storage. No A/C (rooms
+                        reportedly cool per the lodge).</p>
+                    <div class="contact"><b>530-289-1000</b><br>Confirmation #4079169723299</div>
+                </div>
+                <div class="card clay">
+                    <div class="ct">Jun 12-13 · 2 nights</div>
+                    <h3>Quincy</h3>
+                    <div class="meta">Pine Hill Motel</div>
+                    <p>42075 Highway 70, Quincy, CA 95971. Renovated rooms, kitchenette, air conditioning.</p>
+                    <div class="contact"><b>530-283-1670</b> · pinehillmotel.com</div>
+                </div>
+                <div class="card slate">
+                    <div class="ct">Jun 14 · 1 night</div>
+                    <h3>Carson City</h3>
+                    <div class="meta">Carson City Plaza Hotel</div>
+                    <p>803 South Carson Street. Two queen beds, breakfast included. Third-party booking (Booking /
+                        TripGenius) — <b>non-refundable after June 11</b>.</p>
+                    <div class="contact"><b>775-883-9500</b><br>Confirmation 11642706065515750092</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4 — SHUTTLES -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">4</div>
+                <h2>Shuttles &amp; trail access</h2>
+                <div class="note">2 confirmed · 1 to book</div>
+            </div>
+            <div class="grid2">
+                <div class="card">
+                    <div class="ct">Days 2 &amp; 3 — Downieville</div>
+                    <h3>Downieville Outfitters</h3>
+                    <p>Shuttles to Packer Saddle for the Downieville Downhill (D2) and the Gold Valley Rim Epic (D3).
+                        Operates daily, departing from the village.</p>
+                    <div class="contact">downievilleoutfitters.net</div>
+                </div>
+                <div class="card clay">
+                    <div class="ct">Day 4 — Quincy</div>
+                    <h3>Yuba Expeditions — Mt. Hough</h3>
+                    <p><b>Friday June 12.</b> Shuttle service, $42/lap, 1-2 laps (departures 11 am and 2 pm). Descents:
+                        Mt. Hough trail and Tollgate trail.</p>
+                    <div class="contact">yubaexpeditions.com · check-in at 550 Crescent Street, Quincy</div>
+                </div>
+                <div class="card">
+                    <div class="ct">Day 6 — Incline Village, Tahoe</div>
+                    <h3>Flume Trail Tahoe — IMBA Epic</h3>
+                    <p><b>Sunday June 14.</b> Weekend shuttle, even dates: 9 am, 10 am, 11 am, 1 pm, 4 pm.
+                        Pickup toward Tahoe Meadows; downhill ride Tahoe Meadows → Tunnel Creek (20.8 mi).</p>
+                    <div class="contact">flumetrailtahoe.com · 1115 Tunnel Creek Rd, Incline Village · 775-298-2501
+                    </div>
+                </div>
+            </div>
+            <div class="callout">
+                <b>No shuttle needed:</b> D5 (Mt. Hough out-and-back, Saturday) and D7 (Ash to Kings Trail, Monday
+                morning) are self-guided rides — park at the trailhead, no shuttle to book.
+            </div>
+        </div>
+    </section>
+
+    <!-- 5 — DRIVING LEGS -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">5</div>
+                <h2>Driving legs &amp; key addresses</h2>
+                <div class="note">rental car · Reno loop · ~8 h total driving</div>
+            </div>
+
+            <div class="roadmap">
+
+                <div class="rstop" data-n="1">
+                    <div class="rsday">D1 · Tuesday June 9 — Departure</div>
+                    <div class="rsn">Reno-Tahoe International Airport (RNO)</div>
+                    <div class="rsaddr">2001 E Plumb Ln, Reno, NV 89502</div>
+                    <div class="rsnote">Pick up rental car. <b>Car rental:</b> center accessible on foot from the
+                        terminal, baggage claim side. Flight UA264 arrives at 7:44 pm.</div>
+                </div>
+
+                <div class="rdrive"><b>~2 h 00</b> · D1 evening (arrives ~11 pm) · Hwy 395 N → Hwy 89 N → Hwy 49 ·
+                    Mountain road, at night — drive carefully <a class="gm"
+                        href="https://www.google.com/maps/dir/?api=1&origin_place_id=ChIJF0m8rXA_mYARQFmvIP8eQBA&destination_place_id=ChIJI4XI80F8nIAR6uI8HWZVZ9w&travelmode=driving"
+                        target="_blank" rel="noopener">GMaps ↗</a></div>
+
+                <div class="rstop" data-n="2">
+                    <div class="rsday">D1-D3 · Jun 9-12 — 3 nights</div>
+                    <div class="rsn">Riverside Mountain Lodge</div>
+                    <div class="rsaddr">206 Commercial Street, Downieville, CA 95936</div>
+                    <div class="rsnote"><b>Tel.</b> 530-289-1000 · <b>Conf.</b> #4079169723299 · Late check-in
+                        confirmed (~11 pm) · Secure bike storage available</div>
+                </div>
+
+                <div class="rdrive"><b>~1 h 30</b> · D4 morning · Hwy 49 → Hwy 70 E toward Quincy <a class="gm"
+                        href="https://www.google.com/maps/dir/?api=1&origin_place_id=ChIJI4XI80F8nIAR6uI8HWZVZ9w&destination=262+Spanish+Creek+Rd,+Quincy,+CA+95971&travelmode=driving"
+                        target="_blank" rel="noopener">GMaps ↗</a></div>
+
+                <div class="rstop" data-n="3">
+                    <div class="rsday">D4 · Friday June 12 — Mt. Hough Shuttle</div>
+                    <div class="rsn">Yuba Expeditions — Shuttle Point</div>
+                    <div class="rsaddr">262 Spanish Creek Rd, Quincy, CA 95971</div>
+                    <div class="rsnote"><b>Tel.</b> 530-283-2426 · yubaexpeditions.com · Check-in 15 min before
+                        departure · Departures 11 am and 2 pm (Mt. Hough trail + Tollgate)</div>
+                </div>
+
+                <div class="rdrive"><b>~10 min</b> · D4 · Hwy 70 westbound to motel <a class="gm"
+                        href="https://www.google.com/maps/dir/?api=1&origin=262+Spanish+Creek+Rd,+Quincy,+CA+95971&destination_place_id=ChIJW3dfX8n-nIAR0HgGi8KIVI4&travelmode=driving"
+                        target="_blank" rel="noopener">GMaps ↗</a></div>
+
+                <div class="rstop" data-n="4">
+                    <div class="rsday">D4-D5 · Jun 12-14 — 2 nights</div>
+                    <div class="rsn">Pine Hill Motel</div>
+                    <div class="rsaddr">42075 Highway 70, Quincy, CA 95971</div>
+                    <div class="rsnote"><b>Tel.</b> 530-283-1670 · pinehillmotel.com · Rooms with kitchenette and
+                        air conditioning</div>
+                    <div class="rssub">Laundry D4 evening · <b>East Side Laundry</b> — 1949 E Main St, Quincy ·
+                        Open 6 am–11 pm · Only laundromat in town · Ideal after the ride, clean kit for D5-D6-D7. Note:
+                        dryers sometimes insufficient — finish drying at the motel. <a class="gm"
+                            href="https://www.google.com/maps/dir/?api=1&origin_place_id=ChIJW3dfX8n-nIAR0HgGi8KIVI4&destination_place_id=ChIJjz4O64T4nIARNFuv7RI3S5Y&travelmode=driving"
+                            target="_blank" rel="noopener">GMaps ↗</a></div>
+                </div>
+
+                <div class="rdrive"><b>~2 h 45</b> · D6 morning · Hwy 70 E → Hwy 89 S toward Truckee → Hwy 28 E
+                    toward Incline Village <a class="gm"
+                        href="https://www.google.com/maps/dir/?api=1&origin_place_id=ChIJW3dfX8n-nIAR0HgGi8KIVI4&destination_place_id=ChIJ4-IvaAZxmYARtBPCc8shjVI&travelmode=driving"
+                        target="_blank" rel="noopener">GMaps ↗</a></div>
+
+                <div class="rstop" data-n="5">
+                    <div class="rsday">D6 · Sunday June 14 — Flume Trail Shuttle</div>
+                    <div class="rsn">Tunnel Creek Station — Flume Trail Bikes</div>
+                    <div class="rsaddr">1115 Tunnel Creek Rd, Incline Village, NV 89451</div>
+                    <div class="rsnote"><b>Tel.</b> 775-298-2501 · flumetrailtahoe.com · Parking and shuttle pickup ·
+                        Departure 10 am toward Tahoe Meadows · Tunnel Creek Café (suite A) open from 9 am for
+                        breakfast</div>
+                    <div class="rssub">Ride D6 · <b>Tahoe Rim &amp; Flume Trail IMBA Epic</b> — Tahoe Meadows →
+                        Tunnel Creek · 20.8 mi · ↑3,294 ft / ↓5,574 ft · max 8,825 ft · ~5 h in the saddle · Note:
+                        Marlette Lake drained for dam rehabilitation (altered landscape, but trails open on weekends) ·
+                        trailforks.com/ridelog/planner/view/695834/</div>
+                </div>
+
+                <div class="rdrive"><b>~0 h 30</b> · D6 after the ride · Hwy 28 S → US-50 E toward Carson City <a
+                        class="gm"
+                        href="https://www.google.com/maps/dir/?api=1&origin_place_id=ChIJ4-IvaAZxmYARtBPCc8shjVI&destination_place_id=ChIJNycC0gqgmYARJXr-WDHrhkU&travelmode=driving"
+                        target="_blank" rel="noopener">GMaps ↗</a></div>
+
+                <div class="rstop" data-n="6">
+                    <div class="rsday">D6 · Sunday June 14 — 1 night</div>
+                    <div class="rsn">Carson City Plaza Hotel</div>
+                    <div class="rsaddr">803 South Carson Street, Carson City, NV 89701</div>
+                    <div class="rsnote"><b>Tel.</b> 775-883-9500 · <b>Conf.</b> 11642706065515750092 · Breakfast
+                        included · Non-refundable after June 11</div>
+                    <div class="rssub">Ride D7 (Monday morning) · <b>Ash Canyon Creek Trailhead</b> — Ash Canyon Road,
+                        Carson City NV · ~10 min west of Carson City Plaza Hotel ·
+                        trailforks.com/route/kings-to-ash-canyon/ · <a class="gm"
+                            href="https://www.google.com/maps/dir/?api=1&origin_place_id=ChIJNycC0gqgmYARJXr-WDHrhkU&destination_place_id=ChIJ77DrhTl1mYARWG6FT8Y6VqU&travelmode=driving"
+                            target="_blank" rel="noopener">GMaps ↗</a></div>
+                </div>
+
+                <div class="rdrive"><b>~0 h 50</b> · D7 after the ride · US-50 E → US-395 N toward Reno <a class="gm"
+                        href="https://www.google.com/maps/dir/?api=1&origin_place_id=ChIJNycC0gqgmYARJXr-WDHrhkU&destination_place_id=ChIJF0m8rXA_mYARQFmvIP8eQBA&travelmode=driving"
+                        target="_blank" rel="noopener">GMaps ↗</a></div>
+
+                <div class="rstop" data-n="7">
+                    <div class="rsday">D7 · Monday June 15 — Return</div>
+                    <div class="rsn">Reno-Tahoe International Airport (RNO) — Car return</div>
+                    <div class="rsaddr">2001 E Plumb Ln, Reno, NV 89502</div>
+                    <div class="rsnote"><b>Return flight:</b> RNO 6:40 pm → LAX 8:35 pm (UA5908) · Ref. ACFVVP</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6 — BOOKING STATUS -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">6</div>
+                <h2>Booking status</h2>
+                <div class="note">booked · to finalize</div>
+            </div>
+            <div class="grouplabel">Booked</div>
+            <ul class="statuslist">
+                <li class="done"><b>Flights Québec ⇄ Reno</b> — Air Canada, ref. ACFVVP</li>
+                <li class="done"><b>Rental car</b> — Reno, full-size SUV</li>
+                <li class="done"><b>Downieville accommodation</b> — Riverside Mountain Lodge, 3 nights</li>
+                <li class="done"><b>Quincy accommodation</b> — Pine Hill Motel, 2 nights</li>
+                <li class="done"><b>Carson City accommodation</b> — Carson City Plaza Hotel, 1 night</li>
+            </ul>
+            <div class="grouplabel second">To finalize</div>
+            <ul class="statuslist">
+                <li class="done"><b>Downieville Outfitters shuttle</b> — Days 2 and 3</li>
+                <li class="done"><b>Yuba Expeditions shuttle</b> — Mt. Hough, Friday June 12 (1-2 laps)</li>
+                <li class="todo"><b>Flume Trail Tahoe shuttle</b> — Flume Trail IMBA Epic, Sunday June 14 (10 am
+                    departure, 2 spots)</li>
+                <li class="todo"><b>Late arrival at Riverside</b> — confirm ~11 pm arrival on June 9</li>
+                <li class="todo"><b>Bike as checked baggage policy</b> — confirm with Air Canada / United (interline
+                    ticket)
+                </li>
+                <li class="todo"><b>Travel medical insurance</b> — purchase before departure</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 7 — DISTANCES & ELEVATION -->
+    <section style="background:var(--surface-2);border-top:1px solid var(--line);">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">7</div>
+                <h2>Distances &amp; elevation</h2>
+                <div class="note">6 rides · ~104 mi / 167 km</div>
+            </div>
+
+            <div class="statbig">
+                <div class="sbnum">~28,750 ft</div>
+                <div class="sbunit">cumulative descent over the week · ~8,760 m</div>
+                <div class="sbcompare">That's <b>the full height of Everest</b> (8,849 m / 29,032 ft) swallowed in six
+                    rides — or the equivalent of about <b>14 full top-to-bottom runs at Mont-Sainte-Anne</b>. All for
+                    ~10,800 ft (3,300 m) of climbing: the descent-to-climb ratio of a true gravity trip.</div>
+            </div>
+
+            <div class="bars">
+                <div class="bar">
+                    <div class="brtop">
+                        <div class="brname"><span>D2</span> Downieville Downhill</div>
+                        <div class="brstats">15 mi · ↑656 ft · <b>↓4,888 ft</b><span class="imp">24 km · ↓1,490
+                                m</span>
+                        </div>
+                    </div>
+                    <div class="brtrack">
+                        <div class="brfill" style="width:63%"></div>
+                    </div>
+                </div>
+                <div class="bar">
+                    <div class="brtop">
+                        <div class="brname"><span>D3</span> Gold Valley Rim Epic</div>
+                        <div class="brstats">18 mi · ↑1,722 ft · <b>↓5,774 ft</b><span class="imp">29 km · ↓1,760
+                                m</span>
+                        </div>
+                    </div>
+                    <div class="brtrack">
+                        <div class="brfill" style="width:75%"></div>
+                    </div>
+                </div>
+                <div class="bar">
+                    <div class="brtop">
+                        <div class="brname"><span>D4</span> Mt. Hough · 2 shuttle laps</div>
+                        <div class="brstats">21 mi · ↑328 ft · <b>↓7,710 ft</b><span class="imp">34 km · ↓2,350
+                                m</span>
+                        </div>
+                    </div>
+                    <div class="brtrack">
+                        <div class="brfill" style="width:100%"></div>
+                    </div>
+                </div>
+                <div class="bar">
+                    <div class="brtop">
+                        <div class="brname"><span>D5</span> Mt. Hough out-and-back</div>
+                        <div class="brstats">~16 mi · ↑2,789 ft · <b>↓2,789 ft</b><span class="imp">~26 km · ↓850
+                                m</span>
+                        </div>
+                    </div>
+                    <div class="brtrack">
+                        <div class="brfill" style="width:36%"></div>
+                    </div>
+                </div>
+                <div class="bar">
+                    <div class="brtop">
+                        <div class="brname"><span>D6</span> Tahoe Rim &amp; Flume Trail shuttle</div>
+                        <div class="brstats">20.8 mi · ↑3,294 ft · <b>↓5,574 ft</b><span class="imp">33.5 km · ↓1,699
+                                m</span></div>
+                    </div>
+                    <div class="brtrack">
+                        <div class="brfill" style="width:72%"></div>
+                    </div>
+                </div>
+                <div class="bar">
+                    <div class="brtop">
+                        <div class="brname"><span>D7</span> Ash to Kings Trail</div>
+                        <div class="brstats">13 mi · ↑2,018 ft · <b>↓2,018 ft</b><span class="imp">21 km · ↓615
+                                m</span>
+                        </div>
+                    </div>
+                    <div class="brtrack">
+                        <div class="brfill" style="width:26%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="statnote">Bars proportional to each ride's descent · Trailforks data. D4 assumes two laps (Mt.
+                Hough + Tollgate); D5, backcountry out-and-back, is an estimate.</div>
+        </div>
+    </section>
+
+    <!-- 8 — THE SETTING -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">8</div>
+                <h2>The setting: history, geography, geology</h2>
+                <div class="note">the three terrains of the trip</div>
+            </div>
+            <div class="terr">
+                <div class="tlabel">Days 1-3 · Downieville</div>
+                <h3>The Lost Sierra</h3>
+                <p>Downieville was born of the Gold Rush: founded in 1849 at the confluence of the Downie River and the
+                    North Fork of the Yuba, it takes its name from William Downie, a Scottish prospector who wintered
+                    here in 1849–1850. In the 1850s it was one of the largest towns in California. Once the gold ran
+                    out, the region was largely bypassed by development — hence its nickname <b>"Lost Sierra,"</b> the
+                    forgotten Sierra.</p>
+                <p>Everything here rests on the <b>Sierra Nevada Batholith</b>: granite that crystallized deep in the
+                    earth over a hundred million years ago, then uplifted and exposed by erosion. This same granite
+                    hosts the gold-bearing quartz veins that drew the miners, and its weathering produces
+                    <b>decomposed granite</b>, sandy — precisely the loose-over-hard surface you'll be riding. The
+                    steep Yuba canyons were carved by rivers cutting into the rising range; in the 19th century,
+                    hydraulic mining blasted the hillsides apart in search of gold.</p>
+            </div>
+            <div class="terr">
+                <div class="tlabel">Days 4-5 · Quincy</div>
+                <h3>Feather River Country</h3>
+                <p>Quincy sits in American Valley, a lush basin in the northern Sierra, and serves as the seat of
+                    Plumas County. <b>"Plumas"</b> comes from the Spanish Río de las Plumas — the "River of Feathers"
+                    — the name given to the Feather River whose forks drain this land. Like Downieville, the region was
+                    settled by the Gold Rush, then lived off timber: valleys of forest and ranching as much as mines.
+                </p>
+                <p>Geologically, this is the far northern end of the Sierra Nevada, where the range drops in elevation
+                    and begins its transition toward the <b>volcanic Cascades</b> — Lassen Peak is not far. The bedrock
+                    reflects this: to the granite are added older metamorphic rocks and younger volcanic layers, a more
+                    composite substrate than Downieville's. Mount Hough rises directly above Quincy; its descents pass
+                    through forest still marked by fire — the <b>2021 Dixie Fire</b> burned enormous acreage in Plumas
+                    County.</p>
+            </div>
+            <div class="terr">
+                <div class="tlabel">Days 6-7 · Carson City &amp; Tahoe</div>
+                <h3>The Lake Tahoe Basin</h3>
+                <p>Lake Tahoe occupies a large <b>graben</b>: as the Sierra Nevada rose, a block of crust dropped down
+                    between the Sierra crest and the Carson Range to the east, forming a deep rift. Lava flows at the
+                    northern end of the basin blocked the outlet and raised the water level; ice-age glaciers then
+                    sculpted the slopes and bays. The result is one of the deepest and clearest lakes in North America,
+                    perched above 6,200 ft (1,900 m).</p>
+                <p>Carson City spreads just to the east, in the high desert of Eagle Valley, sheltered from rain behind
+                    the Carson Range. Nevada's capital, it takes its name from scout Kit Carson and grew in the 1860s
+                    as a supply town for the <b>Comstock Lode</b>, the massive silver deposit at Virginia City. That
+                    history is literally under your wheels on the last day — and more layered than it first appears.
+                    Marlette Lake was first created in 1873 by a timber company: its waters fed <b>V-flumes</b> that
+                    carried logs down from Spooner Summit to a depot near Carson City, before the railroad to the
+                    mines. In 1876, the same source was repurposed as a drinking water supply for the Comstock via
+                    rectangular box flumes — the alignment that the <b>Flume Trail</b> follows. Two networks, two
+                    uses, one mountain: the V-flumes carried wood, the box flumes carried water. You close the trip on
+                    the Comstock's water system.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9 — READING THE LANDSCAPE -->
+    <section style="background:var(--surface-2);border-top:1px solid var(--line);">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">9</div>
+                <h2>Reading the landscape — ride by ride</h2>
+                <div class="note">to orient yourself · on-trail geomorphology</div>
+            </div>
+
+            <div class="terr" style="border-left-color:var(--slate);">
+                <div class="tlabel">D2 · Downieville Downhill</div>
+                <h3>Fluvial dissection of the tilted Sierra block</h3>
+                <p>From Packer Saddle (~7,100 ft / 2,165 m), you're sitting on the divide between the North Yuba
+                    drainage (west) and the Lakes Basin (northeast). This saddle marks the edge of the uplifted
+                    tectonic block — the transition between the glacial landforms of the northeast flank (cirques,
+                    overdeepened lakes, Packer Lake moraine visible below) and the fluvially incised west slope toward
+                    the Yuba. The descent then follows the fluvial dissection of the western face: <b>Third Divide and
+                        First Divide are not passes but lateral spurs</b> — interfluves perpendicular to the Yuba
+                    thalweg, along which the trail runs before plunging toward the next tributary. Vegetation acts as
+                    an elevation marker: red fir (subalpine zone) → mixed conifer forest (Ponderosa pine, White fir,
+                    incense cedar) → riparian gallery at the valley bottom. Downieville (~2,800 ft / 855 m), at the
+                    Downie River–North Yuba confluence, wraps up ~4,300 ft of descent over ~15 miles — a direct
+                    expression of the western batholith slope.</p>
+            </div>
+
+            <div class="terr" style="border-left-color:var(--slate);">
+                <div class="tlabel">D3 · Gold Valley Rim Epic</div>
+                <h3>Glacial ridge, metamorphic outlier and riparian canyon</h3>
+                <p>The Gold Valley Rim (~7,380–7,545 ft / 2,250–2,300 m) runs along the divide ridge in alpine
+                    terrain: from the trail you can simultaneously take in the <b>Lakes Basin to the northeast</b>
+                    (classic glacial morphology — nested cirques, overdeepened lakes, rock bars) and the slopes
+                    plunging toward the Yuba to the southwest. The Sierra Buttes, visible to the southeast, are a
+                    <b>metamorphic outlier</b>: a belt of volcanic and metasedimentary rock more resistant than the
+                    surrounding batholith — hence their jagged profile cutting against the rounded granite domes.
+                    The descent into Gold Valley crosses a high-elevation basin likely shaped by glaciation and nivation.
+                    Pauley Creek Trail contrasts sharply with Sunrise: a narrow riparian canyon, wet substrate, dense
+                    roots, gallery vegetation (alders, willows) — you drop from a dry exposed slope to a moist valley
+                    floor in just a few hundred feet of descent. The rest of the descent rejoins the same interfluve
+                    ridgelines as D2, but from a more recessed basin headwater.</p>
+            </div>
+
+            <div class="terr" style="border-left-color:var(--slate);">
+                <div class="tlabel">D4 · Mt. Hough shuttle</div>
+                <h3>Lithological transition and fire scar</h3>
+                <p>American Valley (~3,445 ft / 1,050 m) is an intramontane basin with an alluvial floor; here you
+                    leave the relatively homogeneous batholith geology of the Lost Sierra for a more composite
+                    northern-Sierra transition zone. The Mt. Hough basement mixes granite, <b>Paleozoic metamorphic
+                        rocks</b> (oceanic terranes accreted in the Mesozoic) and Cenozoic volcanic layers — the
+                    imprint of the Cordilleran geotectonic context. The descents pass through zones heavily burned by
+                    the <b>Dixie Fire (2021)</b>: alternating snags (standing dead conifers), colonization by
+                    ceanothus and manzanita (nitrogen-fixing pioneer shrubs) and regeneration patches. These forest
+                    openings provide sweeping views over the valley and the Feather River Country ridgelines — it's
+                    the fire that makes the landscape legible where a closed canopy would conceal it. The fire also
+                    altered local hydrology (reduced transpiration, compaction, increased runoff), perceptible in
+                    spots along the trails.</p>
+            </div>
+
+            <div class="terr" style="border-left-color:var(--slate);">
+                <div class="tlabel">D5 · Mt. Hough out-and-back</div>
+                <h3>Summit ridge and four-direction regional panorama</h3>
+                <p>From the ridgelines at ~6,560–7,100 ft (2,000–2,165 m), the terrain opens up: rock outcrops, alpine
+                    pedogenesis, the domain of mechanical erosion. The panorama is organized around four <b>structural
+                        geographic anchors</b>: to the <b>north</b>, American Valley and Quincy in their intramontane
+                    basin floor; to the <b>northeast</b>, Lake Almanor (reservoir on the Feather River, ~3,510 ft /
+                    1,070 m) at the foot of the Cascade foothills; to the <b>north-northwest</b>, Lassen Peak
+                    (~10,457 ft / 3,187 m) visible on clear days — an active stratovolcano and visual marker of the
+                    Sierra Nevada / volcanic Cascades physiographic boundary; to the <b>south</b>, the Lost Sierra
+                    ridge chain out to the Sierra Buttes. The contrast with D4 is sharp: the forest descents hid the
+                    regional geological framework; the ridge reveals it. This single vantage point lets you read a
+                    transition between two distinct physiographic provinces across ~50 miles in a single rotation.</p>
+            </div>
+
+            <div class="terr" style="border-left-color:var(--slate);">
+                <div class="tlabel">D6 · Tahoe Rim &amp; Flume Trail (Tahoe Meadows → Tunnel Creek)</div>
+                <h3>Carson Range transect: lacustrine graben, Sierra ledge and unexpected endorheism</h3>
+                <p>The epic takes the form of a long ridgeline-to-lake transect. The start at <b>Tahoe Meadows</b>
+                    (~8,725 ft / 2,660 m), at the foot of Mt. Rose, places you in a glacially shaped subalpine zone:
+                    perched wet meadows, seasonally waterlogged soils, granite outcrops polished to slabs. The trail
+                    then follows the <b>Carson Range crest</b> southward, oscillating between 8,200 and 8,825 ft on
+                    the TRT — this is the watershed divide between the Tahoe-Truckee system to the west and the Great
+                    Basin to the east. One nuance deserves attention: <b>Lake Tahoe is hydrographically
+                        endorheic</b>. The Truckee River, Tahoe's only outlet, doesn't reach the Pacific — it ends
+                    in Pyramid Lake, a terminal lake in the Great Basin. The Tahoe basin thus belongs hydrologically
+                    to the Great Basin despite its physiographic Sierra position. The passage by <b>Marlette Peak</b>
+                    opens one of the trip's most sweeping panoramas: the Tahoe graben to the west, endorheic basins
+                    stretching east. Marlette Lake below is currently <b>drained for dam rehabilitation</b> (1873
+                    dam, 2025-2026 renovation in progress) — a transitional but legible landscape. The Flume Trail
+                    proper then follows the <b>eastern ledge of the Carson Range</b> (~7,220–7,870 ft), perched ~1,475 ft
+                    above the lake: a ledge hand-cut into the granite in 1875 to route water to the Comstock. The
+                    lake's absolute blue color results from its depth (~1,640 ft / 500 m), extreme <b>oligotrophy</b>
+                    and the differential absorption of light through the water column. The final descent down the
+                    <b>Tunnel Creek</b> thalweg closes the ride at ~6,460 ft (1,970 m), near lake level.</p>
+            </div>
+
+            <div class="terr" style="border-left-color:var(--slate);">
+                <div class="tlabel">D7 · Ash to Kings Trail</div>
+                <h3>Fault scarp and Basin-and-Range threshold</h3>
+                <p>A change of physiographic province — the sharpest of the trip. Ash Canyon and Kings Canyon cut into
+                    the <b>eastern fault scarp of the Carson Range</b>, the abrupt back face of the Sierra block
+                    bounded by normal faults of the Basin-and-Range system. The morphology is characteristic:
+                    triangular fault facets, coalescing alluvial fans forming the Carson Valley bajada, V-shaped gorges
+                    incising the uplifted block. Vegetation reflects the <b>rain shadow effect</b>: sagebrush,
+                    bitterbrush, juniper on the eastern slopes — semi-arid steppe replacing the forested Sierra
+                    shadeside. From the crest, the panorama is structuring: to the <b>west</b>, Lake Tahoe in its
+                    graben; to the <b>east</b>, Carson Valley (endorheic Great Basin alluvial floor) and the Virginia
+                    Range. This viewpoint captures in a single image the <b>tectonic asymmetry of the Sierra
+                        Nevada</b> (gentle ~155-mile western slope / ~19-mile eastern escarpment) and the Sierra
+                    Nevada–Great Basin physiographic threshold. The closing ride of the trip before the flight home.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 10 — GLOSSARY -->
+    <section style="background:var(--surface-2);border-top:1px solid var(--line);">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">10</div>
+                <h2>Glossary</h2>
+                <div class="note">geographic &amp; geomorphological vocabulary · 34 terms</div>
+            </div>
+            <div class="calwrap">
+                <table class="lex">
+                    <tbody>
+                        <tr>
+                            <td class="lt">Alluvial cone</td>
+                            <td class="ld">Fan-shaped sedimentary deposit at the mouth of a canyon, where the gradient
+                                eases and stream velocity — and thus transport capacity — drops.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Alluvial fan (bajada)</td>
+                            <td class="ld">Piedmont accumulation surface formed by the coalescence of alluvial cones at
+                                the base of a mountain front; characteristic of arid to semi-arid environments
+                                (Basin-and-Range).</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Batholith</td>
+                            <td class="ld">Large magmatic intrusion (granite, granodiorite) crystallized deep within
+                                the crust and exposed at the surface by erosion over tens of millions of years. The
+                                Sierra Nevada Batholith forms the core of the range.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Cirque</td>
+                            <td class="ld">Semicircular depression carved by glacial erosion at the head of a valley;
+                                the floor is often occupied by a cirque lake or overdeepened lake (e.g. Lakes Basin,
+                                Sierra Nevada).</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Decomposed granite (grus)</td>
+                            <td class="ld">In-situ weathering product of granite: hydrolysis of feldspars releases
+                                quartz grains and forms a loose sandy grit at the surface over a compact base —
+                                the "loose-over-hard" surface characteristic of Sierra trails.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Drainage divide</td>
+                            <td class="ld">Topographic line (ridge, col) separating two adjacent drainage basins;
+                                precipitation on each side reaches distinct outlets. Synonyms: watershed divide,
+                                interfluve.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Endorheism</td>
+                            <td class="ld">Character of a drainage system with no outlet to the sea; waters accumulate
+                                in terminal lakes or evaporate in place. Opposite: exorheism.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Endorheic basin</td>
+                            <td class="ld">Drainage basin with no outlet to the sea; waters converge toward an interior
+                                terminal lake whose level reflects the balance between inputs and evaporation.
+                                Lake Tahoe → Truckee River → Pyramid Lake: an endorheic basin.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Fault scarp</td>
+                            <td class="ld">Steep relief corresponding to the exposed face of an uplifted block along a
+                                fault; can reach several thousand feet in extensional settings (e.g. eastern Sierra
+                                Nevada escarpment).</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Fluvial competence</td>
+                            <td class="ld">Maximum particle size a stream can transport at a given discharge, increasing
+                                with velocity. A high-competence thalweg moves boulders and cobbles.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Graben</td>
+                            <td class="ld">Tectonic trough bounded on both sides by normal faults, formed by
+                                subsidence of the central block. The Lake Tahoe basin is a graben partially sealed to
+                                the north by lava flows.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Intramontane basin</td>
+                            <td class="ld">Depression enclosed by mountain relief, generally filled by alluvial or
+                                fluvioglacial deposits (e.g. American Valley at Quincy).</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Lateral spurs (interfluves)</td>
+                            <td class="ld">Secondary ridges perpendicular to a main valley, separating the sub-basins
+                                of successive tributaries. The "Divides" at Downieville are direct examples.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Metamorphic belt</td>
+                            <td class="ld">Elongated zone of rocks that underwent metamorphism during tectonic
+                                convergences or subduction; often composed of accreted terranes enclosed within a
+                                batholith.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Metamorphic outlier</td>
+                            <td class="ld">Residual mass or landform that resisted erosion which planed the surrounding
+                                terrain; reveals a former state of the landscape. The Sierra Buttes (metamorphic rock
+                                enclosed within the batholith) are a direct example.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Moraine</td>
+                            <td class="ld">Accumulation of till (unsorted glacial material) transported and deposited
+                                by a glacier. Lateral, terminal and ground moraines allow reconstruction of
+                                paleo-glacier extents.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Nivation</td>
+                            <td class="ld">Suite of erosional processes associated with seasonal snowfields:
+                                frost-shattering, solifluction, meltwater runoff; contributes to the widening of
+                                cirques and nivation hollows.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Normal faults</td>
+                            <td class="ld">Extensional faults where the hanging wall drops relative to the footwall;
+                                dominant in the extensional Basin-and-Range regime characterizing the western U.S.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Oligotrophy</td>
+                            <td class="ld">State of a water body with very low nutrient concentrations (nitrogen,
+                                phosphorus), low biological productivity and high transparency. Lake Tahoe is one of
+                                North America's reference examples.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Overdeepened lake</td>
+                            <td class="ld">Lake occupying a basin excavated by a glacier below local base level;
+                                common in areas of great glacial thickness (e.g. Lakes Basin, Sierra Nevada).</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Pedogenesis (alpine)</td>
+                            <td class="ld">Formation and differentiation of soils driven by parent material, climate,
+                                vegetation and time. In alpine settings: slow processes (freeze-thaw dominated), thin
+                                soils, weakly differentiated profiles.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Rain shadow effect (foehn)</td>
+                            <td class="ld">Drying and warming of air on the lee side of a mountain range, resulting
+                                from moist adiabatic cooling on the windward side and dry adiabatic warming on the lee
+                                side. Produces strong precipitation and vegetation asymmetry between the two flanks.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Riparian canyon</td>
+                            <td class="ld">Incised valley carrying a perennial stream, whose banks support dense
+                                riparian vegetation; marked thermal and hydrological contrast with adjacent dry slopes.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Riparian vegetation</td>
+                            <td class="ld">Tree and shrub cover associated with streambanks (alders, willows, cottonwoods);
+                                roles include bank stabilization, stream temperature regulation and serving as a
+                                biological corridor.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Tectonic asymmetry</td>
+                            <td class="ld">Asymmetry of a mountain range between its two flanks resulting from
+                                geological structure or mode of uplift. The Sierra Nevada opposes a long, gently
+                                sloping western flank to a steep eastern escarpment of several miles.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Terminal lake</td>
+                            <td class="ld">Lake in the distal position of an endorheic basin, with no outlet to the
+                                sea; its level is controlled by the balance between stream inputs and evaporation
+                                losses.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Thalweg</td>
+                            <td class="ld">The deepest line of a valley or stream; the thread of the water and
+                                longitudinal axis of the valley. Also used to designate a high-energy stream channel
+                                (high-competence thalweg).</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Tilted fault block (horst / graben)</td>
+                            <td class="ld">Crustal compartment bounded by faults and displaced vertically. A horst is
+                                uplifted, a graben is downdropped. The Sierra Nevada is a large tectonic block tilted
+                                westward.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Triangular facets</td>
+                            <td class="ld">Triangular surfaces cut at the base of a fault scarp by the intersection of
+                                perpendicular valleys; indicators of recent active tectonics.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Uplift</td>
+                            <td class="ld">Rise of a crustal block relative to sea level, driven by tectonic forces or
+                                isostatic rebound. The Sierra Nevada has been uplifting since the late Miocene.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Watershed</td>
+                            <td class="ld">Geographic area drained by a river network converging toward a common
+                                outlet, delimited by the drainage divide.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Watershed headwaters</td>
+                            <td class="ld">Upstream zone of a drainage basin where streams originate; high-energy
+                                erosional terrain, often shaped by glaciation or nivation.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Accreted terranes</td>
+                            <td class="ld">Crustal blocks of allochthonous origin (island arcs, ocean floor fragments)
+                                plastered against a continent during tectonic convergences. The Sierra Nevada
+                                encompasses several belts of Paleozoic and Mesozoic terranes.</td>
+                        </tr>
+                        <tr>
+                            <td class="lt">Alluvial plain (bajada floor)</td>
+                            <td class="ld">Topographic line separating two drainage basins; precipitation on each side
+                                reaches distinct outlets. Synonyms: watershed divide, main interfluve.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Trip plan · Lost Sierra &amp; Tahoe, California · June 9–15, 2026 · near-final version
+    </footer>
+
+</body>
+
+</html>
