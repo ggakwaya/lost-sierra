@@ -936,6 +936,348 @@
             }
         }
 
+        /* EXPENSE CALCULATOR STYLES */
+        #expenses-section {
+            background: var(--surface);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+        
+        .expenses-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 24px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .expenses-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .expense-card {
+            background: var(--surface-2);
+            border: 1px solid var(--line-soft);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .expense-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.15rem;
+            color: var(--pine-deep);
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--line-soft);
+            padding-bottom: 6px;
+        }
+        
+        .form-group {
+            margin-bottom: 14px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+        }
+        
+        .form-control {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-family: 'Spline Sans', sans-serif;
+            font-size: 14px;
+            color: var(--ink);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--pine);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(38, 65, 47, 0.15);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Spline Sans', sans-serif;
+            font-size: 13.5px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--pine);
+            color: #f3ecda;
+        }
+        
+        .btn-primary:hover {
+            background: var(--pine-deep);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--clay);
+            border: 1px solid var(--line);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--clay);
+            color: white;
+            border-color: var(--clay);
+        }
+        
+        .btn-danger-outline {
+            background: transparent;
+            color: var(--clay);
+            border: 1px solid var(--line-soft);
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        
+        .btn-danger-outline:hover {
+            background: rgba(188, 85, 39, 0.1);
+            border-color: var(--clay);
+        }
+        
+        .btn-sm {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        
+        .participant-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+            min-height: 32px;
+        }
+        
+        .participant-tag {
+            display: inline-flex;
+            align-items: center;
+            background: var(--surface);
+            border: 1px solid var(--line-soft);
+            border-radius: 16px;
+            padding: 4px 10px;
+            font-size: 12.5px;
+            color: var(--ink);
+        }
+        
+        .participant-tag .remove-btn {
+            background: none;
+            border: none;
+            color: var(--clay);
+            margin-left: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 1;
+            padding: 0;
+        }
+        
+        .participant-tag .remove-btn:hover {
+            color: var(--clay-deep);
+        }
+        
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 8px;
+            margin-top: 6px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13.5px;
+            color: var(--ink);
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .checkbox-label input {
+            cursor: pointer;
+            width: 15px;
+            height: 15px;
+            accent-color: var(--pine);
+        }
+        
+        .checkbox-actions {
+            display: flex;
+            gap: 12px;
+            font-size: 11px;
+            margin-top: 6px;
+        }
+        
+        .checkbox-actions a {
+            color: var(--clay);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .checkbox-actions a:hover {
+            text-decoration: underline;
+        }
+        
+        .calc-alert {
+            background: rgba(188, 85, 39, 0.08);
+            border-left: 3px solid var(--clay);
+            color: var(--clay-deep);
+            padding: 8px 12px;
+            border-radius: 0 4px 4px 0;
+            font-size: 12.5px;
+            margin-bottom: 12px;
+            display: none;
+        }
+        
+        .calc-success {
+            background: rgba(38, 65, 47, 0.08);
+            border-left: 3px solid var(--pine);
+            color: var(--pine-deep);
+            padding: 8px 12px;
+            border-radius: 0 4px 4px 0;
+            font-size: 12.5px;
+            margin-bottom: 12px;
+            display: none;
+        }
+        
+        /* Tables and Lists inside calculator */
+        .history-table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--line-soft);
+            border-radius: 4px;
+            background: var(--surface);
+        }
+        
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+        
+        .history-table th {
+            background: var(--pine);
+            color: #f3ecda;
+            padding: 8px 12px;
+            font-family: 'Fraunces', serif;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .history-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--line-soft);
+            color: var(--ink-soft);
+            vertical-align: middle;
+        }
+        
+        .history-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .history-table td b {
+            color: var(--ink);
+        }
+        
+        .history-table .actions {
+            text-align: right;
+        }
+        
+        .balance-list, .transfer-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .balance-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--line-soft);
+            font-size: 13.5px;
+        }
+        
+        .balance-item:last-child {
+            border-bottom: none;
+        }
+        
+        .balance-item .name {
+            font-weight: 600;
+        }
+        
+        .balance-item .amount {
+            font-family: monospace;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .balance-positive {
+            color: var(--pine-deep);
+        }
+        
+        .balance-negative {
+            color: var(--clay-deep);
+        }
+        
+        .balance-neutral {
+            color: var(--ink-soft);
+        }
+        
+        .transfer-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            background: var(--surface);
+            border: 1px solid var(--line-soft);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .transfer-item .arrow {
+            color: var(--clay);
+            font-weight: bold;
+        }
+        
+        .transfer-item .amount {
+            font-weight: bold;
+            color: var(--pine-deep);
+            margin-left: auto;
+        }
+        
+        .reset-confirm-box {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+            padding: 10px;
+            background: rgba(188, 85, 39, 0.05);
+            border: 1px dashed var(--clay);
+            border-radius: 4px;
+        }
+        
+        .reset-confirm-box span {
+            font-size: 12px;
+            color: var(--clay-deep);
+            font-weight: 600;
+        }
+
         @media print {
             body {
                 background: #fff;
@@ -1406,6 +1748,125 @@
                 </li>
                 <li class="done"><b>Assurance voyage médicale</b> — à souscrire avant le départ</li>
             </ul>
+        </div>
+    </section>
+
+    <!-- 6.5 — CALCULATEUR DE DÉPENSES -->
+    <section id="expenses-section">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">💸</div>
+                <h2>Partage des frais</h2>
+                <div class="note">calculateur de dépenses de voyage</div>
+            </div>
+            
+            <div class="expenses-container">
+                <!-- COLONNE GAUCHE: Participants & Formulaire -->
+                <div>
+                    <!-- Participants Card -->
+                    <div class="expense-card">
+                        <h3>Participants</h3>
+                        <div id="calc-alert-participant" class="calc-alert"></div>
+                        <div class="participant-tags" id="participant-list">
+                            <!-- Tags injected here -->
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 8px; margin-bottom: 0;">
+                            <input type="text" id="new-participant-name" class="form-control" placeholder="Nom du participant" maxlength="20">
+                            <button type="button" id="add-participant-btn" class="btn btn-primary">+</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Ajouter Dépense Card -->
+                    <div class="expense-card">
+                        <h3>Ajouter une dépense</h3>
+                        <div id="calc-alert-expense" class="calc-alert"></div>
+                        
+                        <div class="form-group">
+                            <label for="expense-desc">Description</label>
+                            <input type="text" id="expense-desc" class="form-control" placeholder="ex: Essence, Souper..." maxlength="40">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="expense-amount">Montant ($)</label>
+                            <input type="number" id="expense-amount" class="form-control" placeholder="0.00" step="0.01" min="0.01">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="expense-payer">Payé par</label>
+                            <select id="expense-payer" class="form-control">
+                                <!-- Options injected here -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Partagé par (Bénéficiaires)</label>
+                            <div class="checkbox-actions">
+                                <a href="#" id="select-all-beneficiaries">Tous</a>
+                                <a href="#" id="select-none-beneficiaries">Aucun</a>
+                            </div>
+                            <div class="checkbox-grid" id="beneficiaries-grid">
+                                <!-- Checkboxes injected here -->
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="add-expense-btn" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Ajouter la dépense</button>
+                    </div>
+                </div>
+                
+                <!-- COLONNE DROITE: Historique & Soldes -->
+                <div>
+                    <!-- Historique Card -->
+                    <div class="expense-card" style="margin-bottom: 16px;">
+                        <h3>Historique des dépenses</h3>
+                        <div class="history-table-wrapper">
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Payeur</th>
+                                        <th>Montant</th>
+                                        <th>Partagé avec</th>
+                                        <th style="text-align: right;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expenses-history-rows">
+                                    <!-- Rows injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Soldes & Transferts Card -->
+                    <div class="expense-card">
+                        <h3>Soldes &amp; Règlements</h3>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="font-size: 13px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; letter-spacing: 0.05em;">Résumé des soldes</h4>
+                            <div class="history-table-wrapper" style="padding: 4px 12px; background: var(--surface);">
+                                <div id="balances-list-container">
+                                    <!-- Balances injected here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 style="font-size: 13px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; letter-spacing: 0.05em;">Règlements suggérés</h4>
+                            <div id="transfers-container">
+                                <!-- Transfers injected here -->
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 24px; border-top: 1px solid var(--line-soft); padding-top: 16px; display: flex; flex-direction: column;">
+                            <button type="button" id="reset-all-btn" class="btn btn-secondary btn-sm" style="align-self: flex-start;">Réinitialiser les frais</button>
+                            <div id="reset-confirm-box" class="reset-confirm-box">
+                                <span>Confirmer ?</span>
+                                <button type="button" id="reset-confirm-yes" class="btn btn-primary btn-sm">Oui</button>
+                                <button type="button" id="reset-confirm-no" class="btn btn-secondary btn-sm">Non</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2030,6 +2491,484 @@
                 });
             });
         });
+    </script>
+
+    <!-- EXPENSE CALCULATOR LOGIC -->
+    <script>
+        (function() {
+            const STORAGE_KEY = 'lost_sierra_expenses';
+            const state = {
+                participants: ['Gab', 'Alex'],
+                expenses: []
+            };
+
+            function loadState() {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        if (parsed && Array.isArray(parsed.participants)) {
+                            state.participants = parsed.participants;
+                        }
+                        if (parsed && Array.isArray(parsed.expenses)) {
+                            state.expenses = parsed.expenses;
+                        }
+                    } catch (e) {
+                        console.error('Failed to load expenses state', e);
+                    }
+                }
+            }
+
+            function saveState() {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            }
+
+            function showAlert(elementId, message, isSuccess = false) {
+                const alertEl = document.getElementById(elementId);
+                if (!alertEl) return;
+                alertEl.textContent = message;
+                alertEl.className = isSuccess ? 'calc-success' : 'calc-alert';
+                alertEl.style.display = 'block';
+                setTimeout(() => {
+                    alertEl.style.display = 'none';
+                }, 5000);
+            }
+
+            function renderParticipants() {
+                const listEl = document.getElementById('participant-list');
+                if (!listEl) return;
+                listEl.replaceChildren();
+
+                state.participants.forEach(name => {
+                    const tag = document.createElement('div');
+                    tag.className = 'participant-tag';
+                    tag.textContent = name;
+
+                    const removeBtn = document.createElement('button');
+                    removeBtn.type = 'button';
+                    removeBtn.className = 'remove-btn';
+                    removeBtn.textContent = '×';
+                    removeBtn.title = 'Supprimer ' + name;
+                    removeBtn.addEventListener('click', () => {
+                        // Check if participant is in expenses
+                        const isPayer = state.expenses.some(e => e.payer === name);
+                        const isBeneficiary = state.expenses.some(e => e.beneficiaries.includes(name));
+                        if (isPayer || isBeneficiary) {
+                            showAlert('calc-alert-participant', 'Impossible de supprimer ce participant car il est associé à une dépense.');
+                            return;
+                        }
+                        state.participants = state.participants.filter(p => p !== name);
+                        saveState();
+                        updateAll();
+                    });
+
+                    tag.appendChild(removeBtn);
+                    listEl.appendChild(tag);
+                });
+
+                // Update select dropdown
+                const payerSelect = document.getElementById('expense-payer');
+                if (payerSelect) {
+                    const currentSelected = payerSelect.value;
+                    payerSelect.replaceChildren();
+                    
+                    const optDefault = document.createElement('option');
+                    optDefault.value = '';
+                    optDefault.textContent = 'Choisir un payeur...';
+                    payerSelect.appendChild(optDefault);
+
+                    state.participants.forEach(name => {
+                        const opt = document.createElement('option');
+                        opt.value = name;
+                        opt.textContent = name;
+                        if (name === currentSelected) {
+                            opt.selected = true;
+                        }
+                        payerSelect.appendChild(opt);
+                    });
+                }
+
+                // Update checkbox grid
+                const gridEl = document.getElementById('beneficiaries-grid');
+                if (gridEl) {
+                    gridEl.replaceChildren();
+                    state.participants.forEach(name => {
+                        const label = document.createElement('label');
+                        label.className = 'checkbox-label';
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.name = 'beneficiary';
+                        checkbox.value = name;
+                        checkbox.checked = true; // default to checked
+
+                        label.appendChild(checkbox);
+                        label.appendChild(document.createTextNode(' ' + name));
+                        gridEl.appendChild(label);
+                    });
+                }
+            }
+
+            function renderExpensesHistory() {
+                const tbody = document.getElementById('expenses-history-rows');
+                if (!tbody) return;
+                tbody.replaceChildren();
+
+                if (state.expenses.length === 0) {
+                    const tr = document.createElement('tr');
+                    const td = document.createElement('td');
+                    td.colSpan = 5;
+                    td.style.textAlign = 'center';
+                    td.style.color = 'var(--ink-soft)';
+                    td.style.fontStyle = 'italic';
+                    td.textContent = 'Aucune dépense enregistrée';
+                    tr.appendChild(td);
+                    tbody.appendChild(tr);
+                    return;
+                }
+
+                state.expenses.forEach(exp => {
+                    const tr = document.createElement('tr');
+
+                    const tdDesc = document.createElement('td');
+                    const bDesc = document.createElement('b');
+                    bDesc.textContent = exp.desc;
+                    tdDesc.appendChild(bDesc);
+
+                    const tdPayer = document.createElement('td');
+                    tdPayer.textContent = exp.payer;
+
+                    const tdAmount = document.createElement('td');
+                    tdAmount.textContent = '$' + exp.amount.toFixed(2);
+
+                    const tdShared = document.createElement('td');
+                    tdShared.textContent = exp.beneficiaries.join(', ');
+
+                    const tdAction = document.createElement('td');
+                    tdAction.className = 'actions';
+                    const delBtn = document.createElement('button');
+                    delBtn.type = 'button';
+                    delBtn.className = 'btn btn-danger-outline btn-sm';
+                    delBtn.textContent = 'Supprimer';
+                    delBtn.addEventListener('click', () => {
+                        state.expenses = state.expenses.filter(e => e.id !== exp.id);
+                        saveState();
+                        updateAll();
+                    });
+                    tdAction.appendChild(delBtn);
+
+                    tr.appendChild(tdDesc);
+                    tr.appendChild(tdPayer);
+                    tr.appendChild(tdAmount);
+                    tr.appendChild(tdShared);
+                    tr.appendChild(tdAction);
+
+                    tbody.appendChild(tr);
+                });
+            }
+
+            function calculateBalancesAndTransfers() {
+                const balances = {};
+                state.participants.forEach(p => {
+                    balances[p] = { paid: 0, share: 0, net: 0 };
+                });
+
+                state.expenses.forEach(exp => {
+                    const payer = exp.payer;
+                    const amount = exp.amount;
+                    const bens = exp.beneficiaries;
+
+                    if (balances[payer]) {
+                        balances[payer].paid += amount;
+                    }
+
+                    if (bens && bens.length > 0) {
+                        const split = amount / bens.length;
+                        bens.forEach(b => {
+                            if (balances[b]) {
+                                balances[b].share += split;
+                            }
+                        });
+                    }
+                });
+
+                // Compute nets
+                state.participants.forEach(p => {
+                    balances[p].net = balances[p].paid - balances[p].share;
+                });
+
+                // Render balances
+                const containerEl = document.getElementById('balances-list-container');
+                if (containerEl) {
+                    containerEl.replaceChildren();
+                    state.participants.forEach(name => {
+                        const bInfo = balances[name];
+                        const item = document.createElement('div');
+                        item.className = 'balance-item';
+
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'name';
+                        nameSpan.textContent = name;
+
+                        const detailsSpan = document.createElement('span');
+                        detailsSpan.style.fontSize = '12px';
+                        detailsSpan.style.color = 'var(--ink-soft)';
+                        detailsSpan.textContent = ' (Payé: $' + bInfo.paid.toFixed(2) + ', Part: $' + bInfo.share.toFixed(2) + ')';
+                        nameSpan.appendChild(detailsSpan);
+
+                        const amountSpan = document.createElement('span');
+                        amountSpan.className = 'amount';
+                        const netVal = bInfo.net;
+                        if (netVal > 0.005) {
+                            amountSpan.textContent = '+$' + netVal.toFixed(2);
+                            amountSpan.classList.add('balance-positive');
+                        } else if (netVal < -0.005) {
+                            amountSpan.textContent = '-$' + Math.abs(netVal).toFixed(2);
+                            amountSpan.classList.add('balance-negative');
+                        } else {
+                            amountSpan.textContent = '$0.00';
+                            amountSpan.classList.add('balance-neutral');
+                        }
+
+                        item.appendChild(nameSpan);
+                        item.appendChild(amountSpan);
+                        containerEl.appendChild(item);
+                    });
+                }
+
+                // Settle debts (Greedy algorithm)
+                const debtors = [];
+                const creditors = [];
+
+                state.participants.forEach(p => {
+                    const net = balances[p].net;
+                    if (net < -0.005) {
+                        debtors.push({ name: p, net: net });
+                    } else if (net > 0.005) {
+                        creditors.push({ name: p, net: net });
+                    }
+                });
+
+                // Sort debtors ascending (most negative first)
+                debtors.sort((a, b) => a.net - b.net);
+                // Sort creditors descending (most positive first)
+                creditors.sort((a, b) => b.net - a.net);
+
+                const transfers = [];
+                let dIdx = 0;
+                let cIdx = 0;
+
+                while (dIdx < debtors.length && cIdx < creditors.length) {
+                    const debtor = debtors[dIdx];
+                    const creditor = creditors[cIdx];
+
+                    const amount = Math.min(Math.abs(debtor.net), creditor.net);
+                    if (amount > 0.005) {
+                        transfers.push({
+                            from: debtor.name,
+                            to: creditor.name,
+                            amount: amount
+                        });
+                    }
+
+                    debtor.net += amount;
+                    creditor.net -= amount;
+
+                    if (Math.abs(debtor.net) < 0.005) {
+                        dIdx++;
+                    }
+                    if (Math.abs(creditor.net) < 0.005) {
+                        cIdx++;
+                    }
+                }
+
+                // Render transfers
+                const transfersEl = document.getElementById('transfers-container');
+                if (transfersEl) {
+                    transfersEl.replaceChildren();
+
+                    if (transfers.length === 0) {
+                        const noTransfers = document.createElement('div');
+                        noTransfers.style.fontSize = '13.5px';
+                        noTransfers.style.color = 'var(--pine-deep)';
+                        noTransfers.style.fontStyle = 'italic';
+                        noTransfers.style.padding = '8px 0';
+                        noTransfers.textContent = 'Tous les comptes sont équilibrés.';
+                        transfersEl.appendChild(noTransfers);
+                        return;
+                    }
+
+                    transfers.forEach(t => {
+                        const item = document.createElement('div');
+                        item.className = 'transfer-item';
+
+                        const fromSpan = document.createElement('span');
+                        fromSpan.style.fontWeight = '600';
+                        fromSpan.textContent = t.from;
+
+                        const arrowSpan = document.createElement('span');
+                        arrowSpan.className = 'arrow';
+                        arrowSpan.textContent = ' ➔ ';
+
+                        const toSpan = document.createElement('span');
+                        toSpan.style.fontWeight = '600';
+                        toSpan.textContent = t.to;
+
+                        const amountSpan = document.createElement('span');
+                        amountSpan.className = 'amount';
+                        amountSpan.textContent = '$' + t.amount.toFixed(2);
+
+                        item.appendChild(fromSpan);
+                        item.appendChild(arrowSpan);
+                        item.appendChild(toSpan);
+                        item.appendChild(amountSpan);
+
+                        transfersEl.appendChild(item);
+                    });
+                }
+            }
+
+            function updateAll() {
+                renderParticipants();
+                renderExpensesHistory();
+                calculateBalancesAndTransfers();
+            }
+
+            // Event Listeners setup
+            function init() {
+                loadState();
+
+                // Add participant
+                const addPartBtn = document.getElementById('add-participant-btn');
+                const newPartInput = document.getElementById('new-participant-name');
+                if (addPartBtn && newPartInput) {
+                    addPartBtn.addEventListener('click', () => {
+                        const name = newPartInput.value.trim();
+                        if (!name) {
+                            showAlert('calc-alert-participant', 'Le nom ne peut pas être vide.');
+                            return;
+                        }
+                        if (state.participants.some(p => p.toLowerCase() === name.toLowerCase())) {
+                            showAlert('calc-alert-participant', 'Ce nom existe déjà.');
+                            return;
+                        }
+                        state.participants.push(name);
+                        newPartInput.value = '';
+                        saveState();
+                        updateAll();
+                    });
+                    newPartInput.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            addPartBtn.click();
+                        }
+                    });
+                }
+
+                // Select All / Select None beneficiaries
+                const selAll = document.getElementById('select-all-beneficiaries');
+                const selNone = document.getElementById('select-none-beneficiaries');
+                if (selAll) {
+                    selAll.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const checkBoxes = document.querySelectorAll('#beneficiaries-grid input[type="checkbox"]');
+                        checkBoxes.forEach(cb => cb.checked = true);
+                    });
+                }
+                if (selNone) {
+                    selNone.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const checkBoxes = document.querySelectorAll('#beneficiaries-grid input[type="checkbox"]');
+                        checkBoxes.forEach(cb => cb.checked = false);
+                    });
+                }
+
+                // Add Expense
+                const addExpBtn = document.getElementById('add-expense-btn');
+                if (addExpBtn) {
+                    addExpBtn.addEventListener('click', () => {
+                        const descInput = document.getElementById('expense-desc');
+                        const amtInput = document.getElementById('expense-amount');
+                        const payerSelect = document.getElementById('expense-payer');
+
+                        const desc = descInput.value.trim();
+                        const amount = parseFloat(amtInput.value);
+                        const payer = payerSelect.value;
+
+                        if (!desc || isNaN(amount)) {
+                            showAlert('calc-alert-expense', 'Veuillez entrer une description et un montant valide.');
+                            return;
+                        }
+                        if (amount <= 0) {
+                            showAlert('calc-alert-expense', 'Le montant doit être supérieur à zéro.');
+                            return;
+                        }
+                        if (!payer) {
+                            showAlert('calc-alert-expense', 'Veuillez sélectionner un payeur.');
+                            return;
+                        }
+
+                        // Get checked beneficiaries
+                        const checkedBoxes = document.querySelectorAll('#beneficiaries-grid input[name="beneficiary"]:checked');
+                        const beneficiaries = Array.from(checkedBoxes).map(cb => cb.value);
+
+                        if (beneficiaries.length === 0) {
+                            showAlert('calc-alert-expense', 'Sélectionnez au moins un participant qui partage cette dépense.');
+                            return;
+                        }
+
+                        // Create expense object
+                        const newExp = {
+                            id: Date.now().toString(),
+                            desc: desc,
+                            amount: amount,
+                            payer: payer,
+                            beneficiaries: beneficiaries,
+                            date: new Date().toISOString()
+                        };
+
+                        state.expenses.push(newExp);
+                        descInput.value = '';
+                        amtInput.value = '';
+                        saveState();
+                        updateAll();
+                    });
+                }
+
+                // Reset all
+                const resetBtn = document.getElementById('reset-all-btn');
+                const confirmBox = document.getElementById('reset-confirm-box');
+                const confirmYes = document.getElementById('reset-confirm-yes');
+                const confirmNo = document.getElementById('reset-confirm-no');
+
+                if (resetBtn && confirmBox && confirmYes && confirmNo) {
+                    resetBtn.addEventListener('click', () => {
+                        confirmBox.style.display = 'inline-flex';
+                        resetBtn.style.display = 'none';
+                    });
+
+                    confirmNo.addEventListener('click', () => {
+                        confirmBox.style.display = 'none';
+                        resetBtn.style.display = 'inline-flex';
+                    });
+
+                    confirmYes.addEventListener('click', () => {
+                        localStorage.removeItem(STORAGE_KEY);
+                        state.participants = ['Gab', 'Alex'];
+                        state.expenses = [];
+                        confirmBox.style.display = 'none';
+                        resetBtn.style.display = 'inline-flex';
+                        updateAll();
+                    });
+                }
+
+                updateAll();
+            }
+
+            window.addEventListener('DOMContentLoaded', init);
+            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                init();
+            }
+        })();
     </script>
 
     <script>
