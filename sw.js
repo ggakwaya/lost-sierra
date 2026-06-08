@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lost-sierra-v6';
+const CACHE_NAME = 'lost-sierra-v7';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
