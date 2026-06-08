@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <title>Plan du voyage — Lost Sierra &amp; Tahoe · 9–15 juin 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1366,6 +1367,18 @@
         </div>
     </section>
 
+    <!-- MAPS SECTION -->
+    <section style="background:var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">🗺️</div>
+                <h2>Carte interactive</h2>
+                <div class="note">itinéraires &amp; sentiers</div>
+            </div>
+            <div id="map" style="height: 480px; border-radius: 6px; border: 1px solid var(--line); box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; z-index: 1;"></div>
+        </div>
+    </section>
+
     <!-- 6 — RESERVATIONS -->
     <section>
         <div class="wrap">
@@ -1878,6 +1891,47 @@
     <footer>
         Plan du voyage · Lost Sierra &amp; Tahoe, Californie · 9–15 juin 2026 · version quasi-finale
     </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const map = L.map('map').setView([39.55, -120.30], 9);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Fetch and render the geojson routes
+            fetch('./map-data.geojson')
+                .then(res => res.json())
+                .then(geojsonData => {
+                    L.geoJSON(geojsonData, {
+                        style: (feature) => {
+                            if (feature.properties.type === 'drive') {
+                                return { color: '#bc5527', weight: 4, opacity: 0.8, dashArray: '6, 6' };
+                            } else if (feature.properties.type === 'trail') {
+                                return { color: '#26412f', weight: 5, opacity: 0.9 };
+                            }
+                            return { color: '#3d5965', weight: 3 };
+                        },
+                        pointToLayer: (feature, latlng) => {
+                            return L.marker(latlng);
+                        },
+                        onEachFeature: (feature, layer) => {
+                            if (feature.properties && feature.properties.name) {
+                                let popupContent = `<strong>${feature.properties.name}</strong>`;
+                                if (feature.properties.description) {
+                                    popupContent += `<br><span style="font-size:12px;color:#555;">${feature.properties.description}</span>`;
+                                }
+                                layer.bindPopup(popupContent);
+                            }
+                        }
+                    }).addTo(map);
+                })
+                .catch(err => console.error('Error loading map data:', err));
+        });
+    </script>
 
     <script>
         if ('serviceWorker' in navigator) {

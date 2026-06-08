@@ -1,0 +1,179 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Reno-Tahoe International Airport (RNO)",
+        "type": "stop",
+        "description": "Point d'arrivée et de départ des vols."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-119.7681, 39.4991]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Riverside Mountain Lodge (Downieville)",
+        "type": "stop",
+        "description": "Hébergement pour les jours 1 à 3."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-120.8273, 39.5599]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pine Hill Motel (Quincy)",
+        "type": "stop",
+        "description": "Hébergement pour les jours 4 et 5."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-120.9472, 39.9368]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tunnel Creek Station (Incline Village)",
+        "type": "stop",
+        "description": "Départ de la navette Flume Trail (Jour 6)."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-119.9272, 39.2483]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Carson City Plaza Hotel",
+        "type": "stop",
+        "description": "Hébergement pour la nuit du jour 6."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-119.7674, 39.1594]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "J1 : Reno ➔ Downieville",
+        "type": "drive",
+        "legId": "drive-j1",
+        "description": "Trajet de montagne sinueux de ~2h via Hwy 395 N ➔ Hwy 89 N ➔ Hwy 49."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-119.7681, 39.4991],
+          [-119.7745, 39.5420],
+          [-120.1001, 39.7123],
+          [-120.3541, 39.6912],
+          [-120.6212, 39.5982],
+          [-120.8273, 39.5599]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "J4 : Downieville ➔ Quincy",
+        "type": "drive",
+        "legId": "drive-j4",
+        "description": "Trajet de ~1h30 via Hwy 49 ➔ Hwy 70 E direction Quincy."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-120.8273, 39.5599],
+          [-120.6212, 39.5982],
+          [-120.3541, 39.6912],
+          [-120.3702, 39.8142],
+          [-120.5510, 39.9012],
+          [-120.9472, 39.9368]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "J6 : Quincy ➔ Incline Village",
+        "type": "drive",
+        "legId": "drive-j6",
+        "description": "Trajet de ~2h45 via Hwy 70 E ➔ Hwy 89 S vers Truckee ➔ Hwy 28 E."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-120.9472, 39.9368],
+          [-120.5510, 39.9012],
+          [-120.3702, 39.8142],
+          [-120.2520, 39.5230],
+          [-120.2012, 39.3292],
+          [-120.0810, 39.2612],
+          [-119.9272, 39.2483]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "J6 soir : Incline Village ➔ Carson City",
+        "type": "drive",
+        "legId": "drive-j6-evening",
+        "description": "Trajet après le ride de ~30 min via Hwy 28 S ➔ US-50 E."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-119.9272, 39.2483],
+          [-119.9312, 39.1821],
+          [-119.8210, 39.1412],
+          [-119.7674, 39.1594]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "J7 : Carson City ➔ Reno",
+        "type": "drive",
+        "legId": "drive-j7",
+        "description": "Trajet de retour à l'aéroport de ~50 min via US-395 N."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-119.7674, 39.1594],
+          [-119.7712, 39.2492],
+          [-119.7892, 39.3812],
+          [-119.7681, 39.4991]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "J6 Ride : Flume Trail (Tahoe Meadows ➔ Tunnel Creek)",
+        "type": "trail",
+        "description": "Sentier légendaire au-dessus du lac Tahoe de 33,5 km."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-119.9192, 39.3142],
+          [-119.9012, 39.2942],
+          [-119.9142, 39.2612],
+          [-119.9272, 39.2483]
+        ]
+      }
+    }
+  ]
+}
