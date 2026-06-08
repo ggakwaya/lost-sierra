@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lost-sierra-v3';
+const CACHE_NAME = 'lost-sierra-v5';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
@@ -74,7 +74,7 @@ self.addEventListener('fetch', (event) => {
         const isSameOrigin = url.origin === location.origin;
         const isGoogleFont = url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com');
         const isLeafletCDN = url.hostname.includes('unpkg.com');
-        const isMapTile = url.hostname.includes('tile.openstreetmap.org');
+        const isMapTile = url.hostname.includes('tile.openstreetmap.org') || url.hostname.includes('basemaps.cartocdn.com');
 
         if (isSameOrigin || isGoogleFont || isLeafletCDN || isMapTile) {
           const responseToCache = networkResponse.clone();
