@@ -1277,7 +1277,7 @@
                 <div class="rdrive"><b>~2 h 00</b> · J1 soir (arrivée ~23h) · Hwy 395 N → Hwy 89 N → Hwy 49 · Route de
                     montagne sinueuse, de nuit — prudence <a class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Reno-Tahoe+International+Airport&origin_place_id=ChIJF0m8rXA_mYARQFmvIP8eQBA&destination=Riverside+Mountain+Lodge&destination_place_id=ChIJI4XI80F8nIAR6uI8HWZVZ9w&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j1" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="2">
                     <div class="rsday">J1-J3 · 9-12 juin — 3 nuits</div>
@@ -1289,7 +1289,7 @@
 
                 <div class="rdrive"><b>~1 h 30</b> · J4 matin · Hwy 49 → Hwy 70 E direction Quincy <a class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Riverside+Mountain+Lodge&origin_place_id=ChIJI4XI80F8nIAR6uI8HWZVZ9w&destination=262+Spanish+Creek+Rd,+Quincy,+CA+95971&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j4" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="3">
                     <div class="rsday">J4 · Vendredi 12 juin — Navette Mt. Hough</div>
@@ -1319,7 +1319,7 @@
                 <div class="rdrive"><b>~2 h 45</b> · J6 matin · Hwy 70 E → Hwy 89 S vers Truckee → Hwy 28 E direction
                     Incline Village <a class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Pine+Hill+Motel&origin_place_id=ChIJW3dfX8n-nIAR0HgGi8KIVI4&destination=Tunnel+Creek+Station&destination_place_id=ChIJ4-IvaAZxmYARtBPCc8shjVI&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j6" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="5">
                     <div class="rsday">J6 · Dimanche 14 juin — Navette Flume Trail</div>
@@ -1337,7 +1337,7 @@
                 <div class="rdrive"><b>~0 h 30</b> · J6 après le ride · Hwy 28 S → US-50 E direction Carson City <a
                         class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Tunnel+Creek+Station&origin_place_id=ChIJ4-IvaAZxmYARtBPCc8shjVI&destination=Carson+City+Plaza+Hotel&destination_place_id=ChIJNycC0gqgmYARJXr-WDHrhkU&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j6-evening" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="6">
                     <div class="rsday">J6 · Dimanche 14 juin — 1 nuit</div>
@@ -1354,7 +1354,7 @@
 
                 <div class="rdrive"><b>~0 h 50</b> · J7 après le ride · US-50 E → US-395 N direction Reno <a class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Carson+City+Plaza+Hotel&origin_place_id=ChIJNycC0gqgmYARJXr-WDHrhkU&destination=Reno-Tahoe+International+Airport&destination_place_id=ChIJF0m8rXA_mYARQFmvIP8eQBA&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j7" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="7">
                     <div class="rsday">J7 · Lundi 15 juin — Retour</div>
@@ -1368,7 +1368,7 @@
     </section>
 
     <!-- MAPS SECTION -->
-    <section style="background:var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <section id="map-section" style="background:var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
         <div class="wrap">
             <div class="sh">
                 <div class="num">🗺️</div>
@@ -1902,11 +1902,13 @@
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
 
+            let mapLayers = null;
+
             // Fetch and render the geojson routes
             fetch('./map-data.geojson')
                 .then(res => res.json())
                 .then(geojsonData => {
-                    L.geoJSON(geojsonData, {
+                    mapLayers = L.geoJSON(geojsonData, {
                         style: (feature) => {
                             if (feature.properties.type === 'drive') {
                                 return { color: '#bc5527', weight: 4, opacity: 0.8, dashArray: '6, 6' };
@@ -1916,7 +1918,31 @@
                             return { color: '#3d5965', weight: 3 };
                         },
                         pointToLayer: (feature, latlng) => {
-                            return L.marker(latlng);
+                            let emoji = '📍';
+                            let color = '#bc5527'; // clay default
+                            const name = feature.properties.name || '';
+                            if (name.includes('Airport') || name.includes('Aéroport')) {
+                                emoji = '✈️';
+                                color = '#e0a55f'; // amber
+                            } else if (name.includes('Lodge') || name.includes('Motel') || name.includes('Hotel')) {
+                                emoji = '🏨';
+                                color = '#26412f'; // pine
+                            } else if (name.includes('Bikes') || name.includes('Expeditions') || name.includes('Trailhead')) {
+                                emoji = '🚲';
+                                color = '#9a4420'; // clay-deep
+                            } else if (name.includes('Laundry') || name.includes('Buanderie')) {
+                                emoji = '🧼';
+                                color = '#3d5965'; // slate
+                            }
+
+                            const customIcon = L.divIcon({
+                                html: `<div style="background-color: ${color}; width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px;">${emoji}</div>`,
+                                className: 'custom-map-icon',
+                                iconSize: [30, 30],
+                                iconAnchor: [15, 15]
+                            });
+
+                            return L.marker(latlng, { icon: customIcon });
                         },
                         onEachFeature: (feature, layer) => {
                             if (feature.properties && feature.properties.name) {
@@ -1930,6 +1956,79 @@
                     }).addTo(map);
                 })
                 .catch(err => console.error('Error loading map data:', err));
+
+            // Connection status monitoring for GPS tracker control
+            L.Control.Location = L.Control.extend({
+                onAdd: function(map) {
+                    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+                    const button = L.DomUtil.create('a', '', container);
+                    button.innerHTML = '🎯';
+                    button.href = '#';
+                    button.title = 'Ma position / My position';
+                    button.style.fontSize = '16px';
+                    button.style.display = 'flex';
+                    button.style.alignItems = 'center';
+                    button.style.justifyContent = 'center';
+                    button.style.cursor = 'pointer';
+
+                    let locMarker = null;
+
+                    L.DomEvent.on(button, 'click', function(e) {
+                        L.DomEvent.stopPropagation(e);
+                        L.DomEvent.preventDefault(e);
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition((position) => {
+                                const latlng = [position.coords.latitude, position.coords.longitude];
+                                if (locMarker) {
+                                    locMarker.setLatLng(latlng);
+                                } else {
+                                    locMarker = L.circleMarker(latlng, {
+                                        radius: 8,
+                                        fillColor: '#3897f0',
+                                        color: '#fff',
+                                        weight: 2,
+                                        opacity: 1,
+                                        fillOpacity: 0.9
+                                    }).addTo(map);
+                                }
+                                map.setView(latlng, 12);
+                            }, (err) => {
+                                alert('Impossible de récupérer la position / Unable to retrieve position: ' + err.message);
+                            });
+                        } else {
+                            alert('Géolocalisation non supportée / Geolocation not supported.');
+                        }
+                    });
+                    return container;
+                }
+            });
+            new L.Control.Location({ position: 'topleft' }).addTo(map);
+
+            // Listen for clicks on map-links to focus and highlight route segments
+            document.querySelectorAll('.map-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const legId = link.getAttribute('data-leg');
+                    if (!legId || !mapLayers) return;
+
+                    // Search for the layer with properties.legId === legId
+                    mapLayers.eachLayer(layer => {
+                        if (layer.feature && layer.feature.properties && layer.feature.properties.legId === legId) {
+                            // Highlight the line
+                            layer.setStyle({ color: '#e0a55f', weight: 6, opacity: 1 }); // temporary amber highlight
+                            setTimeout(() => {
+                                layer.setStyle({ color: '#bc5527', weight: 4, opacity: 0.8 }); // restore original color
+                            }, 3000);
+
+                            // Fit bounds to show the route leg
+                            if (layer.getBounds) {
+                                map.fitBounds(layer.getBounds(), { padding: [50, 50] });
+                            }
+                            // Open popup on that layer
+                            layer.openPopup();
+                        }
+                    });
+                });
+            });
         });
     </script>
 
