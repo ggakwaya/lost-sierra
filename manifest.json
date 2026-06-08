@@ -1,0 +1,18 @@
+{
+  "name": "Lost Sierra & Tahoe Road Trip",
+  "short_name": "Lost Sierra",
+  "description": "Itinerary and trail companion for the Lost Sierra & Tahoe road trip, June 2026.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#e9e1cf",
+  "theme_color": "#182a1f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -3,19 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="./manifest.json">
 <title>Trame sonore · Lost Sierra & Tahoe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Spline+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Roboto:wght@300;400;500;700&family=Spline+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --pine-deep:#1b3a2f; --pine:#2d5a40; --clay:#a86340; --clay-deep:#7a4628;
-    --amber:#c8961e; --slate:#4a6274; --rust:#c04520;
-    --ink:#1e1e1e; --ink-soft:#555; --ink-muted:#888;
-    --bg:#faf8f3; --surface:#fff; --surface-2:#f4f1ea;
-    --line:#e0dbd0; --line-soft:#ece8de;
-    --thrash:#7a4628; --death:#1b3a2f; --desert:#b07a10;
-    --altmetal:#4a6274; --punk:#a02a1a;
+    --pine-deep:#182a1f; --pine:#26412f; --clay:#bc5527; --clay-deep:#9a4420;
+    --amber:#e0a55f; --slate:#3d5965; --rust:#bc5527;
+    --ink:#211f18; --ink-soft:#5b574c; --ink-muted:#888;
+    --bg:#e9e1cf; --surface:#f8f3e6; --surface-2:#f1ead9;
+    --line:rgba(33, 31, 24, .16); --line-soft:rgba(33, 31, 24, .09);
+    --thrash:#9a4420; --death:#182a1f; --desert:#c8961e;
+    --altmetal:#3d5965; --punk:#bc5527;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{font-size:16px;}
@@ -96,6 +97,123 @@
   .mwhy{font-size:12px;color:#9dbba8;margin-top:8px;font-style:italic;line-height:1.45;}
   @media(max-width:600px){.mlist{grid-template-columns:1fr;}}
 
+  /* THEME VARIABLES & SYSTEM */
+  body[data-theme="dark"] {
+      --bg: #12161a;
+      --surface: #1a2026;
+      --surface-2: #222b33;
+      --ink: #eef3f7;
+      --ink-soft: #9bb0c1;
+      --pine: #3e6e52;
+      --pine-deep: #224230;
+      --clay: #e66a38;
+      --clay-deep: #b84e23;
+      --amber: #f2c26f;
+      --slate: #5d7f96;
+      --line: rgba(238, 243, 247, 0.15);
+      --line-soft: rgba(238, 243, 247, 0.08);
+      --thrash:#b84e23; --death:#3e6e52; --desert:#f2c26f;
+      --altmetal:#5d7f96; --punk:#e66a38;
+  }
+  
+  body[data-theme="high-sierra"] {
+      --bg: #e2e6e8;
+      --surface: #f1f4f5;
+      --surface-2: #d4dcde;
+      --ink: #1a242a;
+      --ink-soft: #4c5d67;
+      --pine: #1d5654;
+      --pine-deep: #0e3533;
+      --clay: #c55f30;
+      --clay-deep: #96421a;
+      --amber: #cca038;
+      --slate: #4d7491;
+      --line: rgba(26, 36, 42, 0.16);
+      --line-soft: rgba(26, 36, 42, 0.09);
+      --thrash:#96421a; --death:#1d5654; --desert:#cca038;
+      --altmetal:#4d7491; --punk:#c55f30;
+  }
+  
+  body[data-theme="m3"] {
+      --bg: #f3f4f9;
+      --surface: #ffffff;
+      --surface-2: #eef0f7;
+      --ink: #191c20;
+      --ink-soft: #43474e;
+      --pine: #0061a4;
+      --pine-deep: #00477b;
+      --clay: #b3261e;
+      --clay-deep: #8c1d18;
+      --amber: #cca038;
+      --slate: #535f70;
+      --line: rgba(67, 71, 78, 0.16);
+      --line-soft: rgba(67, 71, 78, 0.08);
+      --thrash:#8c1d18; --death:#0061a4; --desert:#cca038;
+      --altmetal:#535f70; --punk:#b3261e;
+  }
+  
+  body[data-theme="m3"],
+  body[data-theme="m3"] h1,
+  body[data-theme="m3"] h2,
+  body[data-theme="m3"] h3,
+  body[data-theme="m3"] h4,
+  body[data-theme="m3"] .masthead h1,
+  body[data-theme="m3"] .gnum,
+  body[data-theme="m3"] .ghead h2,
+  body[data-theme="m3"] .rband,
+  body[data-theme="m3"] .moments h2,
+  body[data-theme="m3"] .mtrack,
+  body[data-theme="m3"] button,
+  body[data-theme="m3"] .btn {
+      font-family: 'Roboto', sans-serif !important;
+  }
+
+  .theme-selector {
+      border: 1px solid rgba(243, 236, 218, 0.25);
+      border-radius: 20px;
+      display: inline-flex;
+      padding: 2px;
+      gap: 2px;
+      align-items: center;
+      background: rgba(18, 22, 26, 0.4);
+      margin-left: 6px;
+  }
+  
+  body[data-theme="dark"] .theme-selector {
+      border-color: rgba(238, 243, 247, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+  }
+  
+  body[data-theme="high-sierra"] .theme-selector {
+      border-color: rgba(26, 36, 42, 0.2);
+      background: rgba(0, 0, 0, 0.05);
+  }
+  
+  .theme-btn {
+      background: transparent;
+      border: none;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 3px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      opacity: 0.65;
+  }
+  
+  .theme-btn:hover {
+      opacity: 1;
+      background: rgba(243, 236, 218, 0.1);
+  }
+  
+  .theme-btn.active {
+      opacity: 1;
+      background: var(--amber);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+
   /* FOOTER */
   footer{border-top:1px solid var(--line);text-align:center;
     padding:28px 0 36px;font-size:11.5px;color:var(--ink-muted);margin-top:32px;}
@@ -105,7 +223,16 @@
 <body>
 
 <div class="masthead">
-  <div class="sup">Companion document · Lost Sierra &amp; Tahoe, juin 2026 · <a href="index.html" style="color: #f8f3e8; text-decoration: none; border-bottom: 1px solid rgba(248, 243, 232, 0.4);">← Plan du voyage</a></div>
+  <div class="sup" style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;">
+    <span>Companion document · Lost Sierra &amp; Tahoe, juin 2026 · <a href="index.html" style="color: #f8f3e8; text-decoration: none; border-bottom: 1px solid rgba(248, 243, 232, 0.4);">← Plan du voyage</a></span>
+    <div class="theme-selector">
+        <button class="theme-btn active" data-theme="sand" title="Lost Sierra Sand">🏜️</button>
+        <button class="theme-btn" data-theme="dark" title="Tahoe Night">🌙</button>
+        <button class="theme-btn" data-theme="high-sierra" title="High Sierra">🏔️</button>
+        <button class="theme-btn" data-theme="m3" title="Material Design 3">🤖</button>
+    </div>
+    <span id="status-badge" style="color: #6fa888; border: 1px solid rgba(111, 168, 136, 0.3); font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 4px; transition: all 0.3s ease; background: transparent;"><span style="width: 5px; height: 5px; background-color: #6fa888; border-radius: 50%; display: inline-block;"></span><span id="status-text">Dispo</span></span>
+  </div>
   <h1>Trame sonore californienne</h1>
   <div class="sub">Punk, punk rock, rock, thrash metal, metal, death metal · Californie · 1990–2025 · 28 artistes · 6 moments du voyage</div>
 </div>
@@ -560,6 +687,65 @@
 <footer>
   Trame sonore · <span>Lost Sierra &amp; Tahoe</span> · Californie · 9–15 juin 2026 · 28 artistes · 5 genres · 1990–2025
 </footer>
+
+<!-- THEME SWITCHER LOGIC -->
+<script>
+    (function() {
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        
+        function applyTheme(themeName) {
+            document.body.setAttribute('data-theme', themeName);
+            localStorage.setItem('lost-sierra-theme', themeName);
+            
+            themeButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-theme') === themeName);
+            });
+        }
+
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                applyTheme(btn.getAttribute('data-theme'));
+            });
+        });
+
+        // Initial theme loading
+        const savedTheme = localStorage.getItem('lost-sierra-theme') || 'sand';
+        applyTheme(savedTheme);
+    })();
+</script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker registered.', reg))
+                .catch(err => console.log('Service Worker registration failed.', err));
+        });
+    }
+
+    // Connection status monitoring
+    const statusBadge = document.getElementById('status-badge');
+    if (statusBadge) {
+        const statusText = document.getElementById('status-text');
+        const updateStatus = () => {
+            const dot = statusBadge.querySelector('span');
+            if (navigator.onLine) {
+                statusBadge.style.color = '#6fa888';
+                statusBadge.style.borderColor = 'rgba(111, 168, 136, 0.3)';
+                dot.style.backgroundColor = '#6fa888';
+                if (statusText) statusText.textContent = 'Dispo';
+            } else {
+                statusBadge.style.color = '#bc5527';
+                statusBadge.style.borderColor = 'rgba(188, 85, 39, 0.3)';
+                dot.style.backgroundColor = '#bc5527';
+                if (statusText) statusText.textContent = 'Hors-ligne';
+            }
+        };
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        updateStatus(); // run initial check
+    }
+</script>
 
 </body>
 </html>

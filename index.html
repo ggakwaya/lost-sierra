@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="">
     <title>Plan du voyage — Lost Sierra &amp; Tahoe · 9–15 juin 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Spline+Sans:wght@300..600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Roboto:wght@300;400;500;700&family=Spline+Sans:wght@300..600&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -934,6 +936,460 @@
             }
         }
 
+        /* THEME VARIABLES & SYSTEM */
+        body[data-theme="dark"] {
+            --bg: #12161a;
+            --surface: #1a2026;
+            --surface-2: #222b33;
+            --ink: #eef3f7;
+            --ink-soft: #9bb0c1;
+            --pine: #3e6e52;
+            --pine-deep: #224230;
+            --clay: #e66a38;
+            --clay-deep: #b84e23;
+            --amber: #f2c26f;
+            --slate: #5d7f96;
+            --line: rgba(238, 243, 247, 0.15);
+            --line-soft: rgba(238, 243, 247, 0.08);
+        }
+        
+        body[data-theme="high-sierra"] {
+            --bg: #e2e6e8;
+            --surface: #f1f4f5;
+            --surface-2: #d4dcde;
+            --ink: #1a242a;
+            --ink-soft: #4c5d67;
+            --pine: #1d5654;
+            --pine-deep: #0e3533;
+            --clay: #c55f30;
+            --clay-deep: #96421a;
+            --amber: #cca038;
+            --slate: #4d7491;
+            --line: rgba(26, 36, 42, 0.16);
+            --line-soft: rgba(26, 36, 42, 0.09);
+        }
+        
+        body[data-theme="m3"] {
+            --bg: #f3f4f9;
+            --surface: #ffffff;
+            --surface-2: #eef0f7;
+            --ink: #191c20;
+            --ink-soft: #43474e;
+            --pine: #0061a4;
+            --pine-deep: #00477b;
+            --clay: #b3261e;
+            --clay-deep: #8c1d18;
+            --amber: #cca038;
+            --slate: #535f70;
+            --line: rgba(67, 71, 78, 0.16);
+            --line-soft: rgba(67, 71, 78, 0.08);
+        }
+        
+        body[data-theme="m3"],
+        body[data-theme="m3"] h1,
+        body[data-theme="m3"] h2,
+        body[data-theme="m3"] h3,
+        body[data-theme="m3"] h4,
+        body[data-theme="m3"] .num,
+        body[data-theme="m3"] .v,
+        body[data-theme="m3"] th,
+        body[data-theme="m3"] td,
+        body[data-theme="m3"] button,
+        body[data-theme="m3"] input,
+        body[data-theme="m3"] select,
+        body[data-theme="m3"] .btn,
+        body[data-theme="m3"] .form-control {
+            font-family: 'Roboto', sans-serif !important;
+        }
+
+        .theme-selector {
+            border: 1px solid rgba(243, 236, 218, 0.25);
+            border-radius: 20px;
+            display: inline-flex;
+            padding: 2px;
+            gap: 2px;
+            align-items: center;
+            background: rgba(18, 22, 26, 0.4);
+            margin-left: 6px;
+        }
+        
+        body[data-theme="dark"] .theme-selector {
+            border-color: rgba(238, 243, 247, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        body[data-theme="high-sierra"] .theme-selector {
+            border-color: rgba(26, 36, 42, 0.2);
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .theme-btn {
+            background: transparent;
+            border: none;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 12px;
+            padding: 3px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            opacity: 0.65;
+        }
+        
+        .theme-btn:hover {
+            opacity: 1;
+            background: rgba(243, 236, 218, 0.1);
+        }
+        
+        .theme-btn.active {
+            opacity: 1;
+            background: var(--amber);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        /* EXPENSE CALCULATOR STYLES */
+        #expenses-section {
+            background: var(--surface);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+        
+        .expenses-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 24px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .expenses-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .expense-card {
+            background: var(--surface-2);
+            border: 1px solid var(--line-soft);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .expense-card h3 {
+            font-family: 'Fraunces', serif;
+            font-size: 1.15rem;
+            color: var(--pine-deep);
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--line-soft);
+            padding-bottom: 6px;
+        }
+        
+        .form-group {
+            margin-bottom: 14px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+        }
+        
+        .form-control {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-family: 'Spline Sans', sans-serif;
+            font-size: 14px;
+            color: var(--ink);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--pine);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(38, 65, 47, 0.15);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Spline Sans', sans-serif;
+            font-size: 13.5px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--pine);
+            color: #f3ecda;
+        }
+        
+        .btn-primary:hover {
+            background: var(--pine-deep);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--clay);
+            border: 1px solid var(--line);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--clay);
+            color: white;
+            border-color: var(--clay);
+        }
+        
+        .btn-danger-outline {
+            background: transparent;
+            color: var(--clay);
+            border: 1px solid var(--line-soft);
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        
+        .btn-danger-outline:hover {
+            background: rgba(188, 85, 39, 0.1);
+            border-color: var(--clay);
+        }
+        
+        .btn-sm {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        
+        .participant-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+            min-height: 32px;
+        }
+        
+        .participant-tag {
+            display: inline-flex;
+            align-items: center;
+            background: var(--surface);
+            border: 1px solid var(--line-soft);
+            border-radius: 16px;
+            padding: 4px 10px;
+            font-size: 12.5px;
+            color: var(--ink);
+        }
+        
+        .participant-tag .remove-btn {
+            background: none;
+            border: none;
+            color: var(--clay);
+            margin-left: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 1;
+            padding: 0;
+        }
+        
+        .participant-tag .remove-btn:hover {
+            color: var(--clay-deep);
+        }
+        
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 8px;
+            margin-top: 6px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13.5px;
+            color: var(--ink);
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .checkbox-label input {
+            cursor: pointer;
+            width: 15px;
+            height: 15px;
+            accent-color: var(--pine);
+        }
+        
+        .checkbox-actions {
+            display: flex;
+            gap: 12px;
+            font-size: 11px;
+            margin-top: 6px;
+        }
+        
+        .checkbox-actions a {
+            color: var(--clay);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .checkbox-actions a:hover {
+            text-decoration: underline;
+        }
+        
+        .calc-alert {
+            background: rgba(188, 85, 39, 0.08);
+            border-left: 3px solid var(--clay);
+            color: var(--clay-deep);
+            padding: 8px 12px;
+            border-radius: 0 4px 4px 0;
+            font-size: 12.5px;
+            margin-bottom: 12px;
+            display: none;
+        }
+        
+        .calc-success {
+            background: rgba(38, 65, 47, 0.08);
+            border-left: 3px solid var(--pine);
+            color: var(--pine-deep);
+            padding: 8px 12px;
+            border-radius: 0 4px 4px 0;
+            font-size: 12.5px;
+            margin-bottom: 12px;
+            display: none;
+        }
+        
+        /* Tables and Lists inside calculator */
+        .history-table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--line-soft);
+            border-radius: 4px;
+            background: var(--surface);
+        }
+        
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+        
+        .history-table th {
+            background: var(--pine);
+            color: #f3ecda;
+            padding: 8px 12px;
+            font-family: 'Fraunces', serif;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .history-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--line-soft);
+            color: var(--ink-soft);
+            vertical-align: middle;
+        }
+        
+        .history-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .history-table td b {
+            color: var(--ink);
+        }
+        
+        .history-table .actions {
+            text-align: right;
+        }
+        
+        .balance-list, .transfer-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .balance-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--line-soft);
+            font-size: 13.5px;
+        }
+        
+        .balance-item:last-child {
+            border-bottom: none;
+        }
+        
+        .balance-item .name {
+            font-weight: 600;
+        }
+        
+        .balance-item .amount {
+            font-family: monospace;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .balance-positive {
+            color: var(--pine-deep);
+        }
+        
+        .balance-negative {
+            color: var(--clay-deep);
+        }
+        
+        .balance-neutral {
+            color: var(--ink-soft);
+        }
+        
+        .transfer-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            background: var(--surface);
+            border: 1px solid var(--line-soft);
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .transfer-item .arrow {
+            color: var(--clay);
+            font-weight: bold;
+        }
+        
+        .transfer-item .amount {
+            font-weight: bold;
+            color: var(--pine-deep);
+            margin-left: auto;
+        }
+        
+        .reset-confirm-box {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+            padding: 10px;
+            background: rgba(188, 85, 39, 0.05);
+            border: 1px dashed var(--clay);
+            border-radius: 4px;
+        }
+        
+        .reset-confirm-box span {
+            font-size: 12px;
+            color: var(--clay-deep);
+            font-weight: 600;
+        }
+
         @media print {
             body {
                 background: #fff;
@@ -970,12 +1426,20 @@
         <div class="wrap">
             <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;">
                 <div class="eyebrow">Plan du voyage · version quasi-finale</div>
-                <div style="display: flex; gap: 14px; font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">
+                <div style="display: flex; gap: 14px; font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; align-items: center; flex-wrap: wrap;">
                     <a href="index.en.html" style="color: var(--amber); text-decoration: none;">English ↗</a>
                     <span style="color: rgba(243, 236, 218, 0.3);">|</span>
                     <a href="sfo-layover.html" style="color: var(--amber); text-decoration: none;">Transit SFO ↗</a>
                     <span style="color: rgba(243, 236, 218, 0.3);">|</span>
                     <a href="roadtrip-trame-sonore.html" style="color: var(--amber); text-decoration: none;">Trame sonore ↗</a>
+                    <span style="color: rgba(243, 236, 218, 0.3);">|</span>
+                    <div class="theme-selector">
+                        <button class="theme-btn active" data-theme="sand" title="Lost Sierra Sand">🏜️</button>
+                        <button class="theme-btn" data-theme="dark" title="Tahoe Night">🌙</button>
+                        <button class="theme-btn" data-theme="high-sierra" title="High Sierra">🏔️</button>
+                        <button class="theme-btn" data-theme="m3" title="Material Design 3">🤖</button>
+                    </div>
+                    <span id="status-badge" style="color: #6fa888; border: 1px solid rgba(111, 168, 136, 0.3); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 5px; transition: all 0.3s ease; margin-left: 4px;"><span style="width: 6px; height: 6px; background-color: #6fa888; border-radius: 50%; display: inline-block;"></span><span id="status-text">Dispo</span></span>
                 </div>
             </div>
             <h1>Lost Sierra &amp; Tahoe — road trip vélo</h1>
@@ -1274,7 +1738,7 @@
                 <div class="rdrive"><b>~2 h 00</b> · J1 soir (arrivée ~23h) · Hwy 395 N → Hwy 89 N → Hwy 49 · Route de
                     montagne sinueuse, de nuit — prudence <a class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Reno-Tahoe+International+Airport&origin_place_id=ChIJF0m8rXA_mYARQFmvIP8eQBA&destination=Riverside+Mountain+Lodge&destination_place_id=ChIJI4XI80F8nIAR6uI8HWZVZ9w&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j1" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="2">
                     <div class="rsday">J1-J3 · 9-12 juin — 3 nuits</div>
@@ -1286,7 +1750,7 @@
 
                 <div class="rdrive"><b>~1 h 30</b> · J4 matin · Hwy 49 → Hwy 70 E direction Quincy <a class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Riverside+Mountain+Lodge&origin_place_id=ChIJI4XI80F8nIAR6uI8HWZVZ9w&destination=262+Spanish+Creek+Rd,+Quincy,+CA+95971&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j4" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="3">
                     <div class="rsday">J4 · Vendredi 12 juin — Navette Mt. Hough</div>
@@ -1316,7 +1780,7 @@
                 <div class="rdrive"><b>~2 h 45</b> · J6 matin · Hwy 70 E → Hwy 89 S vers Truckee → Hwy 28 E direction
                     Incline Village <a class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Pine+Hill+Motel&origin_place_id=ChIJW3dfX8n-nIAR0HgGi8KIVI4&destination=Tunnel+Creek+Station&destination_place_id=ChIJ4-IvaAZxmYARtBPCc8shjVI&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j6" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="5">
                     <div class="rsday">J6 · Dimanche 14 juin — Navette Flume Trail</div>
@@ -1334,7 +1798,7 @@
                 <div class="rdrive"><b>~0 h 30</b> · J6 après le ride · Hwy 28 S → US-50 E direction Carson City <a
                         class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Tunnel+Creek+Station&origin_place_id=ChIJ4-IvaAZxmYARtBPCc8shjVI&destination=Carson+City+Plaza+Hotel&destination_place_id=ChIJNycC0gqgmYARJXr-WDHrhkU&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j6-evening" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="6">
                     <div class="rsday">J6 · Dimanche 14 juin — 1 nuit</div>
@@ -1351,7 +1815,7 @@
 
                 <div class="rdrive"><b>~0 h 50</b> · J7 après le ride · US-50 E → US-395 N direction Reno <a class="gm"
                         href="https://www.google.com/maps/dir/?api=1&origin=Carson+City+Plaza+Hotel&origin_place_id=ChIJNycC0gqgmYARJXr-WDHrhkU&destination=Reno-Tahoe+International+Airport&destination_place_id=ChIJF0m8rXA_mYARQFmvIP8eQBA&travelmode=driving"
-                        target="_blank" rel="noopener">GMaps ↗</a></div>
+                        target="_blank" rel="noopener">GMaps ↗</a> · <a class="map-link" data-leg="drive-j7" href="#map-section">Carte 📍</a></div>
 
                 <div class="rstop" data-n="7">
                     <div class="rsday">J7 · Lundi 15 juin — Retour</div>
@@ -1364,33 +1828,134 @@
         </div>
     </section>
 
-    <!-- 6 — RESERVATIONS -->
-    <section>
+    <!-- MAPS SECTION -->
+    <section id="map-section" style="background:var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">🗺️</div>
+                <h2>Carte interactive</h2>
+                <div class="note">itinéraires &amp; sentiers</div>
+            </div>
+            <div id="map" style="height: 480px; border-radius: 6px; border: 1px solid var(--line); box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; z-index: 1;"></div>
+        </div>
+    </section>
+
+    <!-- 6 — PARTAGE DES FRAIS -->
+    <section id="expenses-section">
         <div class="wrap">
             <div class="sh">
                 <div class="num">6</div>
-                <h2>État des réservations</h2>
-                <div class="note">réservé · à finaliser</div>
+                <h2>Partage des frais</h2>
+                <div class="note">calculateur de dépenses de voyage</div>
             </div>
-            <div class="grouplabel">Réservé</div>
-            <ul class="statuslist">
-                <li class="done"><b>Vols Québec ⇄ Reno</b> — Air Canada, réf. ACFVVP</li>
-                <li class="done"><b>Véhicule de location</b> — Reno, VUS pleine grandeur</li>
-                <li class="done"><b>Hébergement Downieville</b> — Riverside Mountain Lodge, 3 nuits</li>
-                <li class="done"><b>Hébergement Quincy</b> — Pine Hill Motel, 2 nuits</li>
-                <li class="done"><b>Hébergement Carson City</b> — Carson City Plaza Hotel, 1 nuit</li>
-            </ul>
-            <div class="grouplabel second">À finaliser</div>
-            <ul class="statuslist">
-                <li class="done"><b>Navette Downieville Outfitters</b> — Jours 2 et 3</li>
-                <li class="done"><b>Navette Yuba Expeditions</b> — Mt. Hough, vendredi 12 juin (1-2 laps)</li>
-                <li class="done"><b>Navette Flume Trail Tahoe</b> — Flume Trail IMBA Epic, dimanche 14 juin (départ 11
-                    h, 2 places)</li>
-                <li class="done"><b>Arrivée tardive à Riverside</b> — confirmer l'arrivée vers 23 h le 9 juin</li>
-                <li class="done"><b>Politique vélo en soute</b> — confirmer avec Air Canada / United (billet interligne)
-                </li>
-                <li class="done"><b>Assurance voyage médicale</b> — à souscrire avant le départ</li>
-            </ul>
+            
+            <div class="expenses-container">
+                <!-- COLONNE GAUCHE: Participants & Formulaire -->
+                <div>
+                    <!-- Participants Card -->
+                    <div class="expense-card">
+                        <h3>Participants</h3>
+                        <div id="calc-alert-participant" class="calc-alert"></div>
+                        <div class="participant-tags" id="participant-list">
+                            <!-- Tags injected here -->
+                        </div>
+                        <div class="form-group" style="display: flex; gap: 8px; margin-bottom: 0;">
+                            <input type="text" id="new-participant-name" class="form-control" placeholder="Nom du participant" maxlength="20">
+                            <button type="button" id="add-participant-btn" class="btn btn-primary">+</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Ajouter Dépense Card -->
+                    <div class="expense-card">
+                        <h3>Ajouter une dépense</h3>
+                        <div id="calc-alert-expense" class="calc-alert"></div>
+                        
+                        <div class="form-group">
+                            <label for="expense-desc">Description</label>
+                            <input type="text" id="expense-desc" class="form-control" placeholder="ex: Essence, Souper..." maxlength="40">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="expense-amount">Montant ($)</label>
+                            <input type="number" id="expense-amount" class="form-control" placeholder="0.00" step="0.01" min="0.01">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="expense-payer">Payé par</label>
+                            <select id="expense-payer" class="form-control">
+                                <!-- Options injected here -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Partagé par (Bénéficiaires)</label>
+                            <div class="checkbox-actions">
+                                <a href="#" id="select-all-beneficiaries">Tous</a>
+                                <a href="#" id="select-none-beneficiaries">Aucun</a>
+                            </div>
+                            <div class="checkbox-grid" id="beneficiaries-grid">
+                                <!-- Checkboxes injected here -->
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="add-expense-btn" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Ajouter la dépense</button>
+                    </div>
+                </div>
+                
+                <!-- COLONNE DROITE: Historique & Soldes -->
+                <div>
+                    <!-- Historique Card -->
+                    <div class="expense-card" style="margin-bottom: 16px;">
+                        <h3>Historique des dépenses</h3>
+                        <div class="history-table-wrapper">
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Payeur</th>
+                                        <th>Montant</th>
+                                        <th>Partagé avec</th>
+                                        <th style="text-align: right;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expenses-history-rows">
+                                    <!-- Rows injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Soldes & Transferts Card -->
+                    <div class="expense-card">
+                        <h3>Soldes &amp; Règlements</h3>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="font-size: 13px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; letter-spacing: 0.05em;">Résumé des soldes</h4>
+                            <div class="history-table-wrapper" style="padding: 4px 12px; background: var(--surface);">
+                                <div id="balances-list-container">
+                                    <!-- Balances injected here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 style="font-size: 13px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; letter-spacing: 0.05em;">Règlements suggérés</h4>
+                            <div id="transfers-container">
+                                <!-- Transfers injected here -->
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 24px; border-top: 1px solid var(--line-soft); padding-top: 16px; display: flex; flex-direction: column;">
+                            <button type="button" id="reset-all-btn" class="btn btn-secondary btn-sm" style="align-self: flex-start;">Réinitialiser les frais</button>
+                            <div id="reset-confirm-box" class="reset-confirm-box">
+                                <span>Confirmer ?</span>
+                                <button type="button" id="reset-confirm-yes" class="btn btn-primary btn-sm">Oui</button>
+                                <button type="button" id="reset-confirm-no" class="btn btn-secondary btn-sm">Non</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1876,6 +2441,695 @@
     <footer>
         Plan du voyage · Lost Sierra &amp; Tahoe, Californie · 9–15 juin 2026 · version quasi-finale
     </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin=""></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const map = L.map('map').setView([39.55, -120.30], 9);
+
+            window.mapTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            let mapLayers = null;
+
+            // Fetch and render the geojson routes
+            fetch('./map-data.geojson')
+                .then(res => res.json())
+                .then(geojsonData => {
+                    mapLayers = L.geoJSON(geojsonData, {
+                        style: (feature) => {
+                            if (feature.properties.type === 'drive') {
+                                return { color: '#bc5527', weight: 4, opacity: 0.8, dashArray: '6, 6' };
+                            } else if (feature.properties.type === 'trail') {
+                                return { color: '#26412f', weight: 5, opacity: 0.9 };
+                            }
+                            return { color: '#3d5965', weight: 3 };
+                        },
+                        pointToLayer: (feature, latlng) => {
+                            let emoji = '📍';
+                            let color = '#bc5527'; // clay default
+                            const name = feature.properties.name || '';
+                            if (name.includes('Airport') || name.includes('Aéroport')) {
+                                emoji = '✈️';
+                                color = '#e0a55f'; // amber
+                            } else if (name.includes('Lodge') || name.includes('Motel') || name.includes('Hotel')) {
+                                emoji = '🏨';
+                                color = '#26412f'; // pine
+                            } else if (name.includes('Bikes') || name.includes('Expeditions') || name.includes('Trailhead')) {
+                                emoji = '🚲';
+                                color = '#9a4420'; // clay-deep
+                            } else if (name.includes('Laundry') || name.includes('Buanderie')) {
+                                emoji = '🧼';
+                                color = '#3d5965'; // slate
+                            }
+
+                            const customIcon = L.divIcon({
+                                html: `<div style="background-color: ${color}; width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px;">${emoji}</div>`,
+                                className: 'custom-map-icon',
+                                iconSize: [30, 30],
+                                iconAnchor: [15, 15]
+                            });
+
+                            return L.marker(latlng, { icon: customIcon });
+                        },
+                        onEachFeature: (feature, layer) => {
+                            if (feature.properties && feature.properties.name) {
+                                let popupContent = `<strong>${feature.properties.name}</strong>`;
+                                if (feature.properties.description) {
+                                    popupContent += `<br><span style="font-size:12px;color:#555;">${feature.properties.description}</span>`;
+                                }
+                                layer.bindPopup(popupContent);
+                            }
+                        }
+                    }).addTo(map);
+                })
+                .catch(err => console.error('Error loading map data:', err));
+
+            // Connection status monitoring for GPS tracker control
+            L.Control.Location = L.Control.extend({
+                onAdd: function(map) {
+                    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+                    const button = L.DomUtil.create('a', '', container);
+                    button.innerHTML = '🎯';
+                    button.href = '#';
+                    button.title = 'Ma position / My position';
+                    button.style.fontSize = '16px';
+                    button.style.display = 'flex';
+                    button.style.alignItems = 'center';
+                    button.style.justifyContent = 'center';
+                    button.style.cursor = 'pointer';
+
+                    let locMarker = null;
+
+                    L.DomEvent.on(button, 'click', function(e) {
+                        L.DomEvent.stopPropagation(e);
+                        L.DomEvent.preventDefault(e);
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition((position) => {
+                                const latlng = [position.coords.latitude, position.coords.longitude];
+                                if (locMarker) {
+                                    locMarker.setLatLng(latlng);
+                                } else {
+                                    locMarker = L.circleMarker(latlng, {
+                                        radius: 8,
+                                        fillColor: '#3897f0',
+                                        color: '#fff',
+                                        weight: 2,
+                                        opacity: 1,
+                                        fillOpacity: 0.9
+                                    }).addTo(map);
+                                }
+                                map.setView(latlng, 12);
+                            }, (err) => {
+                                alert('Impossible de récupérer la position / Unable to retrieve position: ' + err.message);
+                            });
+                        } else {
+                            alert('Géolocalisation non supportée / Geolocation not supported.');
+                        }
+                    });
+                    return container;
+                }
+            });
+            new L.Control.Location({ position: 'topleft' }).addTo(map);
+
+            // Listen for clicks on map-links to focus and highlight route segments
+            document.querySelectorAll('.map-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const legId = link.getAttribute('data-leg');
+                    if (!legId || !mapLayers) return;
+
+                    // Search for the layer with properties.legId === legId
+                    mapLayers.eachLayer(layer => {
+                        if (layer.feature && layer.feature.properties && layer.feature.properties.legId === legId) {
+                            // Highlight the line
+                            layer.setStyle({ color: '#e0a55f', weight: 6, opacity: 1 }); // temporary amber highlight
+                            setTimeout(() => {
+                                layer.setStyle({ color: '#bc5527', weight: 4, opacity: 0.8 }); // restore original color
+                            }, 3000);
+
+                            // Fit bounds to show the route leg
+                            if (layer.getBounds) {
+                                map.fitBounds(layer.getBounds(), { padding: [50, 50] });
+                            }
+                            // Open popup on that layer
+                            layer.openPopup();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+    <!-- EXPENSE CALCULATOR LOGIC -->
+    <script>
+        (function() {
+            const STORAGE_KEY = 'lost_sierra_expenses';
+            const state = {
+                participants: ['Gab', 'Alex'],
+                expenses: []
+            };
+
+            function loadState() {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        if (parsed && Array.isArray(parsed.participants)) {
+                            state.participants = parsed.participants;
+                        }
+                        if (parsed && Array.isArray(parsed.expenses)) {
+                            state.expenses = parsed.expenses;
+                        }
+                    } catch (e) {
+                        console.error('Failed to load expenses state', e);
+                    }
+                }
+            }
+
+            function saveState() {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            }
+
+            function showAlert(elementId, message, isSuccess = false) {
+                const alertEl = document.getElementById(elementId);
+                if (!alertEl) return;
+                alertEl.textContent = message;
+                alertEl.className = isSuccess ? 'calc-success' : 'calc-alert';
+                alertEl.style.display = 'block';
+                setTimeout(() => {
+                    alertEl.style.display = 'none';
+                }, 5000);
+            }
+
+            function renderParticipants() {
+                const listEl = document.getElementById('participant-list');
+                if (!listEl) return;
+                listEl.replaceChildren();
+
+                state.participants.forEach(name => {
+                    const tag = document.createElement('div');
+                    tag.className = 'participant-tag';
+                    tag.textContent = name;
+
+                    const removeBtn = document.createElement('button');
+                    removeBtn.type = 'button';
+                    removeBtn.className = 'remove-btn';
+                    removeBtn.textContent = '×';
+                    removeBtn.title = 'Supprimer ' + name;
+                    removeBtn.addEventListener('click', () => {
+                        // Check if participant is in expenses
+                        const isPayer = state.expenses.some(e => e.payer === name);
+                        const isBeneficiary = state.expenses.some(e => e.beneficiaries.includes(name));
+                        if (isPayer || isBeneficiary) {
+                            showAlert('calc-alert-participant', 'Impossible de supprimer ce participant car il est associé à une dépense.');
+                            return;
+                        }
+                        state.participants = state.participants.filter(p => p !== name);
+                        saveState();
+                        updateAll();
+                    });
+
+                    tag.appendChild(removeBtn);
+                    listEl.appendChild(tag);
+                });
+
+                // Update select dropdown
+                const payerSelect = document.getElementById('expense-payer');
+                if (payerSelect) {
+                    const currentSelected = payerSelect.value;
+                    payerSelect.replaceChildren();
+                    
+                    const optDefault = document.createElement('option');
+                    optDefault.value = '';
+                    optDefault.textContent = 'Choisir un payeur...';
+                    payerSelect.appendChild(optDefault);
+
+                    state.participants.forEach(name => {
+                        const opt = document.createElement('option');
+                        opt.value = name;
+                        opt.textContent = name;
+                        if (name === currentSelected) {
+                            opt.selected = true;
+                        }
+                        payerSelect.appendChild(opt);
+                    });
+                }
+
+                // Update checkbox grid
+                const gridEl = document.getElementById('beneficiaries-grid');
+                if (gridEl) {
+                    gridEl.replaceChildren();
+                    state.participants.forEach(name => {
+                        const label = document.createElement('label');
+                        label.className = 'checkbox-label';
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.name = 'beneficiary';
+                        checkbox.value = name;
+                        checkbox.checked = true; // default to checked
+
+                        label.appendChild(checkbox);
+                        label.appendChild(document.createTextNode(' ' + name));
+                        gridEl.appendChild(label);
+                    });
+                }
+            }
+
+            function renderExpensesHistory() {
+                const tbody = document.getElementById('expenses-history-rows');
+                if (!tbody) return;
+                tbody.replaceChildren();
+
+                if (state.expenses.length === 0) {
+                    const tr = document.createElement('tr');
+                    const td = document.createElement('td');
+                    td.colSpan = 5;
+                    td.style.textAlign = 'center';
+                    td.style.color = 'var(--ink-soft)';
+                    td.style.fontStyle = 'italic';
+                    td.textContent = 'Aucune dépense enregistrée';
+                    tr.appendChild(td);
+                    tbody.appendChild(tr);
+                    return;
+                }
+
+                state.expenses.forEach(exp => {
+                    const tr = document.createElement('tr');
+
+                    const tdDesc = document.createElement('td');
+                    const bDesc = document.createElement('b');
+                    bDesc.textContent = exp.desc;
+                    tdDesc.appendChild(bDesc);
+
+                    const tdPayer = document.createElement('td');
+                    tdPayer.textContent = exp.payer;
+
+                    const tdAmount = document.createElement('td');
+                    tdAmount.textContent = '$' + exp.amount.toFixed(2);
+
+                    const tdShared = document.createElement('td');
+                    tdShared.textContent = exp.beneficiaries.join(', ');
+
+                    const tdAction = document.createElement('td');
+                    tdAction.className = 'actions';
+                    const delBtn = document.createElement('button');
+                    delBtn.type = 'button';
+                    delBtn.className = 'btn btn-danger-outline btn-sm';
+                    delBtn.textContent = 'Supprimer';
+                    delBtn.addEventListener('click', () => {
+                        state.expenses = state.expenses.filter(e => e.id !== exp.id);
+                        saveState();
+                        updateAll();
+                    });
+                    tdAction.appendChild(delBtn);
+
+                    tr.appendChild(tdDesc);
+                    tr.appendChild(tdPayer);
+                    tr.appendChild(tdAmount);
+                    tr.appendChild(tdShared);
+                    tr.appendChild(tdAction);
+
+                    tbody.appendChild(tr);
+                });
+            }
+
+            function calculateBalancesAndTransfers() {
+                const balances = {};
+                state.participants.forEach(p => {
+                    balances[p] = { paid: 0, share: 0, net: 0 };
+                });
+
+                state.expenses.forEach(exp => {
+                    const payer = exp.payer;
+                    const amount = exp.amount;
+                    const bens = exp.beneficiaries;
+
+                    if (balances[payer]) {
+                        balances[payer].paid += amount;
+                    }
+
+                    if (bens && bens.length > 0) {
+                        const split = amount / bens.length;
+                        bens.forEach(b => {
+                            if (balances[b]) {
+                                balances[b].share += split;
+                            }
+                        });
+                    }
+                });
+
+                // Compute nets
+                state.participants.forEach(p => {
+                    balances[p].net = balances[p].paid - balances[p].share;
+                });
+
+                // Render balances
+                const containerEl = document.getElementById('balances-list-container');
+                if (containerEl) {
+                    containerEl.replaceChildren();
+                    state.participants.forEach(name => {
+                        const bInfo = balances[name];
+                        const item = document.createElement('div');
+                        item.className = 'balance-item';
+
+                        const nameSpan = document.createElement('span');
+                        nameSpan.className = 'name';
+                        nameSpan.textContent = name;
+
+                        const detailsSpan = document.createElement('span');
+                        detailsSpan.style.fontSize = '12px';
+                        detailsSpan.style.color = 'var(--ink-soft)';
+                        detailsSpan.textContent = ' (Payé: $' + bInfo.paid.toFixed(2) + ', Part: $' + bInfo.share.toFixed(2) + ')';
+                        nameSpan.appendChild(detailsSpan);
+
+                        const amountSpan = document.createElement('span');
+                        amountSpan.className = 'amount';
+                        const netVal = bInfo.net;
+                        if (netVal > 0.005) {
+                            amountSpan.textContent = '+$' + netVal.toFixed(2);
+                            amountSpan.classList.add('balance-positive');
+                        } else if (netVal < -0.005) {
+                            amountSpan.textContent = '-$' + Math.abs(netVal).toFixed(2);
+                            amountSpan.classList.add('balance-negative');
+                        } else {
+                            amountSpan.textContent = '$0.00';
+                            amountSpan.classList.add('balance-neutral');
+                        }
+
+                        item.appendChild(nameSpan);
+                        item.appendChild(amountSpan);
+                        containerEl.appendChild(item);
+                    });
+                }
+
+                // Settle debts (Greedy algorithm)
+                const debtors = [];
+                const creditors = [];
+
+                state.participants.forEach(p => {
+                    const net = balances[p].net;
+                    if (net < -0.005) {
+                        debtors.push({ name: p, net: net });
+                    } else if (net > 0.005) {
+                        creditors.push({ name: p, net: net });
+                    }
+                });
+
+                // Sort debtors ascending (most negative first)
+                debtors.sort((a, b) => a.net - b.net);
+                // Sort creditors descending (most positive first)
+                creditors.sort((a, b) => b.net - a.net);
+
+                const transfers = [];
+                let dIdx = 0;
+                let cIdx = 0;
+
+                while (dIdx < debtors.length && cIdx < creditors.length) {
+                    const debtor = debtors[dIdx];
+                    const creditor = creditors[cIdx];
+
+                    const amount = Math.min(Math.abs(debtor.net), creditor.net);
+                    if (amount > 0.005) {
+                        transfers.push({
+                            from: debtor.name,
+                            to: creditor.name,
+                            amount: amount
+                        });
+                    }
+
+                    debtor.net += amount;
+                    creditor.net -= amount;
+
+                    if (Math.abs(debtor.net) < 0.005) {
+                        dIdx++;
+                    }
+                    if (Math.abs(creditor.net) < 0.005) {
+                        cIdx++;
+                    }
+                }
+
+                // Render transfers
+                const transfersEl = document.getElementById('transfers-container');
+                if (transfersEl) {
+                    transfersEl.replaceChildren();
+
+                    if (transfers.length === 0) {
+                        const noTransfers = document.createElement('div');
+                        noTransfers.style.fontSize = '13.5px';
+                        noTransfers.style.color = 'var(--pine-deep)';
+                        noTransfers.style.fontStyle = 'italic';
+                        noTransfers.style.padding = '8px 0';
+                        noTransfers.textContent = 'Tous les comptes sont équilibrés.';
+                        transfersEl.appendChild(noTransfers);
+                        return;
+                    }
+
+                    transfers.forEach(t => {
+                        const item = document.createElement('div');
+                        item.className = 'transfer-item';
+
+                        const fromSpan = document.createElement('span');
+                        fromSpan.style.fontWeight = '600';
+                        fromSpan.textContent = t.from;
+
+                        const arrowSpan = document.createElement('span');
+                        arrowSpan.className = 'arrow';
+                        arrowSpan.textContent = ' ➔ ';
+
+                        const toSpan = document.createElement('span');
+                        toSpan.style.fontWeight = '600';
+                        toSpan.textContent = t.to;
+
+                        const amountSpan = document.createElement('span');
+                        amountSpan.className = 'amount';
+                        amountSpan.textContent = '$' + t.amount.toFixed(2);
+
+                        item.appendChild(fromSpan);
+                        item.appendChild(arrowSpan);
+                        item.appendChild(toSpan);
+                        item.appendChild(amountSpan);
+
+                        transfersEl.appendChild(item);
+                    });
+                }
+            }
+
+            function updateAll() {
+                renderParticipants();
+                renderExpensesHistory();
+                calculateBalancesAndTransfers();
+            }
+
+            // Event Listeners setup
+            function init() {
+                loadState();
+
+                // Add participant
+                const addPartBtn = document.getElementById('add-participant-btn');
+                const newPartInput = document.getElementById('new-participant-name');
+                if (addPartBtn && newPartInput) {
+                    addPartBtn.addEventListener('click', () => {
+                        const name = newPartInput.value.trim();
+                        if (!name) {
+                            showAlert('calc-alert-participant', 'Le nom ne peut pas être vide.');
+                            return;
+                        }
+                        if (state.participants.some(p => p.toLowerCase() === name.toLowerCase())) {
+                            showAlert('calc-alert-participant', 'Ce nom existe déjà.');
+                            return;
+                        }
+                        state.participants.push(name);
+                        newPartInput.value = '';
+                        saveState();
+                        updateAll();
+                    });
+                    newPartInput.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            addPartBtn.click();
+                        }
+                    });
+                }
+
+                // Select All / Select None beneficiaries
+                const selAll = document.getElementById('select-all-beneficiaries');
+                const selNone = document.getElementById('select-none-beneficiaries');
+                if (selAll) {
+                    selAll.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const checkBoxes = document.querySelectorAll('#beneficiaries-grid input[type="checkbox"]');
+                        checkBoxes.forEach(cb => cb.checked = true);
+                    });
+                }
+                if (selNone) {
+                    selNone.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const checkBoxes = document.querySelectorAll('#beneficiaries-grid input[type="checkbox"]');
+                        checkBoxes.forEach(cb => cb.checked = false);
+                    });
+                }
+
+                // Add Expense
+                const addExpBtn = document.getElementById('add-expense-btn');
+                if (addExpBtn) {
+                    addExpBtn.addEventListener('click', () => {
+                        const descInput = document.getElementById('expense-desc');
+                        const amtInput = document.getElementById('expense-amount');
+                        const payerSelect = document.getElementById('expense-payer');
+
+                        const desc = descInput.value.trim();
+                        const amount = parseFloat(amtInput.value);
+                        const payer = payerSelect.value;
+
+                        if (!desc || isNaN(amount)) {
+                            showAlert('calc-alert-expense', 'Veuillez entrer une description et un montant valide.');
+                            return;
+                        }
+                        if (amount <= 0) {
+                            showAlert('calc-alert-expense', 'Le montant doit être supérieur à zéro.');
+                            return;
+                        }
+                        if (!payer) {
+                            showAlert('calc-alert-expense', 'Veuillez sélectionner un payeur.');
+                            return;
+                        }
+
+                        // Get checked beneficiaries
+                        const checkedBoxes = document.querySelectorAll('#beneficiaries-grid input[name="beneficiary"]:checked');
+                        const beneficiaries = Array.from(checkedBoxes).map(cb => cb.value);
+
+                        if (beneficiaries.length === 0) {
+                            showAlert('calc-alert-expense', 'Sélectionnez au moins un participant qui partage cette dépense.');
+                            return;
+                        }
+
+                        // Create expense object
+                        const newExp = {
+                            id: Date.now().toString(),
+                            desc: desc,
+                            amount: amount,
+                            payer: payer,
+                            beneficiaries: beneficiaries,
+                            date: new Date().toISOString()
+                        };
+
+                        state.expenses.push(newExp);
+                        descInput.value = '';
+                        amtInput.value = '';
+                        saveState();
+                        updateAll();
+                    });
+                }
+
+                // Reset all
+                const resetBtn = document.getElementById('reset-all-btn');
+                const confirmBox = document.getElementById('reset-confirm-box');
+                const confirmYes = document.getElementById('reset-confirm-yes');
+                const confirmNo = document.getElementById('reset-confirm-no');
+
+                if (resetBtn && confirmBox && confirmYes && confirmNo) {
+                    resetBtn.addEventListener('click', () => {
+                        confirmBox.style.display = 'inline-flex';
+                        resetBtn.style.display = 'none';
+                    });
+
+                    confirmNo.addEventListener('click', () => {
+                        confirmBox.style.display = 'none';
+                        resetBtn.style.display = 'inline-flex';
+                    });
+
+                    confirmYes.addEventListener('click', () => {
+                        localStorage.removeItem(STORAGE_KEY);
+                        state.participants = ['Gab', 'Alex'];
+                        state.expenses = [];
+                        confirmBox.style.display = 'none';
+                        resetBtn.style.display = 'inline-flex';
+                        updateAll();
+                    });
+                }
+
+                updateAll();
+            }
+
+            window.addEventListener('DOMContentLoaded', init);
+            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                init();
+            }
+        })();
+    </script>
+
+    <!-- THEME SWITCHER LOGIC -->
+    <script>
+        (function() {
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            
+            function applyTheme(themeName) {
+                document.body.setAttribute('data-theme', themeName);
+                localStorage.setItem('lost-sierra-theme', themeName);
+                
+                themeButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-theme') === themeName);
+                });
+
+                if (window.mapTileLayer) {
+                    let newTileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'; // sand / default
+                    if (themeName === 'dark') {
+                        newTileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png';
+                    } else if (themeName === 'high-sierra') {
+                        newTileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png';
+                    } else if (themeName === 'm3') {
+                        newTileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png';
+                    }
+                    window.mapTileLayer.setUrl(newTileUrl);
+                }
+            }
+
+            themeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    applyTheme(btn.getAttribute('data-theme'));
+                });
+            });
+
+            // Initial theme loading
+            const savedTheme = localStorage.getItem('lost-sierra-theme') || 'sand';
+            applyTheme(savedTheme);
+        })();
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registered.', reg))
+                    .catch(err => console.log('Service Worker registration failed.', err));
+            });
+        }
+
+        // Connection status monitoring
+        const statusBadge = document.getElementById('status-badge');
+        if (statusBadge) {
+            const statusText = document.getElementById('status-text');
+            const updateStatus = () => {
+                const dot = statusBadge.querySelector('span');
+                if (navigator.onLine) {
+                    statusBadge.style.color = '#6fa888';
+                    statusBadge.style.borderColor = 'rgba(111, 168, 136, 0.3)';
+                    dot.style.backgroundColor = '#6fa888';
+                    if (statusText) statusText.textContent = 'Dispo';
+                } else {
+                    statusBadge.style.color = '#bc5527';
+                    statusBadge.style.borderColor = 'rgba(188, 85, 39, 0.3)';
+                    dot.style.backgroundColor = '#bc5527';
+                    if (statusText) statusText.textContent = 'Hors-ligne';
+                }
+            };
+            window.addEventListener('online', updateStatus);
+            window.addEventListener('offline', updateStatus);
+            updateStatus(); // run initial check
+        }
+    </script>
 
 </body>
 

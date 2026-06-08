@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="./manifest.json">
     <title>Transit San Francisco — mardi 9 juin 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Spline+Sans:wght@300..600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Roboto:wght@300;400;500;700&family=Spline+Sans:wght@300..600&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -178,6 +179,116 @@
             .grid2 { grid-template-columns: 1fr; }
         }
 
+        /* THEME VARIABLES & SYSTEM */
+        body[data-theme="dark"] {
+            --bg: #12161a;
+            --surface: #1a2026;
+            --surface-2: #222b33;
+            --ink: #eef3f7;
+            --ink-soft: #9bb0c1;
+            --pine: #3e6e52;
+            --pine-deep: #224230;
+            --clay: #e66a38;
+            --clay-deep: #b84e23;
+            --amber: #f2c26f;
+            --slate: #5d7f96;
+            --line: rgba(238, 243, 247, 0.15);
+            --line-soft: rgba(238, 243, 247, 0.08);
+        }
+        
+        body[data-theme="high-sierra"] {
+            --bg: #e2e6e8;
+            --surface: #f1f4f5;
+            --surface-2: #d4dcde;
+            --ink: #1a242a;
+            --ink-soft: #4c5d67;
+            --pine: #1d5654;
+            --pine-deep: #0e3533;
+            --clay: #c55f30;
+            --clay-deep: #96421a;
+            --amber: #cca038;
+            --slate: #4d7491;
+            --line: rgba(26, 36, 42, 0.16);
+            --line-soft: rgba(26, 36, 42, 0.09);
+        }
+        
+        body[data-theme="m3"] {
+            --bg: #f3f4f9;
+            --surface: #ffffff;
+            --surface-2: #eef0f7;
+            --ink: #191c20;
+            --ink-soft: #43474e;
+            --pine: #0061a4;
+            --pine-deep: #00477b;
+            --clay: #b3261e;
+            --clay-deep: #8c1d18;
+            --amber: #cca038;
+            --slate: #535f70;
+            --line: rgba(67, 71, 78, 0.16);
+            --line-soft: rgba(67, 71, 78, 0.08);
+        }
+        
+        body[data-theme="m3"],
+        body[data-theme="m3"] h1,
+        body[data-theme="m3"] h2,
+        body[data-theme="m3"] h3,
+        body[data-theme="m3"] h4,
+        body[data-theme="m3"] .v,
+        body[data-theme="m3"] .num,
+        body[data-theme="m3"] .tm,
+        body[data-theme="m3"] .act,
+        body[data-theme="m3"] .walk li::before,
+        body[data-theme="m3"] button,
+        body[data-theme="m3"] .btn {
+            font-family: 'Roboto', sans-serif !important;
+        }
+
+        .theme-selector {
+            border: 1px solid rgba(243, 236, 218, 0.25);
+            border-radius: 20px;
+            display: inline-flex;
+            padding: 2px;
+            gap: 2px;
+            align-items: center;
+            background: rgba(18, 22, 26, 0.4);
+            margin-left: 6px;
+        }
+        
+        body[data-theme="dark"] .theme-selector {
+            border-color: rgba(238, 243, 247, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        body[data-theme="high-sierra"] .theme-selector {
+            border-color: rgba(26, 36, 42, 0.2);
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .theme-btn {
+            background: transparent;
+            border: none;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 12px;
+            padding: 3px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            opacity: 0.65;
+        }
+        
+        .theme-btn:hover {
+            opacity: 1;
+            background: rgba(243, 236, 218, 0.1);
+        }
+        
+        .theme-btn.active {
+            opacity: 1;
+            background: var(--amber);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
         @media print {
             body { background: #fff; font-size: 10.5pt; }
             header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -193,7 +304,16 @@
         <div class="wrap">
             <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;">
                 <div class="eyebrow">Compagnon du voyage · transit aller</div>
-                <a href="index.html" style="font-size: 11.5px; color: var(--amber); text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">← Plan du voyage</a>
+                <div style="display: flex; gap: 14px; align-items: center;">
+                    <a href="index.html" style="font-size: 11.5px; color: var(--amber); text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">← Plan du voyage</a>
+                    <div class="theme-selector">
+                        <button class="theme-btn active" data-theme="sand" title="Lost Sierra Sand">🏜️</button>
+                        <button class="theme-btn" data-theme="dark" title="Tahoe Night">🌙</button>
+                        <button class="theme-btn" data-theme="high-sierra" title="High Sierra">🏔️</button>
+                        <button class="theme-btn" data-theme="m3" title="Material Design 3">🤖</button>
+                    </div>
+                    <span id="status-badge" style="color: #6fa888; border: 1px solid rgba(111, 168, 136, 0.3); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 5px; transition: all 0.3s ease;"><span style="width: 6px; height: 6px; background-color: #6fa888; border-radius: 50%; display: inline-block;"></span><span id="status-text">Dispo</span></span>
+                </div>
             </div>
             <h1>Transit San Francisco</h1>
             <div class="sub">Mardi 9 juin 2026 — ~5 h entre l'atterrissage et le vol vers Reno. Ferry Building + Mission District.</div>
@@ -399,6 +519,65 @@
     <footer>
         Transit San Francisco · mardi 9 juin 2026 · compagnon du road trip Lost Sierra &amp; Tahoe
     </footer>
+
+    <!-- THEME SWITCHER LOGIC -->
+    <script>
+        (function() {
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            
+            function applyTheme(themeName) {
+                document.body.setAttribute('data-theme', themeName);
+                localStorage.setItem('lost-sierra-theme', themeName);
+                
+                themeButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-theme') === themeName);
+                });
+            }
+
+            themeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    applyTheme(btn.getAttribute('data-theme'));
+                });
+            });
+
+            // Initial theme loading
+            const savedTheme = localStorage.getItem('lost-sierra-theme') || 'sand';
+            applyTheme(savedTheme);
+        })();
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registered.', reg))
+                    .catch(err => console.log('Service Worker registration failed.', err));
+            });
+        }
+
+        // Connection status monitoring
+        const statusBadge = document.getElementById('status-badge');
+        if (statusBadge) {
+            const statusText = document.getElementById('status-text');
+            const updateStatus = () => {
+                const dot = statusBadge.querySelector('span');
+                if (navigator.onLine) {
+                    statusBadge.style.color = '#6fa888';
+                    statusBadge.style.borderColor = 'rgba(111, 168, 136, 0.3)';
+                    dot.style.backgroundColor = '#6fa888';
+                    if (statusText) statusText.textContent = 'Dispo';
+                } else {
+                    statusBadge.style.color = '#bc5527';
+                    statusBadge.style.borderColor = 'rgba(188, 85, 39, 0.3)';
+                    dot.style.backgroundColor = '#bc5527';
+                    if (statusText) statusText.textContent = 'Hors-ligne';
+                }
+            };
+            window.addEventListener('online', updateStatus);
+            window.addEventListener('offline', updateStatus);
+            updateStatus(); // run initial check
+        }
+    </script>
 
 </body>
 
