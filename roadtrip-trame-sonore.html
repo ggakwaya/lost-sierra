@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="./manifest.json">
 <title>Trame sonore · Lost Sierra & Tahoe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,7 +106,10 @@
 <body>
 
 <div class="masthead">
-  <div class="sup">Companion document · Lost Sierra &amp; Tahoe, juin 2026 · <a href="index.html" style="color: #f8f3e8; text-decoration: none; border-bottom: 1px solid rgba(248, 243, 232, 0.4);">← Plan du voyage</a></div>
+  <div class="sup" style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;">
+    <span>Companion document · Lost Sierra &amp; Tahoe, juin 2026 · <a href="index.html" style="color: #f8f3e8; text-decoration: none; border-bottom: 1px solid rgba(248, 243, 232, 0.4);">← Plan du voyage</a></span>
+    <span id="status-badge" style="color: #6fa888; border: 1px solid rgba(111, 168, 136, 0.3); font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 4px; transition: all 0.3s ease; background: transparent;"><span style="width: 5px; height: 5px; background-color: #6fa888; border-radius: 50%; display: inline-block;"></span><span id="status-text">Dispo</span></span>
+  </div>
   <h1>Trame sonore californienne</h1>
   <div class="sub">Punk, punk rock, rock, thrash metal, metal, death metal · Californie · 1990–2025 · 28 artistes · 6 moments du voyage</div>
 </div>
@@ -560,6 +564,39 @@
 <footer>
   Trame sonore · <span>Lost Sierra &amp; Tahoe</span> · Californie · 9–15 juin 2026 · 28 artistes · 5 genres · 1990–2025
 </footer>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker registered.', reg))
+                .catch(err => console.log('Service Worker registration failed.', err));
+        });
+    }
+
+    // Connection status monitoring
+    const statusBadge = document.getElementById('status-badge');
+    if (statusBadge) {
+        const statusText = document.getElementById('status-text');
+        const updateStatus = () => {
+            const dot = statusBadge.querySelector('span');
+            if (navigator.onLine) {
+                statusBadge.style.color = '#6fa888';
+                statusBadge.style.borderColor = 'rgba(111, 168, 136, 0.3)';
+                dot.style.backgroundColor = '#6fa888';
+                if (statusText) statusText.textContent = 'Dispo';
+            } else {
+                statusBadge.style.color = '#bc5527';
+                statusBadge.style.borderColor = 'rgba(188, 85, 39, 0.3)';
+                dot.style.backgroundColor = '#bc5527';
+                if (statusText) statusText.textContent = 'Hors-ligne';
+            }
+        };
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        updateStatus(); // run initial check
+    }
+</script>
 
 </body>
 </html>
