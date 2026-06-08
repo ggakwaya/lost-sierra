@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transit San Francisco — mardi 9 juin 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Spline+Sans:wght@300..600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #e9e1cf;
+            --surface: #f8f3e6;
+            --surface-2: #f1ead9;
+            --ink: #211f18;
+            --ink-soft: #5b574c;
+            --pine: #26412f;
+            --pine-deep: #182a1f;
+            --clay: #bc5527;
+            --clay-deep: #9a4420;
+            --amber: #e0a55f;
+            --slate: #3d5965;
+            --line: rgba(33, 31, 24, .16);
+            --line-soft: rgba(33, 31, 24, .09);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { -webkit-text-size-adjust: 100%; }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Spline Sans', sans-serif;
+            font-weight: 400;
+            line-height: 1.55;
+            font-size: 15.5px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; width: 100%; }
+
+        h1, h2, h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -.01em;
+        }
+
+        /* HEADER */
+        header { background: var(--pine-deep); color: #f3ecda; padding: 40px 0 34px; }
+        header .eyebrow {
+            font-size: 11.5px; font-weight: 600; letter-spacing: .2em;
+            text-transform: uppercase; color: var(--amber);
+        }
+        header h1 { font-size: clamp(1.9rem, 4.6vw, 2.7rem); color: #f6efdc; margin: 8px 0 4px; }
+        header .sub { color: #cfc8b2; font-weight: 300; font-size: 15px; }
+
+        .keyfacts {
+            margin-top: 24px; display: grid; grid-template-columns: repeat(4, 1fr);
+            border: 1px solid rgba(243, 236, 218, .18); border-radius: 5px; overflow: hidden;
+        }
+        .keyfacts div { padding: 13px 14px; border-left: 1px solid rgba(243, 236, 218, .14); }
+        .keyfacts div:first-child { border-left: none; }
+        .keyfacts .k {
+            font-size: 10px; letter-spacing: .13em; text-transform: uppercase;
+            color: var(--amber); font-weight: 600;
+        }
+        .keyfacts .v {
+            font-family: 'Fraunces', serif; font-weight: 600; font-size: 1rem;
+            color: #f6efdc; margin-top: 3px;
+        }
+
+        /* SECTIONS */
+        section { padding: 38px 0; border-bottom: 1px solid var(--line); }
+        section:last-of-type { border-bottom: none; }
+        .sh { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+        .sh .num {
+            font-family: 'Fraunces', serif; font-weight: 600; color: #fff; background: var(--clay);
+            width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; flex: 0 0 auto; font-size: 13px;
+        }
+        .sh h2 { font-size: 1.4rem; color: var(--pine); }
+        .sh .note { margin-left: auto; font-size: 12.5px; color: var(--ink-soft); font-style: italic; }
+
+        /* CALLOUT */
+        .callout {
+            background: var(--surface-2); border: 1px solid var(--line); border-left: 3px solid var(--slate);
+            border-radius: 4px; padding: 15px 18px; font-size: 13.5px; color: var(--ink-soft);
+        }
+        .callout.good { border-left-color: var(--pine); }
+        .callout.warn { border-left-color: var(--clay); }
+        .callout b { color: var(--ink); font-weight: 600; }
+        .callout h3 { font-size: 1.05rem; color: var(--pine); margin-bottom: 6px; }
+        .callout.warn h3 { color: var(--clay-deep); }
+        .callout p + p { margin-top: 8px; }
+
+        /* SCHEDULE TIMELINE */
+        .sked { position: relative; padding-left: 78px; }
+        .sked::before {
+            content: ''; position: absolute; left: 58px; top: 14px; bottom: 14px;
+            width: 2px; background: var(--line);
+        }
+        .skedrow { position: relative; padding: 11px 0; border-bottom: 1px solid var(--line-soft); }
+        .skedrow:last-child { border-bottom: none; }
+        .skedrow .tm {
+            position: absolute; left: -78px; top: 11px; width: 50px; text-align: right;
+            font-family: 'Fraunces', serif; font-weight: 600; font-size: 13.5px; color: var(--clay-deep);
+            font-variant-numeric: tabular-nums;
+        }
+        .skedrow::before {
+            content: ''; position: absolute; left: -23px; top: 16px; width: 11px; height: 11px;
+            border-radius: 50%; background: var(--surface); border: 2px solid var(--clay);
+        }
+        .skedrow.key::before { background: var(--clay); }
+        .skedrow.air::before { background: var(--pine); border-color: var(--pine); }
+        .skedrow .act { font-family: 'Fraunces', serif; font-weight: 600; color: var(--ink); font-size: 14.5px; }
+        .skedrow .det { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+        .skedrow .det b { color: var(--ink); font-weight: 600; }
+
+        /* CARD GRIDS */
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .card {
+            background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--pine);
+            border-radius: 5px; padding: 18px 20px;
+        }
+        .card.clay { border-top-color: var(--clay); }
+        .card.slate { border-top-color: var(--slate); }
+        .card .ct {
+            font-size: 10.5px; letter-spacing: .13em; text-transform: uppercase;
+            font-weight: 600; color: var(--clay-deep);
+        }
+        .card h3 { font-size: 1.12rem; color: var(--pine); margin: 3px 0 2px; }
+        .card .meta { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 9px; }
+        .card p { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 5px; }
+        .card p:last-child { margin-bottom: 0; }
+        .card p b { color: var(--ink); font-weight: 600; }
+
+        /* NUMBERED WALK LIST */
+        .walk { list-style: none; counter-reset: w; }
+        .walk li {
+            position: relative; padding: 11px 0 11px 38px; border-bottom: 1px solid var(--line-soft);
+            font-size: 13.8px; color: var(--ink-soft);
+        }
+        .walk li:last-child { border-bottom: none; }
+        .walk li::before {
+            counter-increment: w; content: counter(w); position: absolute; left: 0; top: 10px;
+            width: 22px; height: 22px; border-radius: 50%; background: var(--pine); color: #f3ecda;
+            font-family: 'Fraunces', serif; font-weight: 600; font-size: 12px; text-align: center; line-height: 22px;
+        }
+        .walk li b { color: var(--ink); font-weight: 600; }
+        .walk li .sub { display: block; font-size: 12.3px; margin-top: 1px; }
+
+        /* PRACTICAL LIST */
+        .plist { list-style: none; }
+        .plist li {
+            position: relative; padding: 10px 0 10px 26px; border-bottom: 1px solid var(--line-soft);
+            font-size: 13.8px; color: var(--ink-soft);
+        }
+        .plist li:last-child { border-bottom: none; }
+        .plist li::before {
+            content: '·'; position: absolute; left: 6px; top: 6px; color: var(--clay);
+            font-weight: 700; font-size: 20px; line-height: 1;
+        }
+        .plist li b { color: var(--ink); font-weight: 600; }
+
+        footer { padding: 26px 0 38px; text-align: center; color: var(--ink-soft); font-size: 11.5px; }
+
+        @media(max-width:720px) {
+            .wrap { padding: 0 18px; }
+            .keyfacts { grid-template-columns: 1fr 1fr; }
+            .keyfacts div { border-left: 1px solid rgba(243, 236, 218, .14); border-top: 1px solid rgba(243, 236, 218, .14); }
+            .keyfacts div:nth-child(odd) { border-left: none; }
+            .keyfacts div:nth-child(-n+2) { border-top: none; }
+            .grid2 { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            body { background: #fff; font-size: 10.5pt; }
+            header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            section { padding: 20px 0; }
+            .card, .callout, .skedrow, .walk li, .plist li { break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="wrap">
+            <div class="eyebrow">Compagnon du voyage · transit aller</div>
+            <h1>Transit San Francisco</h1>
+            <div class="sub">Mardi 9 juin 2026 — ~5 h entre l'atterrissage et le vol vers Reno. Ferry Building + Mission District.</div>
+            <div class="keyfacts">
+                <div>
+                    <div class="k">Atterrissage SFO</div>
+                    <div class="v">11 h 25</div>
+                </div>
+                <div>
+                    <div class="k">Décollage RNO</div>
+                    <div class="v">18 h 30</div>
+                </div>
+                <div>
+                    <div class="k">Temps utile en ville</div>
+                    <div class="v">~3 h</div>
+                </div>
+                <div>
+                    <div class="k">Transit</div>
+                    <div class="v">BART · Tap and Ride</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1 — BAGAGES -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">1</div>
+                <h2>Les bagages — tu n'y touches pas</h2>
+                <div class="note">prédédouanement à Montréal</div>
+            </div>
+            <div class="callout good">
+                <h3>Pourquoi tu peux quitter l'aéroport</h3>
+                <p>Montréal-Trudeau a le <b>prédédouanement américain</b> : tu passes la douane et l'immigration des États-Unis à YUL, avant l'embarquement. Tu atterris donc à SFO comme un passager <b>domestique</b> — pas de douane, pas de carrousel à récupérer.</p>
+                <p>Sur le billet unique interligne (Air Canada + United, Star Alliance), tes bagages enregistrés — <b>vélos inclus</b> — sont étiquetés jusqu'à Reno et voyagent dans le système sans que tu les manipules. Tu es libre avec seulement ton bagage cabine.</p>
+                <p><b>Seule action à verrouiller :</b> à l'enregistrement à Québec, confirme que les vélos (bagage surdimensionné) sont étiquetés jusqu'à <b>RNO</b>, pas juste SFO.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2 — HORAIRE -->
+    <section style="background:var(--surface-2);border-top:1px solid var(--line);">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">2</div>
+                <h2>Horaire</h2>
+                <div class="note">calé sur les vols · marge terminal ~1 h 55</div>
+            </div>
+            <div class="sked">
+                <div class="skedrow air">
+                    <div class="tm">11 h 25</div>
+                    <div class="act">Atterrissage SFO</div>
+                    <div class="det">Arrivée domestique — pas de douane. Bagages déjà acheminés vers RNO.</div>
+                </div>
+                <div class="skedrow">
+                    <div class="tm">11 h 50</div>
+                    <div class="act">AirTrain → station BART</div>
+                    <div class="det">L'AirTrain relie tous les terminaux à la station BART (Terminal International).</div>
+                </div>
+                <div class="skedrow">
+                    <div class="tm">11 h 55</div>
+                    <div class="act">BART ligne Yellow → Embarcadero</div>
+                    <div class="det">Direction Antioch · ~30 min · aux 15 min en semaine.</div>
+                </div>
+                <div class="skedrow key">
+                    <div class="tm">12 h 30</div>
+                    <div class="act">Ferry Building</div>
+                    <div class="det">3 min de marche depuis la station Embarcadero. <b>Lunch + marché fermier du mardi + front de mer.</b></div>
+                </div>
+                <div class="skedrow">
+                    <div class="tm">13 h 50</div>
+                    <div class="act">BART → 16th St Mission</div>
+                    <div class="det">Direction SFO/Daly City · ~10 min.</div>
+                </div>
+                <div class="skedrow key">
+                    <div class="tm">14 h 05</div>
+                    <div class="act">Mission District</div>
+                    <div class="det">Exploration nord→sud : murales, bière locale, burrito. <b>Descente vers 24th St.</b></div>
+                </div>
+                <div class="skedrow warn-row" style="border-bottom:1px solid var(--line-soft);">
+                    <div class="tm" style="color:var(--clay);">15 h 50</div>
+                    <div class="act" style="color:var(--clay-deep);">Départ ferme du Mission</div>
+                    <div class="det">BART 24th St Mission → SFO · ~25 min. <b>Quitte même si c'est bon.</b></div>
+                </div>
+                <div class="skedrow">
+                    <div class="tm">16 h 20</div>
+                    <div class="act">Station SFO → AirTrain → terminal</div>
+                    <div class="det">Sécurité TSA (vol domestique).</div>
+                </div>
+                <div class="skedrow air">
+                    <div class="tm">18 h 30</div>
+                    <div class="act">Décollage SFO → RNO (UA264)</div>
+                    <div class="det">Arrivée Reno 19 h 44, puis route vers Downieville.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 — FERRY BUILDING -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">3</div>
+                <h2>Ferry Building</h2>
+                <div class="note">~1 h 10 · bord de l'eau</div>
+            </div>
+            <p style="font-size:14px;color:var(--ink-soft);margin-bottom:16px;">Halle gourmande au bord de la baie, à 3 min de la station Embarcadero. Le mardi, le marché fermier de la Ferry Plaza roule sur l'esplanade (~10 h–14 h) — tu tombes dedans.</p>
+            <div class="grid2">
+                <div class="card">
+                    <div class="ct">Assis · qualité</div>
+                    <h3>Hog Island Oyster Co.</h3>
+                    <p>Huîtres de la baie + bière ou vin local, vue sur l'eau. Le choix pour s'asseoir et décompresser.</p>
+                </div>
+                <div class="card clay">
+                    <div class="ct">Rapide · léger</div>
+                    <h3>Gott's Roadside</h3>
+                    <p>Burger / casse-croûte efficace si tu préfères manger vite et garder du temps pour marcher.</p>
+                </div>
+                <div class="card slate">
+                    <div class="ct">Café</div>
+                    <h3>Blue Bottle Coffee</h3>
+                    <p>Fondé à Oakland. Un vrai espresso pour relancer la machine après le réveil à 3 h 30.</p>
+                </div>
+                <div class="card">
+                    <div class="ct">Marche</div>
+                    <h3>Embarcadero + Cupid's Span</h3>
+                    <p>Promenade le long de l'eau jusqu'à la sculpture <i>Cupid's Span</i>. Première bière locale sans souci — tu ne conduis pas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4 — MISSION DISTRICT -->
+    <section style="background:var(--surface-2);border-top:1px solid var(--line);">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">4</div>
+                <h2>Mission District</h2>
+                <div class="note">~1 h 45 · descente 16th → 24th St</div>
+            </div>
+            <p style="font-size:14px;color:var(--ink-soft);margin-bottom:16px;">Quartier le plus dense en murales, taquerias et microbrasseries. Tu descends à pied de 16th St vers 24th St pour finir pile à la bonne station de retour.</p>
+            <ol class="walk">
+                <li>
+                    <b>Clarion Alley</b> — ruelle de murales emblématique (17th St, entre Mission et Valencia).
+                    <span class="sub">~5 min de marche depuis 16th St Mission BART. Hit visuel rapide.</span>
+                </li>
+                <li>
+                    <b>Bière locale</b> — Standard Deviant Brewing (280 14th St) ou Southern Pacific Brewing (620 Treat Ave, grande beer hall).
+                    <span class="sub">Sinon, n'importe quel bar de Valencia St a une sélection locale solide.</span>
+                </li>
+                <li>
+                    <b>La Taquería</b> — l'institution, primée James Beard, burrito sans riz (2889 Mission St, près de 25th).
+                    <span class="sub">À ~2 min de la station 24th St Mission — parfait pour finir avant le BART.</span>
+                </li>
+                <li>
+                    <b>Calle 24</b> — si le temps reste, coup d'œil au corridor latino (murales, panaderías) avant de filer.
+                    <span class="sub">Optionnel selon la marge.</span>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- 5 — BART TAP AND RIDE -->
+    <section>
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">5</div>
+                <h2>BART — Tap and Ride</h2>
+                <div class="note">carte sans contact ou téléphone</div>
+            </div>
+            <p style="font-size:14px;color:var(--ink-soft);margin-bottom:16px;">Depuis 2025, BART accepte le paiement sans contact direct au tourniquet — carte de crédit/débit ou Apple/Google Pay. Pas besoin de carte Clipper, zéro inscription. Visa, Mastercard, Amex, Discover acceptées.</p>
+            <ul class="plist">
+                <li><b>Même carte à l'entrée et à la sortie.</b> BART facture selon la distance, donc le tap-out compte. Pars et finis avec le même support (carte physique OU téléphone, pas un mélange).</li>
+                <li><b>Attention au « card clash ».</b> Sors une seule carte sans contact du portefeuille au tourniquet, sinon le lecteur hésite ou surcharge. En mobile, sélectionne une carte par défaut.</li>
+                <li><b>Sur iPhone</b>, si tu as une carte Clipper dans le wallet, désactive Express Transit pour elle avant de taper ta carte bancaire. Si pas de Clipper, rien à faire.</li>
+                <li><b>Coût :</b> plein tarif adulte (pas de rabais Clipper), ~10 $ l'aller-retour SFO ↔ ville. Le gain de temps vaut largement la différence.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 6 — À PRÉPARER -->
+    <section style="background:var(--surface-2);border-top:1px solid var(--line);">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">6</div>
+                <h2>À préparer + garde-fou</h2>
+                <div class="note">avant d'atterrir</div>
+            </div>
+            <ul class="plist" style="margin-bottom:16px;">
+                <li><b>Cartes hors-ligne</b> — télécharge San Francisco dans Google Maps. Données capricieuses en sous-sol BART.</li>
+                <li><b>Carte sans contact prête</b> — ou Apple/Google Pay configuré pour le tourniquet.</li>
+                <li><b>Bagage cabine</b> — garde-le léger sur toi. Pour t'en débarrasser : consigne Airport Travel Agency (Terminal International, 6 h–23 h) ou app Bounce près des stations BART.</li>
+                <li><b>Confirmer vélos → RNO</b> à l'enregistrement à Québec.</li>
+            </ul>
+            <div class="callout warn">
+                <h3>Le seul vrai garde-fou</h3>
+                <p>Quitte le Mission à <b>15 h 50</b> même si c'est excellent. C'est le premier jour du voyage, et tu ne joues pas ta connexion — ni tes vélos déjà en route vers Reno — pour 20 minutes de plus. La marge au terminal (~1 h 55) est confortable seulement si tu respectes ce départ.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Transit San Francisco · mardi 9 juin 2026 · compagnon du road trip Lost Sierra &amp; Tahoe
+    </footer>
+
+</body>
+
+</html>
