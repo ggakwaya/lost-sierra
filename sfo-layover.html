@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Spline+Sans:wght@300..600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Roboto:wght@300;400;500;700&family=Spline+Sans:wght@300..600&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -226,6 +226,21 @@
             --slate: #535f70;
             --line: rgba(67, 71, 78, 0.16);
             --line-soft: rgba(67, 71, 78, 0.08);
+        }
+        
+        body[data-theme="m3"],
+        body[data-theme="m3"] h1,
+        body[data-theme="m3"] h2,
+        body[data-theme="m3"] h3,
+        body[data-theme="m3"] h4,
+        body[data-theme="m3"] .v,
+        body[data-theme="m3"] .num,
+        body[data-theme="m3"] .tm,
+        body[data-theme="m3"] .act,
+        body[data-theme="m3"] .walk li::before,
+        body[data-theme="m3"] button,
+        body[data-theme="m3"] .btn {
+            font-family: 'Roboto', sans-serif !important;
         }
 
         .theme-selector {
