@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Roboto:wght@300;400;500;700&family=Spline+Sans:wght@300..600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Spline+Sans:wght@300..600&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -953,55 +953,6 @@
             --line-soft: rgba(238, 243, 247, 0.08);
         }
         
-        body[data-theme="high-sierra"] {
-            --bg: #e2e6e8;
-            --surface: #f1f4f5;
-            --surface-2: #d4dcde;
-            --ink: #1a242a;
-            --ink-soft: #4c5d67;
-            --pine: #1d5654;
-            --pine-deep: #0e3533;
-            --clay: #c55f30;
-            --clay-deep: #96421a;
-            --amber: #cca038;
-            --slate: #4d7491;
-            --line: rgba(26, 36, 42, 0.16);
-            --line-soft: rgba(26, 36, 42, 0.09);
-        }
-        
-        body[data-theme="m3"] {
-            --bg: #f3f4f9;
-            --surface: #ffffff;
-            --surface-2: #eef0f7;
-            --ink: #191c20;
-            --ink-soft: #43474e;
-            --pine: #0061a4;
-            --pine-deep: #00477b;
-            --clay: #b3261e;
-            --clay-deep: #8c1d18;
-            --amber: #cca038;
-            --slate: #535f70;
-            --line: rgba(67, 71, 78, 0.16);
-            --line-soft: rgba(67, 71, 78, 0.08);
-        }
-        
-        body[data-theme="m3"],
-        body[data-theme="m3"] h1,
-        body[data-theme="m3"] h2,
-        body[data-theme="m3"] h3,
-        body[data-theme="m3"] h4,
-        body[data-theme="m3"] .num,
-        body[data-theme="m3"] .v,
-        body[data-theme="m3"] th,
-        body[data-theme="m3"] td,
-        body[data-theme="m3"] button,
-        body[data-theme="m3"] input,
-        body[data-theme="m3"] select,
-        body[data-theme="m3"] .btn,
-        body[data-theme="m3"] .form-control {
-            font-family: 'Roboto', sans-serif !important;
-        }
-
         .theme-selector {
             border: 1px solid rgba(243, 236, 218, 0.25);
             border-radius: 20px;
@@ -1016,11 +967,6 @@
         body[data-theme="dark"] .theme-selector {
             border-color: rgba(238, 243, 247, 0.2);
             background: rgba(255, 255, 255, 0.05);
-        }
-        
-        body[data-theme="high-sierra"] .theme-selector {
-            border-color: rgba(26, 36, 42, 0.2);
-            background: rgba(0, 0, 0, 0.05);
         }
         
         .theme-btn {
@@ -1390,7 +1336,344 @@
             font-weight: 600;
         }
 
+        /* SECTION NAV (sticky) */
+        .section-nav {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background: var(--pine-deep);
+            border-bottom: 1px solid rgba(243, 236, 218, .14);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+        }
+
+        .section-nav .navwrap {
+            max-width: 940px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            gap: 2px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .section-nav .navwrap::-webkit-scrollbar {
+            display: none;
+        }
+
+        .section-nav a {
+            flex: 0 0 auto;
+            color: #cfc8b2;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .03em;
+            padding: 12px 10px;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: color .2s, border-color .2s;
+        }
+
+        .section-nav a:hover {
+            color: #f6efdc;
+        }
+
+        .section-nav a.active {
+            color: var(--amber);
+            border-bottom-color: var(--amber);
+        }
+
+        section,
+        .day {
+            scroll-margin-top: 52px;
+        }
+
+        /* BACK TO TOP */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--clay);
+            color: #fff;
+            border: none;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: opacity .25s, visibility .25s, transform .25s, background .2s;
+            z-index: 40;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--clay-deep);
+        }
+
+        /* PER-DAY VIEW */
+        .daybyday {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        details.day {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--pine);
+            border-radius: 5px;
+        }
+
+        details.day > summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        details.day > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.day > summary::after {
+            content: '▸';
+            margin-left: auto;
+            color: var(--clay-deep);
+            font-size: 14px;
+            font-weight: 700;
+            transition: transform .2s;
+        }
+
+        details.day[open] > summary::after {
+            transform: rotate(90deg);
+        }
+
+        .day .dtag {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: #fff;
+            background: var(--clay);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex: 0 0 auto;
+        }
+
+        .day .dwhen {
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: .09em;
+            color: var(--clay-deep);
+            font-weight: 600;
+        }
+
+        .day .dtitle {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            color: var(--pine);
+            font-size: 1.02rem;
+            display: block;
+            margin-top: 1px;
+        }
+
+        .day .dbody {
+            padding: 2px 18px 14px;
+        }
+
+        .day .drow {
+            display: flex;
+            gap: 12px;
+            padding: 9px 0;
+            border-top: 1px solid var(--line-soft);
+            font-size: 13.5px;
+            color: var(--ink-soft);
+        }
+
+        .day .drow .dk {
+            flex: 0 0 84px;
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            font-weight: 600;
+            color: var(--clay-deep);
+            padding-top: 2px;
+        }
+
+        .day .drow .dv {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .day .drow .dv b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .day .drow .dv a {
+            color: var(--clay-deep);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px solid var(--line);
+        }
+
+        /* COLLAPSIBLE LONG SECTIONS (8 & 9) */
+        details.section-collapse > summary {
+            cursor: pointer;
+            list-style: none;
+        }
+
+        details.section-collapse > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.section-collapse > summary.sh {
+            margin-bottom: 18px;
+        }
+
+        details.section-collapse > summary::after {
+            content: '▸';
+            margin-left: 8px;
+            color: var(--clay-deep);
+            font-weight: 700;
+            transition: transform .2s;
+        }
+
+        details.section-collapse[open] > summary::after {
+            transform: rotate(90deg);
+        }
+
+        /* MAP LEGEND */
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--ink-soft);
+        }
+
+        .map-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .map-legend .line {
+            width: 22px;
+            height: 4px;
+            border-radius: 2px;
+            flex: 0 0 auto;
+        }
+
+        .map-legend .line.drive {
+            background: repeating-linear-gradient(90deg, var(--clay) 0 5px, transparent 5px 9px);
+        }
+
+        .map-legend .line.trail {
+            background: var(--pine);
+        }
+
+        .map-legend .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+            flex: 0 0 auto;
+        }
+
+        /* EXPENSE: total + import/export */
+        .expense-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--pine-deep);
+            color: #f6efdc;
+            border-radius: 5px;
+            margin-bottom: 14px;
+        }
+
+        .expense-total .et-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--amber);
+            font-weight: 600;
+        }
+
+        .expense-total .et-amount {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            color: #f6efdc;
+        }
+
+        .expense-io {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        /* Bigger tap targets on small links */
+        .rdrive .gm,
+        .rssub .gm,
+        .trk a,
+        .map-link,
+        .checkbox-actions a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 38px;
+        }
+
+        .map-link {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--clay-deep);
+            text-decoration: none;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 4px 11px;
+            white-space: nowrap;
+        }
+
+        .map-link:hover {
+            background: var(--surface-2);
+        }
+
         @media print {
+
+            .section-nav,
+            .back-to-top {
+                display: none;
+            }
+
+            details.day > summary::after,
+            details.section-collapse > summary::after {
+                content: '';
+            }
+
             body {
                 background: #fff;
                 font-size: 10.5pt;
@@ -1433,13 +1716,11 @@
                     <span style="color: rgba(243, 236, 218, 0.3);">|</span>
                     <a href="roadtrip-trame-sonore.html" style="color: var(--amber); text-decoration: none;">Soundtrack ↗</a>
                     <span style="color: rgba(243, 236, 218, 0.3);">|</span>
-                    <div class="theme-selector">
-                        <button class="theme-btn active" data-theme="sand" title="Lost Sierra Sand">🏜️</button>
-                        <button class="theme-btn" data-theme="dark" title="Tahoe Night">🌙</button>
-                        <button class="theme-btn" data-theme="high-sierra" title="High Sierra">🏔️</button>
-                        <button class="theme-btn" data-theme="m3" title="Material Design 3">🤖</button>
+                    <div class="theme-selector" role="group" aria-label="Theme">
+                        <button class="theme-btn active" data-theme="sand" title="Light theme" aria-label="Light theme" aria-pressed="true">☀️</button>
+                        <button class="theme-btn" data-theme="dark" title="Dark theme" aria-label="Dark theme" aria-pressed="false">🌙</button>
                     </div>
-                    <span id="status-badge" style="color: #6fa888; border: 1px solid rgba(111, 168, 136, 0.3); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 5px; transition: all 0.3s ease; margin-left: 4px;"><span style="width: 6px; height: 6px; background-color: #6fa888; border-radius: 50%; display: inline-block;"></span><span id="status-text">Ready</span></span>
+                    <span id="status-badge" style="color: #6fa888; border: 1px solid rgba(111, 168, 136, 0.3); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 5px; transition: all 0.3s ease; margin-left: 4px;"><span style="width: 6px; height: 6px; background-color: #6fa888; border-radius: 50%; display: inline-block;"></span><span id="status-text">Online</span></span>
                 </div>
             </div>
             <h1>Lost Sierra &amp; Tahoe — mountain bike road trip</h1>
@@ -1465,8 +1746,26 @@
         </div>
     </header>
 
+    <!-- STICKY SECTION NAV -->
+    <nav class="section-nav" aria-label="Sections">
+        <div class="navwrap">
+            <a href="#cal">Calendar</a>
+            <a href="#jour">Day by day</a>
+            <a href="#vols">Flights</a>
+            <a href="#hebergement">Lodging</a>
+            <a href="#navettes">Shuttles</a>
+            <a href="#trajets">Driving</a>
+            <a href="#map-section">Map</a>
+            <a href="#expenses-section">Expenses</a>
+            <a href="#distances">Distances</a>
+            <a href="#decor">Setting</a>
+            <a href="#paysage">Landscape</a>
+            <a href="#lexique">Glossary</a>
+        </div>
+    </nav>
+
     <!-- 1 — CALENDAR -->
-    <section>
+    <section id="cal">
         <div class="wrap">
             <div class="sh">
                 <div class="num">1</div>
@@ -1597,8 +1896,111 @@
         </div>
     </section>
 
+    <!-- 1B — DAY BY DAY (consolidated view) -->
+    <section id="jour">
+        <div class="wrap">
+            <div class="sh">
+                <div class="num">📅</div>
+                <h2>Day by day</h2>
+                <div class="note">everything you need for each day</div>
+            </div>
+
+            <div class="daybyday">
+
+                <details class="day" open>
+                    <summary>
+                        <span class="dtag">D1</span>
+                        <span><span class="dwhen">Tue Jun 9 · Arrival</span><span class="dtitle">Fly → Reno, drive to Downieville</span></span>
+                    </summary>
+                    <div class="dbody">
+                        <div class="drow"><span class="dk">Travel</span><span class="dv">Fly Québec → Reno (arrive <b>7:44 pm</b>), then drive Reno → Downieville <b>~2 h</b>, at night (arrive ~11 pm) · <a class="map-link" data-leg="drive-j1" href="#map-section">Map 📍</a></span></div>
+                        <div class="drow"><span class="dk">Ride</span><span class="dv">— arrival and settling in</span></div>
+                        <div class="drow"><span class="dk">Night</span><span class="dv"><b>Riverside Mountain Lodge</b>, Downieville · late check-in confirmed · 530-289-1000</span></div>
+                        <div class="drow"><span class="dk">Note</span><span class="dv">Winding mountain road at night — drive carefully.</span></div>
+                    </div>
+                </details>
+
+                <details class="day">
+                    <summary>
+                        <span class="dtag">D2</span>
+                        <span><span class="dwhen">Wed Jun 10 · Downieville</span><span class="dtitle">Downieville Downhill</span></span>
+                    </summary>
+                    <div class="dbody">
+                        <div class="drow"><span class="dk">Ride</span><span class="dv"><b>Downieville Downhill</b> · 24 km · ↓1,490 m · <a href="https://www.trailforks.com/route/downieville-downhill/" target="_blank" rel="noopener">Trailforks ↗</a></span></div>
+                        <div class="drow"><span class="dk">Shuttle</span><span class="dv">Downieville Outfitters → Packer Saddle (departs from town)</span></div>
+                        <div class="drow"><span class="dk">Night</span><span class="dv">Riverside Mountain Lodge, Downieville</span></div>
+                    </div>
+                </details>
+
+                <details class="day">
+                    <summary>
+                        <span class="dtag">D3</span>
+                        <span><span class="dwhen">Thu Jun 11 · Downieville</span><span class="dtitle">Gold Valley Rim epic</span></span>
+                    </summary>
+                    <div class="dbody">
+                        <div class="drow"><span class="dk">Ride</span><span class="dv"><b>Gold Valley Rim epic</b> · 29 km · ↓1,760 m · <a href="https://www.trailforks.com/route/yuba-expeditions-gold-valley-rim-pauley-creek-butcher-third-first/" target="_blank" rel="noopener">Trailforks ↗</a></span></div>
+                        <div class="drow"><span class="dk">Shuttle</span><span class="dv">Downieville Outfitters</span></div>
+                        <div class="drow"><span class="dk">Night</span><span class="dv">Riverside Mountain Lodge, Downieville</span></div>
+                    </div>
+                </details>
+
+                <details class="day">
+                    <summary>
+                        <span class="dtag">D4</span>
+                        <span><span class="dwhen">Fri Jun 12 · Quincy</span><span class="dtitle">Drive + Mt. Hough shuttle</span></span>
+                    </summary>
+                    <div class="dbody">
+                        <div class="drow"><span class="dk">Travel</span><span class="dv">Downieville → Quincy <b>~1 h 30</b> · <a class="map-link" data-leg="drive-j4" href="#map-section">Map 📍</a></span></div>
+                        <div class="drow"><span class="dk">Ride</span><span class="dv"><b>Mt. Hough</b> · 1-2 laps · 34 km · ↓2,350 m · <a href="https://www.trailforks.com/route/yuba-expeditions-mt-hough-downhill-shuttle-lap/" target="_blank" rel="noopener">Trailforks ↗</a></span></div>
+                        <div class="drow"><span class="dk">Shuttle</span><span class="dv">Yuba Expeditions · $42/lap · departs <b>11 am and 2 pm</b> · 262 Spanish Creek Rd</span></div>
+                        <div class="drow"><span class="dk">Night</span><span class="dv"><b>Pine Hill Motel</b>, Quincy (2 nights) · 530-283-1670</span></div>
+                        <div class="drow"><span class="dk">Note</span><span class="dv">Laundry in the evening — East Side Laundry (only one in town, 6 am–11 pm).</span></div>
+                    </div>
+                </details>
+
+                <details class="day">
+                    <summary>
+                        <span class="dtag">D5</span>
+                        <span><span class="dwhen">Sat Jun 13 · Quincy</span><span class="dtitle">Mt. Hough backcountry</span></span>
+                    </summary>
+                    <div class="dbody">
+                        <div class="drow"><span class="dk">Ride</span><span class="dv"><b>Mt. Hough out-and-back</b> · ~26 km · ↓850 m · <a href="https://www.trailforks.com/ridelog/planner/view/690770" target="_blank" rel="noopener">Trailforks ↗</a></span></div>
+                        <div class="drow"><span class="dk">Shuttle</span><span class="dv">None — self-supported, park at the trailhead</span></div>
+                        <div class="drow"><span class="dk">Night</span><span class="dv">Pine Hill Motel, Quincy</span></div>
+                    </div>
+                </details>
+
+                <details class="day">
+                    <summary>
+                        <span class="dtag">D6</span>
+                        <span><span class="dwhen">Sun Jun 14 · Tahoe → Carson City</span><span class="dtitle">Tahoe Rim &amp; Flume Trail</span></span>
+                    </summary>
+                    <div class="dbody">
+                        <div class="drow"><span class="dk">Travel</span><span class="dv">Quincy → Tunnel Creek <b>~2 h 45</b> (morning) · <a class="map-link" data-leg="drive-j6" href="#map-section">Map 📍</a> · then Tunnel Creek → Carson City ~30 min after the ride · <a class="map-link" data-leg="drive-j6-evening" href="#map-section">Map 📍</a></span></div>
+                        <div class="drow"><span class="dk">Ride</span><span class="dv"><b>Tahoe Meadows → Tunnel Creek</b> · 33.5 km · ↓1,699 m · <a href="https://www.trailforks.com/ridelog/planner/view/695834/" target="_blank" rel="noopener">Trailforks ↗</a></span></div>
+                        <div class="drow"><span class="dk">Shuttle</span><span class="dv">Flume Trail Tahoe · departs <b>11 am</b> to Tahoe Meadows · 1115 Tunnel Creek Rd · 775-298-2501</span></div>
+                        <div class="drow"><span class="dk">Night</span><span class="dv"><b>Carson City Plaza Hotel</b> (1 night) · breakfast included · 775-883-9500</span></div>
+                    </div>
+                </details>
+
+                <details class="day">
+                    <summary>
+                        <span class="dtag">D7</span>
+                        <span><span class="dwhen">Mon Jun 15 · Carson City → Reno → Home</span><span class="dtitle">Ash to Kings Trail, then fly</span></span>
+                    </summary>
+                    <div class="dbody">
+                        <div class="drow"><span class="dk">Ride</span><span class="dv"><b>Ash to Kings Trail</b> (morning) · 21 km · ↓615 m · self-supported, ~10 min from downtown · <a href="https://www.trailforks.com/route/kings-to-ash-canyon/" target="_blank" rel="noopener">Trailforks ↗</a></span></div>
+                        <div class="drow"><span class="dk">Travel</span><span class="dv">Carson City → Reno <b>~50 min</b> (afternoon), drop off the car · <a class="map-link" data-leg="drive-j7" href="#map-section">Map 📍</a></span></div>
+                        <div class="drow"><span class="dk">Flight</span><span class="dv">RNO <b>6:40 pm</b> → LAX · arrive Québec on Jun 16 at 9:31 am</span></div>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
     <!-- 2 — FLIGHTS -->
-    <section>
+    <section id="vols">
         <div class="wrap">
             <div class="sh">
                 <div class="num">2</div>
@@ -1643,7 +2045,7 @@
     </section>
 
     <!-- 3 — ACCOMMODATIONS -->
-    <section>
+    <section id="hebergement">
         <div class="wrap">
             <div class="sh">
                 <div class="num">3</div>
@@ -1652,7 +2054,7 @@
             </div>
             <div class="grid3">
                 <div class="card">
-                    <div class="ct">Jun 9-10-11 · 3 nights</div>
+                    <div class="ct">Jun 9 → 12 · 3 nights</div>
                     <h3>Downieville</h3>
                     <div class="meta">Riverside Mountain Lodge</div>
                     <p>206 Commercial Street. Family room with two beds. Secure covered bike storage. No A/C (rooms
@@ -1660,14 +2062,14 @@
                     <div class="contact"><b>530-289-1000</b><br>Confirmation #4079169723299</div>
                 </div>
                 <div class="card clay">
-                    <div class="ct">Jun 12-13 · 2 nights</div>
+                    <div class="ct">Jun 12 → 14 · 2 nights</div>
                     <h3>Quincy</h3>
                     <div class="meta">Pine Hill Motel</div>
                     <p>42075 Highway 70, Quincy, CA 95971. Renovated rooms, kitchenette, air conditioning.</p>
                     <div class="contact"><b>530-283-1670</b> · pinehillmotel.com</div>
                 </div>
                 <div class="card slate">
-                    <div class="ct">Jun 14 · 1 night</div>
+                    <div class="ct">Jun 14 → 15 · 1 night</div>
                     <h3>Carson City</h3>
                     <div class="meta">Carson City Plaza Hotel</div>
                     <p>803 South Carson Street. Two queen beds, breakfast included. Third-party booking (Booking /
@@ -1679,7 +2081,7 @@
     </section>
 
     <!-- 4 — SHUTTLES -->
-    <section>
+    <section id="navettes">
         <div class="wrap">
             <div class="sh">
                 <div class="num">4</div>
@@ -1718,7 +2120,7 @@
     </section>
 
     <!-- 5 — DRIVING LEGS -->
-    <section>
+    <section id="trajets">
         <div class="wrap">
             <div class="sh">
                 <div class="num">5</div>
@@ -1838,6 +2240,15 @@
                 <div class="note">itineraries &amp; trails</div>
             </div>
             <div id="map" style="height: 480px; border-radius: 6px; border: 1px solid var(--line); box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: relative; z-index: 1;"></div>
+            <div class="map-legend">
+                <span><span class="line drive"></span> Road (drive)</span>
+                <span><span class="line trail"></span> Trail (ride)</span>
+                <span><span class="dot" style="background:#e0a55f;"></span> Airport</span>
+                <span><span class="dot" style="background:#26412f;"></span> Lodging</span>
+                <span><span class="dot" style="background:#9a4420;"></span> Bike / shuttle</span>
+                <span>🎯 My location · ⤢ Fit all</span>
+            </div>
+            <div class="callout" style="margin-top:14px;"><b>Offline:</b> once the page has been visited, the whole plan (maps included) stays available without a connection.</div>
         </div>
     </section>
 
@@ -1908,10 +2319,15 @@
                     <!-- History Card -->
                     <div class="expense-card" style="margin-bottom: 16px;">
                         <h3>Expense History</h3>
+                        <div class="expense-total">
+                            <span class="et-label">Trip total</span>
+                            <span class="et-amount" id="expense-total-amount">$0.00</span>
+                        </div>
                         <div class="history-table-wrapper">
                             <table class="history-table">
                                 <thead>
                                     <tr>
+                                        <th>Date</th>
                                         <th>Description</th>
                                         <th>Payer</th>
                                         <th>Amount</th>
@@ -1946,12 +2362,21 @@
                             </div>
                         </div>
                         
-                        <div style="margin-top: 24px; border-top: 1px solid var(--line-soft); padding-top: 16px; display: flex; flex-direction: column;">
-                            <button type="button" id="reset-all-btn" class="btn btn-secondary btn-sm" style="align-self: flex-start;">Reset Expenses</button>
-                            <div id="reset-confirm-box" class="reset-confirm-box">
-                                <span>Confirm reset?</span>
-                                <button type="button" id="reset-confirm-yes" class="btn btn-primary btn-sm">Yes</button>
-                                <button type="button" id="reset-confirm-no" class="btn btn-secondary btn-sm">No</button>
+                        <div style="margin-top: 24px; border-top: 1px solid var(--line-soft); padding-top: 16px;">
+                            <h4 style="font-size: 13px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; letter-spacing: 0.05em;">Share between devices</h4>
+                            <p style="font-size: 12px; color: var(--ink-soft); margin-bottom: 10px;">Data stays on this device. Export the file and import it on the other phone to sync.</p>
+                            <div class="expense-io">
+                                <button type="button" id="export-btn" class="btn btn-secondary btn-sm">Export ⤓</button>
+                                <button type="button" id="import-btn" class="btn btn-secondary btn-sm">Import ⤒</button>
+                                <input type="file" id="import-file" accept="application/json,.json" style="display:none;">
+                            </div>
+                            <div style="margin-top: 16px; display: flex; flex-direction: column;">
+                                <button type="button" id="reset-all-btn" class="btn btn-secondary btn-sm" style="align-self: flex-start;">Reset Expenses</button>
+                                <div id="reset-confirm-box" class="reset-confirm-box">
+                                    <span>Confirm reset?</span>
+                                    <button type="button" id="reset-confirm-yes" class="btn btn-primary btn-sm">Yes</button>
+                                    <button type="button" id="reset-confirm-no" class="btn btn-secondary btn-sm">No</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1961,7 +2386,7 @@
     </section>
 
     <!-- 7 — DISTANCES & ELEVATION -->
-    <section style="background:var(--surface-2);border-top:1px solid var(--line);">
+    <section id="distances" style="background:var(--surface-2);border-top:1px solid var(--line);">
         <div class="wrap">
             <div class="sh">
                 <div class="num">7</div>
@@ -2050,13 +2475,13 @@
     </section>
 
     <!-- 8 — THE SETTING -->
-    <section>
-        <div class="wrap">
-            <div class="sh">
+    <section id="decor">
+        <details class="wrap section-collapse" open>
+            <summary class="sh">
                 <div class="num">8</div>
                 <h2>The setting: history, geography, geology</h2>
                 <div class="note">the three terrains of the trip</div>
-            </div>
+            </summary>
             <div class="terr">
                 <div class="tlabel">Days 1-3 · Downieville</div>
                 <h3>The Lost Sierra</h3>
@@ -2106,17 +2531,17 @@
                     uses, one mountain: the V-flumes carried wood, the box flumes carried water. You close the trip on
                     the Comstock's water system.</p>
             </div>
-        </div>
+        </details>
     </section>
 
     <!-- 9 — READING THE LANDSCAPE -->
-    <section style="background:var(--surface-2);border-top:1px solid var(--line);">
-        <div class="wrap">
-            <div class="sh">
+    <section id="paysage" style="background:var(--surface-2);border-top:1px solid var(--line);">
+        <details class="wrap section-collapse" open>
+            <summary class="sh">
                 <div class="num">9</div>
                 <h2>Reading the landscape — ride by ride</h2>
                 <div class="note">to orient yourself · on-trail geomorphology</div>
-            </div>
+            </summary>
 
             <div class="terr" style="border-left-color:var(--slate);">
                 <div class="tlabel">D2 · Downieville Downhill</div>
@@ -2220,11 +2645,11 @@
                 </p>
             </div>
 
-        </div>
+        </details>
     </section>
 
     <!-- 10 — GLOSSARY -->
-    <section style="background:var(--surface-2);border-top:1px solid var(--line);">
+    <section id="lexique" style="background:var(--surface-2);border-top:1px solid var(--line);">
         <div class="wrap">
             <div class="sh">
                 <div class="num">10</div>
@@ -2431,6 +2856,8 @@
         </div>
     </section>
 
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+
     <footer>
         Trip plan · Lost Sierra &amp; Tahoe, California · June 9–15, 2026 · near-final version
     </footer>
@@ -2446,6 +2873,7 @@
             }).addTo(map);
 
             let mapLayers = null;
+            let allBounds = null;
 
             // Fetch and render the geojson routes
             fetch('./map-data.geojson')
@@ -2497,6 +2925,7 @@
                             }
                         }
                     }).addTo(map);
+                    allBounds = mapLayers.getBounds();
                 })
                 .catch(err => console.error('Error loading map data:', err));
 
@@ -2546,6 +2975,33 @@
                 }
             });
             new L.Control.Location({ position: 'topleft' }).addTo(map);
+
+            // "Fit all / reset" control — zoom back out to the whole trip
+            L.Control.FitAll = L.Control.extend({
+                onAdd: function(map) {
+                    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+                    const button = L.DomUtil.create('a', '', container);
+                    button.innerHTML = '⤢';
+                    button.href = '#';
+                    button.title = 'Tout afficher / Reset view';
+                    button.style.fontSize = '16px';
+                    button.style.display = 'flex';
+                    button.style.alignItems = 'center';
+                    button.style.justifyContent = 'center';
+                    button.style.cursor = 'pointer';
+                    L.DomEvent.on(button, 'click', function(e) {
+                        L.DomEvent.stopPropagation(e);
+                        L.DomEvent.preventDefault(e);
+                        if (allBounds) {
+                            map.fitBounds(allBounds, { padding: [30, 30] });
+                        } else {
+                            map.setView([39.55, -120.30], 9);
+                        }
+                    });
+                    return container;
+                }
+            });
+            new L.Control.FitAll({ position: 'topleft' }).addTo(map);
 
             // Listen for clicks on map-links to focus and highlight route segments
             document.querySelectorAll('.map-link').forEach(link => {
@@ -2696,10 +3152,17 @@
                 if (!tbody) return;
                 tbody.replaceChildren();
 
+                // Trip total
+                const totalEl = document.getElementById('expense-total-amount');
+                if (totalEl) {
+                    const total = state.expenses.reduce((sum, e) => sum + e.amount, 0);
+                    totalEl.textContent = '$' + total.toFixed(2);
+                }
+
                 if (state.expenses.length === 0) {
                     const tr = document.createElement('tr');
                     const td = document.createElement('td');
-                    td.colSpan = 5;
+                    td.colSpan = 6;
                     td.style.textAlign = 'center';
                     td.style.color = 'var(--ink-soft)';
                     td.style.fontStyle = 'italic';
@@ -2711,6 +3174,12 @@
 
                 state.expenses.forEach(exp => {
                     const tr = document.createElement('tr');
+
+                    const tdDate = document.createElement('td');
+                    tdDate.style.whiteSpace = 'nowrap';
+                    tdDate.textContent = exp.date
+                        ? new Date(exp.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+                        : '—';
 
                     const tdDesc = document.createElement('td');
                     const bDesc = document.createElement('b');
@@ -2739,6 +3208,7 @@
                     });
                     tdAction.appendChild(delBtn);
 
+                    tr.appendChild(tdDate);
                     tr.appendChild(tdDesc);
                     tr.appendChild(tdPayer);
                     tr.appendChild(tdAmount);
@@ -3043,6 +3513,49 @@
                     });
                 }
 
+                // Export to JSON file
+                const exportBtn = document.getElementById('export-btn');
+                if (exportBtn) {
+                    exportBtn.addEventListener('click', () => {
+                        const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'lost-sierra-expenses.json';
+                        a.click();
+                        URL.revokeObjectURL(url);
+                    });
+                }
+
+                // Import from JSON file
+                const importBtn = document.getElementById('import-btn');
+                const importFile = document.getElementById('import-file');
+                if (importBtn && importFile) {
+                    importBtn.addEventListener('click', () => importFile.click());
+                    importFile.addEventListener('change', () => {
+                        const file = importFile.files && importFile.files[0];
+                        if (!file) return;
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            try {
+                                const parsed = JSON.parse(reader.result);
+                                if (!parsed || !Array.isArray(parsed.participants) || !Array.isArray(parsed.expenses)) {
+                                    throw new Error('format');
+                                }
+                                state.participants = parsed.participants;
+                                state.expenses = parsed.expenses;
+                                saveState();
+                                updateAll();
+                                showAlert('calc-alert-participant', 'Data imported successfully.', true);
+                            } catch (err) {
+                                showAlert('calc-alert-participant', 'Invalid file — import cancelled.');
+                            }
+                            importFile.value = '';
+                        };
+                        reader.readAsText(file);
+                    });
+                }
+
                 updateAll();
             }
 
@@ -3063,18 +3576,15 @@
                 localStorage.setItem('lost-sierra-theme', themeName);
                 
                 themeButtons.forEach(btn => {
-                    btn.classList.toggle('active', btn.getAttribute('data-theme') === themeName);
+                    const isActive = btn.getAttribute('data-theme') === themeName;
+                    btn.classList.toggle('active', isActive);
+                    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
                 });
 
                 if (window.mapTileLayer) {
-                    let newTileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'; // sand / default
-                    if (themeName === 'dark') {
-                        newTileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png';
-                    } else if (themeName === 'high-sierra') {
-                        newTileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png';
-                    } else if (themeName === 'm3') {
-                        newTileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png';
-                    }
+                    const newTileUrl = themeName === 'dark'
+                        ? 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png'
+                        : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
                     window.mapTileLayer.setUrl(newTileUrl);
                 }
             }
@@ -3085,9 +3595,9 @@
                 });
             });
 
-            // Initial theme loading
-            const savedTheme = localStorage.getItem('lost-sierra-theme') || 'sand';
-            applyTheme(savedTheme);
+            // Initial theme loading (fall back to light if a removed theme was stored)
+            const savedTheme = localStorage.getItem('lost-sierra-theme');
+            applyTheme(savedTheme === 'dark' ? 'dark' : 'sand');
         })();
     </script>
 
@@ -3110,7 +3620,7 @@
                     statusBadge.style.color = '#6fa888';
                     statusBadge.style.borderColor = 'rgba(111, 168, 136, 0.3)';
                     dot.style.backgroundColor = '#6fa888';
-                    if (statusText) statusText.textContent = 'Ready';
+                    if (statusText) statusText.textContent = 'Online';
                 } else {
                     statusBadge.style.color = '#bc5527';
                     statusBadge.style.borderColor = 'rgba(188, 85, 39, 0.3)';
@@ -3122,6 +3632,51 @@
             window.addEventListener('offline', updateStatus);
             updateStatus(); // run initial check
         }
+    </script>
+
+    <!-- SECTION NAV SCROLLSPY + BACK TO TOP -->
+    <script>
+        (function() {
+            // Back to top
+            const btt = document.getElementById('back-to-top');
+            if (btt) {
+                const toggleBtt = () => btt.classList.toggle('show', window.scrollY > 600);
+                window.addEventListener('scroll', toggleBtt, { passive: true });
+                btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                toggleBtt();
+            }
+
+            // Scrollspy: highlight the nav link for the section in view
+            const navLinks = Array.from(document.querySelectorAll('.section-nav a'));
+            if (navLinks.length && 'IntersectionObserver' in window) {
+                const byId = {};
+                navLinks.forEach(a => { byId[a.getAttribute('href').slice(1)] = a; });
+                const sections = navLinks
+                    .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+                    .filter(Boolean);
+
+                let current = null;
+                const setActive = (id) => {
+                    if (id === current) return;
+                    current = id;
+                    navLinks.forEach(a => a.classList.remove('active'));
+                    const link = byId[id];
+                    if (link) {
+                        link.classList.add('active');
+                        link.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                    }
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    const visible = entries
+                        .filter(e => e.isIntersecting)
+                        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+                    if (visible.length) setActive(visible[0].target.id);
+                }, { rootMargin: '-52px 0px -55% 0px', threshold: [0.1, 0.5] });
+
+                sections.forEach(s => observer.observe(s));
+            }
+        })();
     </script>
 
 </body>
