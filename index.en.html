@@ -47,7 +47,6 @@
             line-height: 1.55;
             font-size: 15.5px;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
         .wrap {
@@ -1009,7 +1008,10 @@
             gap: 24px;
             margin-top: 20px;
         }
-        
+
+        /* grid items must be allowed to shrink below content width */
+        .expenses-container > div { min-width: 0; }
+
         @media (max-width: 768px) {
             .expenses-container {
                 grid-template-columns: 1fr;
@@ -1258,7 +1260,43 @@
         .history-table .actions {
             text-align: right;
         }
-        
+
+        /* Stacked layout for history table on narrow screens */
+        @media (max-width: 720px) {
+            .history-table-wrapper { border: none; background: transparent; }
+            .history-table thead { display: none; }
+            .history-table tr {
+                display: block;
+                background: var(--surface);
+                border: 1px solid var(--line-soft);
+                border-radius: 4px;
+                margin-bottom: 8px;
+                padding: 2px 0;
+            }
+            .history-table tr:last-child { margin-bottom: 0; }
+            .history-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 8px;
+                padding: 5px 12px;
+                border-bottom: 1px solid var(--line-soft);
+                font-size: 12.5px;
+            }
+            .history-table td:last-child { border-bottom: none; }
+            .history-table td::before {
+                content: attr(data-label);
+                font-size: 10px;
+                font-weight: 600;
+                letter-spacing: .1em;
+                text-transform: uppercase;
+                color: var(--clay-deep);
+                flex: 0 0 auto;
+            }
+            .history-table td[data-label=""]::before { display: none; }
+            .history-table .actions { justify-content: flex-end; }
+        }
+
         .balance-list, .transfer-list {
             list-style: none;
             padding: 0;
@@ -3213,26 +3251,32 @@
                     const tr = document.createElement('tr');
 
                     const tdDate = document.createElement('td');
+                    tdDate.dataset.label = 'Date';
                     tdDate.style.whiteSpace = 'nowrap';
                     tdDate.textContent = exp.date
                         ? new Date(exp.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
                         : '-';
 
                     const tdDesc = document.createElement('td');
+                    tdDesc.dataset.label = 'Description';
                     const bDesc = document.createElement('b');
                     bDesc.textContent = exp.desc;
                     tdDesc.appendChild(bDesc);
 
                     const tdPayer = document.createElement('td');
+                    tdPayer.dataset.label = 'Paid by';
                     tdPayer.textContent = exp.payer;
 
                     const tdAmount = document.createElement('td');
+                    tdAmount.dataset.label = 'Amount';
                     tdAmount.textContent = '$' + exp.amount.toFixed(2);
 
                     const tdShared = document.createElement('td');
+                    tdShared.dataset.label = 'Shared';
                     tdShared.textContent = exp.beneficiaries.join(', ');
 
                     const tdAction = document.createElement('td');
+                    tdAction.dataset.label = '';
                     tdAction.className = 'actions';
                     const delBtn = document.createElement('button');
                     delBtn.type = 'button';
