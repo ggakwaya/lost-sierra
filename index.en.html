@@ -37,7 +37,6 @@
 
         html {
             -webkit-text-size-adjust: 100%;
-            overflow-x: hidden;
         }
 
         body {
@@ -48,7 +47,6 @@
             line-height: 1.55;
             font-size: 15.5px;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
         .wrap {
@@ -1010,7 +1008,10 @@
             gap: 24px;
             margin-top: 20px;
         }
-        
+
+        /* grid items must be allowed to shrink below content width */
+        .expenses-container > div { min-width: 0; }
+
         @media (max-width: 768px) {
             .expenses-container {
                 grid-template-columns: 1fr;
@@ -1259,7 +1260,43 @@
         .history-table .actions {
             text-align: right;
         }
-        
+
+        /* Stacked layout for history table on narrow screens */
+        @media (max-width: 720px) {
+            .history-table-wrapper { border: none; background: transparent; }
+            .history-table thead { display: none; }
+            .history-table tr {
+                display: block;
+                background: var(--surface);
+                border: 1px solid var(--line-soft);
+                border-radius: 4px;
+                margin-bottom: 8px;
+                padding: 2px 0;
+            }
+            .history-table tr:last-child { margin-bottom: 0; }
+            .history-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 8px;
+                padding: 5px 12px;
+                border-bottom: 1px solid var(--line-soft);
+                font-size: 12.5px;
+            }
+            .history-table td:last-child { border-bottom: none; }
+            .history-table td::before {
+                content: attr(data-label);
+                font-size: 10px;
+                font-weight: 600;
+                letter-spacing: .1em;
+                text-transform: uppercase;
+                color: var(--clay-deep);
+                flex: 0 0 auto;
+            }
+            .history-table td[data-label=""]::before { display: none; }
+            .history-table .actions { justify-content: flex-end; }
+        }
+
         .balance-list, .transfer-list {
             list-style: none;
             padding: 0;
@@ -1563,6 +1600,10 @@
         details.section-collapse[open] > summary::after {
             transform: rotate(90deg);
         }
+
+        /* MAP - default touch-action lets Android Chrome scroll past without waiting for JS */
+        #map { touch-action: pan-y; }
+        #map.map-active { touch-action: none; }
 
         /* MAP LEGEND */
         .map-legend {
@@ -3031,6 +3072,37 @@
                     });
                 });
             });
+
+            // Mobile gesture handling: single-finger swipe scrolls the page, two fingers pan the map.
+            // touch-action:pan-y (CSS) lets Android Chrome compositor scroll without waiting for JS;
+            // map-active class switches to touch-action:none so Leaflet can take over on two fingers.
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                map.dragging.disable();
+                const mapEl = document.getElementById('map');
+                const hint = document.createElement('div');
+                hint.textContent = '🤏 Deux doigts pour naviguer · Two fingers to pan';
+                hint.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:401;background:rgba(0,0,0,.55);color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;pointer-events:none;opacity:0;transition:opacity .25s;text-align:center;white-space:nowrap;';
+                mapEl.appendChild(hint);
+                let hintTimer;
+                mapEl.addEventListener('touchstart', (e) => {
+                    if (e.touches.length >= 2) {
+                        mapEl.classList.add('map-active');
+                        map.dragging.enable();
+                        hint.style.opacity = '0';
+                    } else {
+                        mapEl.classList.remove('map-active');
+                        hint.style.opacity = '1';
+                        clearTimeout(hintTimer);
+                        hintTimer = setTimeout(() => { hint.style.opacity = '0'; }, 1500);
+                    }
+                }, { passive: true });
+                mapEl.addEventListener('touchend', (e) => {
+                    if (e.touches.length < 2) {
+                        mapEl.classList.remove('map-active');
+                        map.dragging.disable();
+                    }
+                }, { passive: true });
+            }
         });
     </script>
 
@@ -3179,26 +3251,32 @@
                     const tr = document.createElement('tr');
 
                     const tdDate = document.createElement('td');
+                    tdDate.dataset.label = 'Date';
                     tdDate.style.whiteSpace = 'nowrap';
                     tdDate.textContent = exp.date
                         ? new Date(exp.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
                         : '-';
 
                     const tdDesc = document.createElement('td');
+                    tdDesc.dataset.label = 'Description';
                     const bDesc = document.createElement('b');
                     bDesc.textContent = exp.desc;
                     tdDesc.appendChild(bDesc);
 
                     const tdPayer = document.createElement('td');
+                    tdPayer.dataset.label = 'Paid by';
                     tdPayer.textContent = exp.payer;
 
                     const tdAmount = document.createElement('td');
+                    tdAmount.dataset.label = 'Amount';
                     tdAmount.textContent = '$' + exp.amount.toFixed(2);
 
                     const tdShared = document.createElement('td');
+                    tdShared.dataset.label = 'Shared';
                     tdShared.textContent = exp.beneficiaries.join(', ');
 
                     const tdAction = document.createElement('td');
+                    tdAction.dataset.label = '';
                     tdAction.className = 'actions';
                     const delBtn = document.createElement('button');
                     delBtn.type = 'button';
@@ -3666,7 +3744,14 @@
                     const link = byId[id];
                     if (link) {
                         link.classList.add('active');
-                        link.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                        // direct scrollLeft avoids iOS Safari interrupting page momentum
+                        const navWrap = link.closest('.navwrap');
+                        if (navWrap) {
+                            const lr = link.getBoundingClientRect();
+                            const wr = navWrap.getBoundingClientRect();
+                            if (lr.right > wr.right) navWrap.scrollLeft += lr.right - wr.right + 12;
+                            else if (lr.left < wr.left) navWrap.scrollLeft -= wr.left - lr.left + 12;
+                        }
                     }
                 };
 
