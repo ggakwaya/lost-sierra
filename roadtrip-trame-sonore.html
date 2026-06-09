@@ -7,7 +7,7 @@
 <title>Trame sonore · Lost Sierra & Tahoe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Roboto:wght@300;400;500;700&family=Spline+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=Spline+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --pine-deep:#182a1f; --pine:#26412f; --clay:#bc5527; --clay-deep:#9a4420;
@@ -116,58 +116,6 @@
       --altmetal:#5d7f96; --punk:#e66a38;
   }
   
-  body[data-theme="high-sierra"] {
-      --bg: #e2e6e8;
-      --surface: #f1f4f5;
-      --surface-2: #d4dcde;
-      --ink: #1a242a;
-      --ink-soft: #4c5d67;
-      --pine: #1d5654;
-      --pine-deep: #0e3533;
-      --clay: #c55f30;
-      --clay-deep: #96421a;
-      --amber: #cca038;
-      --slate: #4d7491;
-      --line: rgba(26, 36, 42, 0.16);
-      --line-soft: rgba(26, 36, 42, 0.09);
-      --thrash:#96421a; --death:#1d5654; --desert:#cca038;
-      --altmetal:#4d7491; --punk:#c55f30;
-  }
-  
-  body[data-theme="m3"] {
-      --bg: #f3f4f9;
-      --surface: #ffffff;
-      --surface-2: #eef0f7;
-      --ink: #191c20;
-      --ink-soft: #43474e;
-      --pine: #0061a4;
-      --pine-deep: #00477b;
-      --clay: #b3261e;
-      --clay-deep: #8c1d18;
-      --amber: #cca038;
-      --slate: #535f70;
-      --line: rgba(67, 71, 78, 0.16);
-      --line-soft: rgba(67, 71, 78, 0.08);
-      --thrash:#8c1d18; --death:#0061a4; --desert:#cca038;
-      --altmetal:#535f70; --punk:#b3261e;
-  }
-  
-  body[data-theme="m3"],
-  body[data-theme="m3"] h1,
-  body[data-theme="m3"] h2,
-  body[data-theme="m3"] h3,
-  body[data-theme="m3"] h4,
-  body[data-theme="m3"] .masthead h1,
-  body[data-theme="m3"] .gnum,
-  body[data-theme="m3"] .ghead h2,
-  body[data-theme="m3"] .rband,
-  body[data-theme="m3"] .moments h2,
-  body[data-theme="m3"] .mtrack,
-  body[data-theme="m3"] button,
-  body[data-theme="m3"] .btn {
-      font-family: 'Roboto', sans-serif !important;
-  }
-
   .theme-selector {
       border: 1px solid rgba(243, 236, 218, 0.25);
       border-radius: 20px;
@@ -182,11 +130,6 @@
   body[data-theme="dark"] .theme-selector {
       border-color: rgba(238, 243, 247, 0.2);
       background: rgba(255, 255, 255, 0.05);
-  }
-  
-  body[data-theme="high-sierra"] .theme-selector {
-      border-color: rgba(26, 36, 42, 0.2);
-      background: rgba(0, 0, 0, 0.05);
   }
   
   .theme-btn {
@@ -225,11 +168,9 @@
 <div class="masthead">
   <div class="sup" style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;">
     <span>Companion document · Lost Sierra &amp; Tahoe, juin 2026 · <a href="index.html" style="color: #f8f3e8; text-decoration: none; border-bottom: 1px solid rgba(248, 243, 232, 0.4);">← Plan du voyage</a></span>
-    <div class="theme-selector">
-        <button class="theme-btn active" data-theme="sand" title="Lost Sierra Sand">🏜️</button>
-        <button class="theme-btn" data-theme="dark" title="Tahoe Night">🌙</button>
-        <button class="theme-btn" data-theme="high-sierra" title="High Sierra">🏔️</button>
-        <button class="theme-btn" data-theme="m3" title="Material Design 3">🤖</button>
+    <div class="theme-selector" role="group" aria-label="Thème">
+        <button class="theme-btn active" data-theme="sand" title="Thème clair" aria-label="Thème clair" aria-pressed="true">☀️</button>
+        <button class="theme-btn" data-theme="dark" title="Thème sombre" aria-label="Thème sombre" aria-pressed="false">🌙</button>
     </div>
     <span id="status-badge" style="color: #6fa888; border: 1px solid rgba(111, 168, 136, 0.3); font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 4px; transition: all 0.3s ease; background: transparent;"><span style="width: 5px; height: 5px; background-color: #6fa888; border-radius: 50%; display: inline-block;"></span><span id="status-text">Dispo</span></span>
   </div>
@@ -698,7 +639,9 @@
             localStorage.setItem('lost-sierra-theme', themeName);
             
             themeButtons.forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-theme') === themeName);
+                const isActive = btn.getAttribute('data-theme') === themeName;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
             });
         }
 
@@ -708,9 +651,9 @@
             });
         });
 
-        // Initial theme loading
-        const savedTheme = localStorage.getItem('lost-sierra-theme') || 'sand';
-        applyTheme(savedTheme);
+        // Initial theme loading (fall back to light if a removed theme was stored)
+        const savedTheme = localStorage.getItem('lost-sierra-theme');
+        applyTheme(savedTheme === 'dark' ? 'dark' : 'sand');
     })();
 </script>
 
@@ -733,7 +676,7 @@
                 statusBadge.style.color = '#6fa888';
                 statusBadge.style.borderColor = 'rgba(111, 168, 136, 0.3)';
                 dot.style.backgroundColor = '#6fa888';
-                if (statusText) statusText.textContent = 'Dispo';
+                if (statusText) statusText.textContent = 'En ligne';
             } else {
                 statusBadge.style.color = '#bc5527';
                 statusBadge.style.borderColor = 'rgba(188, 85, 39, 0.3)';
