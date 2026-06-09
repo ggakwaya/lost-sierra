@@ -1563,6 +1563,10 @@
             transform: rotate(90deg);
         }
 
+        /* MAP - default touch-action lets Android Chrome scroll past without waiting for JS */
+        #map { touch-action: pan-y; }
+        #map.map-active { touch-action: none; }
+
         /* MAP LEGEND */
         .map-legend {
             display: flex;
@@ -3038,21 +3042,34 @@
                 });
             });
 
-            // Mobile gesture handling: single-finger swipe scrolls the page, two fingers pan the map
+            // Mobile gesture handling: single-finger swipe scrolls the page, two fingers pan the map.
+            // touch-action:pan-y (CSS) lets Android Chrome compositor scroll without waiting for JS;
+            // map-active class switches to touch-action:none so Leaflet can take over on two fingers.
             if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
                 map.dragging.disable();
                 const mapEl = document.getElementById('map');
                 const hint = document.createElement('div');
-                hint.textContent = '🤏 Deux doigts pour déplacer la carte';
+                hint.textContent = '🤏 Deux doigts pour naviguer · Two fingers to pan';
                 hint.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:401;background:rgba(0,0,0,.55);color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;pointer-events:none;opacity:0;transition:opacity .25s;text-align:center;white-space:nowrap;';
                 mapEl.appendChild(hint);
                 let hintTimer;
                 mapEl.addEventListener('touchstart', (e) => {
-                    if (e.touches.length >= 2) { map.dragging.enable(); hint.style.opacity = '0'; }
-                    else { hint.style.opacity = '1'; clearTimeout(hintTimer); hintTimer = setTimeout(() => { hint.style.opacity = '0'; }, 1500); }
+                    if (e.touches.length >= 2) {
+                        mapEl.classList.add('map-active');
+                        map.dragging.enable();
+                        hint.style.opacity = '0';
+                    } else {
+                        mapEl.classList.remove('map-active');
+                        hint.style.opacity = '1';
+                        clearTimeout(hintTimer);
+                        hintTimer = setTimeout(() => { hint.style.opacity = '0'; }, 1500);
+                    }
                 }, { passive: true });
                 mapEl.addEventListener('touchend', (e) => {
-                    if (e.touches.length < 2) map.dragging.disable();
+                    if (e.touches.length < 2) {
+                        mapEl.classList.remove('map-active');
+                        map.dragging.disable();
+                    }
                 }, { passive: true });
             }
         });
