@@ -3030,6 +3030,24 @@
                     });
                 });
             });
+
+            // Mobile gesture handling: single-finger swipe scrolls the page, two fingers pan the map
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                map.dragging.disable();
+                const mapEl = document.getElementById('map');
+                const hint = document.createElement('div');
+                hint.textContent = '🤏 Deux doigts pour déplacer la carte';
+                hint.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:401;background:rgba(0,0,0,.55);color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;pointer-events:none;opacity:0;transition:opacity .25s;text-align:center;white-space:nowrap;';
+                mapEl.appendChild(hint);
+                let hintTimer;
+                mapEl.addEventListener('touchstart', (e) => {
+                    if (e.touches.length >= 2) { map.dragging.enable(); hint.style.opacity = '0'; }
+                    else { hint.style.opacity = '1'; clearTimeout(hintTimer); hintTimer = setTimeout(() => { hint.style.opacity = '0'; }, 1500); }
+                }, { passive: true });
+                mapEl.addEventListener('touchend', (e) => {
+                    if (e.touches.length < 2) map.dragging.disable();
+                }, { passive: true });
+            }
         });
     </script>
 
@@ -3665,7 +3683,14 @@
                     const link = byId[id];
                     if (link) {
                         link.classList.add('active');
-                        link.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                        // direct scrollLeft avoids iOS Safari interrupting page momentum
+                        const navWrap = link.closest('.navwrap');
+                        if (navWrap) {
+                            const lr = link.getBoundingClientRect();
+                            const wr = navWrap.getBoundingClientRect();
+                            if (lr.right > wr.right) navWrap.scrollLeft += lr.right - wr.right + 12;
+                            else if (lr.left < wr.left) navWrap.scrollLeft -= wr.left - lr.left + 12;
+                        }
                     }
                 };
 
